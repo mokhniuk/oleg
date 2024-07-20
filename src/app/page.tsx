@@ -1,95 +1,100 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "@/app/page.module.css";
+import Container from "@/app/components/Container/Container";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
+      <section className={styles.hero}>
+        <Container width="fullscreen">
+          <div className={styles["hero-content"]}>
+            <p>
+              Hey there, I’m Oleg. <br />
+              Frontend Engineer and Designer from Kyiv
+              <Image
+                src="/kyiv_logo.png"
+                alt=""
+                width={34}
+                height={36}
+                className={styles["kyiv-logo"]}
+              />
+              , based in Berlin{" "}
+              <Image
+                src="/berlin_logo.png"
+                alt=""
+                width={42}
+                height={46}
+                className={styles["berlin-logo"]}
+              />
+              .
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section id="works" className={styles.workExamples}>
+        <Container>
+          <header className={styles["section-header"]}>
+            <h2>Recent projects</h2>
+            <p>
+              My job is to create websites, apps, design systems and complex
+              web-interfaces. Here are some of the recent ones I was working on:
+            </p>
+            <Link href="#" title="" className={styles["section-header__link"]}>
+              archive of all works
+            </Link>
+          </header>
+
+          <div className={styles.projects}>
+            {/* Project 1 */}
+            <div className={styles.project}>
+              <Image
+                src="/project1.jpg"
+                alt="Project 1"
+                width={400}
+                height={300}
+              />
+              <h3>Project 1</h3>
+              <p>Short case study for Project 1</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className={styles.contact}>
+        <Container>
+          <header className={styles["section-header"]}>
+            <h2>Contact</h2>
+            <p>
+              I am currently available for hire. Feel free to contact me via{" "}
+              <Link href="#" title="">
+                email
+              </Link>
+              , add me on{" "}
+              <Link href="#" title="">
+                LinkedIn
+              </Link>{" "}
+              or follow on{" "}
+              <Link href="#" title="">
+                Instagram
+              </Link>
+              .
+            </p>
+            <Link href="#" title=""></Link>
+          </header>
+
+          <Link href="/photos" title="" className={styles["photography-link"]}>
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+              src="/berlin.jpg"
+              alt=""
+              width={1280}
+              height={845}
+              className={styles["photography-link__image"]}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          </Link>
+        </Container>
+      </section>
     </main>
   );
 }

@@ -1,0 +1,26 @@
+.menu {
+  font-size: 1.125rem;
+  color: #000;
+  font-weight: 500;
+  display: flex;
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu__item {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.menu__link {
+  // color: #000;
+  // opacity: 1;
+}

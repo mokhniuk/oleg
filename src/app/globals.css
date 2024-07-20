@@ -83,25 +83,40 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* color: rgb(var(--foreground-rgb)); */
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  /* --minFontSize: 18px;
+  --maxFontSize: 32px;
+  --scaler: 2vw;
+  font-size: clamp(var(--minFontSize), var(--scaler), var(--maxFontSize)); */
+  font-size: 1rem;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  border-bottom: 1px solid;
+
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
 }
 
-@media (prefers-color-scheme: dark) {
+a:hover {
+  opacity: 1;
+}
+
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */

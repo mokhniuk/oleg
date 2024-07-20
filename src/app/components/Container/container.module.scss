@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+
+  max-width: 1280px;
+}
+
+.narrow {
+  max-width: 768px;
+}
+
+.wide {
+  max-width: 1024px;
+}
+
+.fullscreen {
+  max-width: 100%;
+
+  max-width: 1280px;
+}

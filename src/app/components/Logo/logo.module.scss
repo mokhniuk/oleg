@@ -1,0 +1,13 @@
+.logo-link {
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1;
+  border-bottom: 0;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,24 @@
+.header {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  padding: 1rem 2rem;
+  z-index: 100;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  // max-width: 1280px;
+  // margin: auto;
+}
+
+.container {
+  max-width: 100%;
+
+  max-width: 1280px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
