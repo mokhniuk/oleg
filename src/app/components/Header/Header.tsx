@@ -1,5 +1,3 @@
-import React from "react";
-
 import Container from "@/app/components/Container/Container";
 import Logo from "@/app/components/Logo/Logo";
 import SiteMenu from "@/app/components/SiteMenu/SiteMenu";
@@ -15,11 +13,13 @@ const MENU_ITEMS = [
     url: "#works",
     label: "Works",
     title: "",
+    visible: true,
   },
   {
     url: "/about",
     label: "About",
     title: "",
+    visible: false,
   },
 ];
 

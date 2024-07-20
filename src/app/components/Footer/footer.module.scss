@@ -1,9 +1,30 @@
 .footer {
+  padding: 0 2rem;
+  font-size: 1.125rem;
+  line-height: 1.2;
+
+  a {
+    color: inherit;
+  }
 }
 
 .container {
   border-top: 1px solid #dcdcdc;
-  padding-top: 4.5rem;
-  padding-bottom: 4.5rem;
   font-size: 1rem;
+  padding: 4.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.links-list {
+  list-style-type: none;
+  display: block;
+  max-width: 50%;
+}
+
+.links-list__item:not(:last-child) {
+  margin-bottom: 0.75rem;
 }

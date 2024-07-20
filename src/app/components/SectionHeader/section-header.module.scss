@@ -1,0 +1,28 @@
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.lead-text {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #202020;
+  max-width: 620px;
+}
+
+.section-header__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-header__link {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #202020;
+
+  opacity: 0.2;
+  cursor: not-allowed;
+  user-select: none;
+}
