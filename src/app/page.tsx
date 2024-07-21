@@ -3,7 +3,6 @@ import styles from "@/app/page.module.css";
 import Container from "@/app/components/Container/Container";
 import SectionHeader from "@/app/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
-import Link from "next/link";
 
 const FEATURED_WORDKS = [
   {
@@ -22,7 +21,7 @@ const FEATURED_WORDKS = [
     title: "Unlimited Paper",
     description:
       "Created a component library and designed landing pages for electronic price tags producer.",
-    platformsDescription: "string",
+    platformsDescription: "Designed mobile app for iOS and Android.",
     stack: "Figma, Webflow",
     url: "https://u-paper.com",
     urlLabel: "u-paper.com",
@@ -53,7 +52,7 @@ export default function Home() {
               Hey there, I’m Oleg. <br />
               Frontend Engineer and Designer from Kyiv
               <Image
-                src="/images/kyiv_logo.png"
+                src="/images/kyiv-logo.png"
                 alt=""
                 width={34}
                 height={36}
@@ -61,7 +60,7 @@ export default function Home() {
               />
               , based in Berlin{" "}
               <Image
-                src="/images/berlin_logo.png"
+                src="/images/berlin-logo.png"
                 alt=""
                 width={42}
                 height={46}
