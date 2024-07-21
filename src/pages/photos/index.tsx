@@ -1,7 +1,7 @@
 export default function Photography() {
   return (
     <>
-      <h1>PHotography</h1>
+      <h1>Photography</h1>
     </>
   );
 }
