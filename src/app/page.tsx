@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "@/app/page.module.css";
 import Container from "@/app/components/Container/Container";
 import SectionHeader from "@/app/components/SectionHeader/SectionHeader";
@@ -50,17 +50,17 @@ export default function Home() {
           <div className={styles["hero-content"]}>
             <p>
               Hey there, I’m Oleg. <br />
-              Frontend Engineer and Designer from Kyiv
-              <Image
-                src="/images/kyiv-logo.png"
+              I am designer and engineer from&nbsp;Kyiv
+              <img
+                src="./images/kyiv-logo.png"
                 alt=""
                 width={34}
                 height={36}
                 className={styles["kyiv-logo"]}
               />
-              , based in Berlin{" "}
-              <Image
-                src="/images/berlin-logo.png"
+              , based in&nbsp;Berlin{" "}
+              <img
+                src="./images/berlin-logo.png"
                 alt=""
                 width={42}
                 height={46}
