@@ -1,6 +1,6 @@
-import Container from "@/app/components/Container/Container";
-import Logo from "@/app/components/Logo/Logo";
-import SiteMenu from "@/app/components/SiteMenu/SiteMenu";
+import Container from "@/components/Container/Container";
+import Logo from "@/components/Logo/Logo";
+import SiteMenu from "@/components/SiteMenu/SiteMenu";
 
 import styles from "./header.module.scss";
 

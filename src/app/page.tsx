@@ -1,22 +1,52 @@
 // import Image from "next/image";
 import styles from "@/app/page.module.css";
-import Container from "@/app/components/Container/Container";
-import SectionHeader from "@/app/components/SectionHeader/SectionHeader";
-import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
+import Container from "@/components/Container/Container";
+import SectionHeader from "@/components/SectionHeader/SectionHeader";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
 const FEATURED_WORDKS = [
+  // {
+  //   imageUrl: "./projects/vitsche/100.jpg",
+  //   bgColor: "",
+  //   title: "The Journey From Dangerous To (Un)Safe",
+  //   description: "Designing and implementing static website for the project about Berlin's bus route #100",
+  //   // platformsDescription: "string",
+  //   stack: "HTML, CSS, JS, Figma",
+  //   // url: "https://vitsche.org/ecology",
+  //   // urlLabel: "vitsche.org/ecology",
+  // },
   {
-    imageUrl: "/projects/pandora-cards.jpg",
-    bgColor: "",
-    title: "Pandora Cards",
-    description: "frontend development.",
+    imageUrl: "./projects/ecology.webp",
+    bgColor: "#fff3f8",
+    title: "Nature on the Edge",
+    description: "Implemented responsive layout for the project page and integrated it in existing website.",
     // platformsDescription: "string",
-    stack: "Next.js, TypeScript, CSS-modules, Figma",
-    // url: "Url",
-    // urlLabel: "string",
+    stack: "WordPress, HTML, CSS, JS, Figma",
+    url: "https://vitsche.org/ecology",
+    urlLabel: "vitsche.org/ecology",
   },
+  // {
+  //   imageUrl: "./projects/u-bar.jpg",
+  //   bgColor: "#fff3f8",
+  //   title: "U Bar Berlin",
+  //   description: "Designed website for amazing speakeasy bar in Berlin.",
+  //   // platformsDescription: "string",
+  //   stack: "Figma",
+  //   url: "https://ubar.me",
+  //   urlLabel: "ubar.me",
+  // },
+  // {
+  //   imageUrl: "./projects/pandora-cards.jpg",
+  //   bgColor: "",
+  //   title: "Pandora Cards",
+  //   description: "Frontend development of web application.",
+  //   // platformsDescription: "string",
+  //   stack: "Next.js, TypeScript, CSS-modules, Figma",
+  //   // url: "Url",
+  //   // urlLabel: "string",
+  // },
   {
-    imageUrl: "/projects/up.jpg",
+    imageUrl: "./projects/up.jpg",
     bgColor: "#EBEDF0",
     title: "Unlimited Paper",
     description:
@@ -27,7 +57,7 @@ const FEATURED_WORDKS = [
     urlLabel: "u-paper.com",
   },
   {
-    imageUrl: "/projects/wundertax.jpg",
+    imageUrl: "./projects/wundertax.jpg",
     bgColor: "#F6FAFA",
     title: "wundertax",
     description:
@@ -50,23 +80,19 @@ export default function Home() {
           <div className={styles["hero-content"]}>
             <p>
               Hey there, I’m Oleg. <br />
-              I am designer and engineer from&nbsp;Kyiv
-              <img
+              I am designer and engineer from <span className={styles.nobr}>Kyiv&nbsp;<img
                 src="./images/kyiv-logo.png"
                 alt=""
                 width={34}
                 height={36}
                 className={styles["kyiv-logo"]}
-              />
-              , based in&nbsp;Berlin{" "}
-              <img
+              />,</span> based <span className={styles.nobr}>in Berlin <img
                 src="./images/berlin-logo.png"
                 alt=""
                 width={42}
                 height={46}
                 className={styles["berlin-logo"]}
-              />
-              .
+              />.</span>
             </p>
           </div>
         </Container>
@@ -76,10 +102,10 @@ export default function Home() {
         <Container>
           <SectionHeader
             title="Recent projects"
-            linkLabel="archive of all works"
+            // linkLabel="archive of all works"
             linkUrl="#"
-            sectionDescription="My job is to create websites, apps, design systems and complex
-              web-interfaces. Here are some of the recent ones I was working on:"
+            sectionDescription="My job mostly consists of designing and coding websites, web applications, design systems and complex
+              web-interfaces. I also enjoy working on visual journalism projects. "
           />
 
           <div className={styles.projects}>
@@ -116,15 +142,16 @@ export default function Home() {
             title="Photography"
             className={styles["photography-link"]}
             hidden
-          >
-            <Image
-              src="/images/berlin.jpg"
+          > */}
+            <img
+              src="./images/berlin.jpg"
               alt=""
               width={1280}
               height={845}
               className={styles["photography-link__image"]}
+              loading="lazy"
             />
-          </Link> */}
+          {/* </Link> */}
         </Container>
       </section>
     </main>

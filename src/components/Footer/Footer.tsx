@@ -50,9 +50,9 @@ const Footer: React.FC = () => {
           </li>
         </ul>
 
-        <Link href="/ua" title="">
+        {/* <Link href="/ua" title="">
           Українською
-        </Link>
+        </Link> */}
 
         <p className={styles.copyright}>Berlin, 2024</p>
       </Container>

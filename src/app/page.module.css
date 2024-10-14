@@ -11,7 +11,7 @@
 .hero {
   width: 100%;
   /* height: 100vh; */
-  min-height: 800px;
+  min-height: 450px;
   position: relative;
   /* padding: 12rem 0 5rem; */
   padding-top: 5rem;
@@ -49,12 +49,27 @@
     top: 25%;
   }
 }
+@media screen and (min-width: 768px) {
+  .hero {
+    min-height: 800px;
+  }
+}
 
 .hero-content {
-  font-size: 3.45rem;
+  font-size: 2rem;
   color: #202020;
   font-weight: 600;
   max-width: 956px;
+}
+@media screen and (min-width: 768px) {
+  .hero-content {
+    font-size: 3.45rem;
+
+  }
+}
+
+.nobr {
+  white-space: nowrap;
 }
 
 .kyiv-logo {
