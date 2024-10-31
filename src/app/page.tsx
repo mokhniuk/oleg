@@ -19,7 +19,8 @@ const FEATURED_WORDKS = [
     imageUrl: "./projects/ecology.webp",
     bgColor: "#fff3f8",
     title: "Nature on the Edge",
-    description: "Implemented responsive layout for the project page and integrated it in existing website.",
+    description:
+      "Implemented responsive layout for the project page and integrated it in existing website.",
     // platformsDescription: "string",
     stack: "WordPress, HTML, CSS, JS, Figma",
     url: "https://vitsche.org/ecology",
@@ -79,20 +80,30 @@ export default function Home() {
         <Container width="fullscreen">
           <div className={styles["hero-content"]}>
             <p>
-              Hey there, I’m Oleg. <br />
-              I am designer and engineer from <span className={styles.nobr}>Kyiv&nbsp;<img
-                src="./images/kyiv-logo.png"
-                alt=""
-                width={34}
-                height={36}
-                className={styles["kyiv-logo"]}
-              />,</span> based <span className={styles.nobr}>in Berlin <img
-                src="./images/berlin-logo.png"
-                alt=""
-                width={42}
-                height={46}
-                className={styles["berlin-logo"]}
-              />.</span>
+              Hey there, I’m Oleg. <br />I am designer and engineer from{" "}
+              <span className={styles.nobr}>
+                Kyiv&nbsp;
+                <img
+                  src="/images/kyiv-logo.png"
+                  alt=""
+                  width={34}
+                  height={36}
+                  className={styles["kyiv-logo"]}
+                />
+                ,
+              </span>{" "}
+              based{" "}
+              <span className={styles.nobr}>
+                in Berlin{" "}
+                <img
+                  src="/images/berlin-logo.png"
+                  alt=""
+                  width={42}
+                  height={46}
+                  className={styles["berlin-logo"]}
+                />
+                .
+              </span>
             </p>
           </div>
         </Container>
@@ -143,14 +154,14 @@ export default function Home() {
             className={styles["photography-link"]}
             hidden
           > */}
-            <img
-              src="./images/berlin.jpg"
-              alt=""
-              width={1280}
-              height={845}
-              className={styles["photography-link__image"]}
-              loading="lazy"
-            />
+          <img
+            src="/images/berlin.jpg"
+            alt=""
+            width={1280}
+            height={845}
+            className={styles["photography-link__image"]}
+            loading="lazy"
+          />
           {/* </Link> */}
         </Container>
       </section>
