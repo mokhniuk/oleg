@@ -84,7 +84,7 @@ export default function Home() {
               <span className={styles.nobr}>
                 Kyiv&nbsp;
                 <img
-                  src="/images/kyiv-logo.png"
+                  src="./images/kyiv-logo.png"
                   alt=""
                   width={34}
                   height={36}
@@ -96,7 +96,7 @@ export default function Home() {
               <span className={styles.nobr}>
                 in Berlin{" "}
                 <img
-                  src="/images/berlin-logo.png"
+                  src="./images/berlin-logo.png"
                   alt=""
                   width={42}
                   height={46}
@@ -155,7 +155,7 @@ export default function Home() {
             hidden
           > */}
           <img
-            src="/images/berlin.jpg"
+            src="./images/berlin.jpg"
             alt=""
             width={1280}
             height={845}
