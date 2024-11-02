@@ -6,7 +6,7 @@ interface SectionHeaderProps {
   title: string;
   linkLabel?: string;
   linkUrl?: Url;
-  sectionDescription?: string;
+  sectionDescription?: string | JSX.Element;
 }
 
 export default function SectionHeader({

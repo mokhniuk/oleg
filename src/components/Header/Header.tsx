@@ -12,14 +12,32 @@ const MENU_ITEMS = [
   {
     url: "#works",
     label: "Works",
-    title: "",
+    title: "Works",
     visible: true,
+  },
+  {
+    url: "/photography",
+    label: "Photography",
+    title: "Photography",
+    visible: false,
+  },
+  {
+    url: "/djing",
+    label: "DJing",
+    title: "DJing",
+    visible: false,
   },
   {
     url: "/about",
     label: "About",
     title: "",
     visible: false,
+  },
+  {
+    url: "/#contact",
+    label: "Contact",
+    title: "Contact",
+    visible: true,
   },
 ];
 

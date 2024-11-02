@@ -105,6 +105,9 @@
 /* projects */
 
 .projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 4%;
 }
 
 /* contact */

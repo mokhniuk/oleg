@@ -5,16 +5,16 @@ import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
 const FEATURED_WORDKS = [
-  // {
-  //   imageUrl: "./projects/vitsche/100.jpg",
-  //   bgColor: "",
-  //   title: "The Journey From Dangerous To (Un)Safe",
-  //   description: "Designing and implementing static website for the project about Berlin's bus route #100",
-  //   // platformsDescription: "string",
-  //   stack: "HTML, CSS, JS, Figma",
-  //   // url: "https://vitsche.org/ecology",
-  //   // urlLabel: "vitsche.org/ecology",
-  // },
+  {
+    // imageUrl: "./projects/vitsche/100.jpg",
+    bgColor: "#fffff2",
+    title: "The Bus That Never Arrives",
+    description: "Designing and implementing website for the soundscape project about Berlin's bus route #100",
+    // platformsDescription: "string",
+    stack: "HTML, CSS, JS, Figma",
+    url: "https://busthatneverarrives.com",
+    urlLabel: "busthatneverarrives.com",
+  },
   {
     imageUrl: "./projects/ecology.webp",
     bgColor: "#fff3f8",
@@ -141,11 +141,11 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className={styles.contact}>
+      <section className={styles.contact} id="contact">
         <Container>
           <SectionHeader
             title="Contact"
-            sectionDescription={`I am currently available for hire. Feel free to contact me via email, add me on LinkedIn or follow on Instagram.`}
+            sectionDescription={<>I am currently available for hire. Feel free to contact me via <a href="mailto:oleg.mokhniuk+hello@gmail.com">email</a>, add me on <a href="https://www.linkedin.com/in/mokhniuk/" target="_blank">LinkedIn</a> or follow on <a href="https://www.instagram.com/mokhniuk/">Instagram</a>.</>}
           />
 
           {/* <Link
