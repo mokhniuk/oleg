@@ -6,30 +6,33 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
 const FEATURED_WORDKS = [
   {
-    imageUrl: "./projects/u-bar.jpg",
-    bgColor: "#fff3f8",
-    title: "U Bar Berlin",
-    description: "Designed website for amazing speakeasy bar in Berlin.",
+    imageUrl: "./projects/2402.jpg",
+    bgColor: "#ffe0dc",
+    title: "2402 Foundation",
+    description:
+      "Support of the wordpress website for the foundation that helps journalists in Ukraine.",
     // platformsDescription: "string",
-    stack: "Figma",
-    url: "https://ubar.me",
-    urlLabel: "ubar.me",
+    stack: "Wordpress, HTML, CSS, JS",
+    url: "https://2402.org",
+    urlLabel: "2402.org",
   },
   {
     imageUrl: "./projects/kashtan.jpg",
     bgColor: "#E9F4E8",
     title: "Kashtan Berlin",
-    description: "Website design and development for a marketplace of Ukrainian products in Berlin.",
+    description:
+      "Website design and development for a marketplace of Ukrainian products in Berlin.",
     // platformsDescription: "string",
     stack: "Figma",
     url: "https://kashtaninberlin.de",
-    urlLabel: "kashtaninberlin.de",
+    urlLabel: "Comming soon",
   },
   {
     // imageUrl: "./projects/vitsche/100.jpg",
     bgColor: "#fffff2",
     title: "The Bus That Never Arrives",
-    description: "Designing and implementing website for the soundscape project about Berlin's bus route #100",
+    description:
+      "Designing and implementing website for the soundscape project about Berlin's bus route #100",
     // platformsDescription: "string",
     stack: "HTML, CSS, JS, Figma",
     url: "https://busthatneverarrives.com",
@@ -45,6 +48,16 @@ const FEATURED_WORDKS = [
     stack: "WordPress, HTML, CSS, JS, Figma",
     url: "https://vitsche.org/ecology",
     urlLabel: "vitsche.org/ecology",
+  },
+  {
+    imageUrl: "./projects/u-bar.jpg",
+    bgColor: "#fff2b0",
+    title: "U Bar Berlin",
+    description: "Designed website for amazing speakeasy bar in Berlin.",
+    // platformsDescription: "string",
+    stack: "Figma",
+    url: "https://ubar.me",
+    urlLabel: "Comming soon",
   },
   // {
   //   imageUrl: "./projects/pandora-cards.jpg",
@@ -67,20 +80,20 @@ const FEATURED_WORDKS = [
     url: "https://u-paper.com",
     urlLabel: "u-paper.com",
   },
-  {
-    imageUrl: "./projects/wundertax.jpg",
-    bgColor: "#F6FAFA",
-    title: "wundertax",
-    description:
-      "As part of the team I took ownership of unifying design elements and design facelifting. Result of my work was a wundertax Design System, created as a Figma library.",
-    platformsDescription:
-      " Usage of the design system was kickstarted with building new pricing page for the website and onboarding flow, using new components.",
-    stack: "Figma, React.js, TypeScript, Storybook, Wordpress, Hugo",
-    url: "https://wundertax.de/onboarding/en/",
-    urlLabel: "wundertax.de/onboarding",
-    url2: "https://wundertax.de/en/price/",
-    urlLabel2: "wundertax.de/price",
-  },
+  // {
+  //   imageUrl: "./projects/wundertax.jpg",
+  //   bgColor: "#F6FAFA",
+  //   title: "wundertax",
+  //   description:
+  //     "As part of the team I took ownership of unifying design elements and design facelifting. Result of my work was a wundertax Design System, created as a Figma library.",
+  //   platformsDescription:
+  //     " Usage of the design system was kickstarted with building new pricing page for the website and onboarding flow, using new components.",
+  //   stack: "Figma, React.js, TypeScript, Storybook, Wordpress, Hugo",
+  //   url: "https://wundertax.de/onboarding/en/",
+  //   urlLabel: "wundertax.de/onboarding",
+  //   url2: "https://wundertax.de/en/price/",
+  //   urlLabel2: "wundertax.de/price",
+  // },
 ];
 
 export default function Home() {
@@ -155,7 +168,18 @@ export default function Home() {
         <Container>
           <SectionHeader
             title="Contact"
-            sectionDescription={<>I am currently available for hire. Feel free to contact me via <a href="mailto:oleg.mokhniuk+hello@gmail.com">email</a>, add me on <a href="https://www.linkedin.com/in/mokhniuk/" target="_blank">LinkedIn</a> or follow on <a href="https://www.instagram.com/mokhniuk/">Instagram</a>.</>}
+            sectionDescription={
+              <>
+                I am currently available for hire. Feel free to contact me via{" "}
+                <a href="mailto:oleg.mokhniuk+hello@gmail.com">email</a>, add me
+                on{" "}
+                <a href="https://www.linkedin.com/in/mokhniuk/" target="_blank">
+                  LinkedIn
+                </a>{" "}
+                or follow on{" "}
+                <a href="https://www.instagram.com/mokhniuk/">Instagram</a>.
+              </>
+            }
           />
 
           {/* <Link
