@@ -37,7 +37,7 @@ const MENU_ITEMS = [
     url: "/#contact",
     label: "Contact",
     title: "Contact",
-    visible: true,
+    visible: false,
   },
 ];
 

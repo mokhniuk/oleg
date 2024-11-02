@@ -24,10 +24,6 @@
     width: 100%;
     filter: blur(172px);
     position: absolute;
-    /* top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0; */
     z-index: 0;
     transform: translate3d(0, 0, 0);
     border-radius: 50%;
@@ -51,21 +47,16 @@
 }
 @media screen and (min-width: 768px) {
   .hero {
-    min-height: 800px;
+    min-height: 768px;
   }
 }
 
 .hero-content {
   font-size: 2rem;
+  font-size: clamp(2rem, 1.1485rem + 3.1683vw, 4rem);
   color: #202020;
   font-weight: 600;
   max-width: 956px;
-}
-@media screen and (min-width: 768px) {
-  .hero-content {
-    font-size: 3.45rem;
-
-  }
 }
 
 .nobr {
@@ -73,26 +64,24 @@
 }
 
 .kyiv-logo {
-  width: 34px;
-  height: 36px;
+  width: clamp(2rem, 1.1485rem + 3.1683vw, 4rem);
+  height: auto;
   line-height: 24px;
   display: inline-block;
-  margin-top: -20px;
-  margin-left: 8px;
+  margin-left: -0.5vw;
   user-select: none;
 }
 
 .berlin-logo {
   line-height: 24px;
   display: inline-block;
-  width: 42px;
-  height: 46px;
+  width: clamp(2rem, 1.0953rem + 3.3663vw, 4.125rem);
+  height: auto;
   position: relative;
-  bottom: -5px;
-  margin-left: -6px;
-  margin-right: -6px;
-  margin-top: -20px;
+  margin-left: -1.5vw;
+  margin-right: -1vw;
   user-select: none;
+  vertical-align: text-top;
 }
 
 /* works */
@@ -106,14 +95,21 @@
 
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
-  gap: 4%;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+}
+@media screen and (min-width: 768px) {
+  .projects {
+    grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+    gap: 4%;
+  }
+  
 }
 
 /* contact */
 
 .contact {
-  padding: 5rem 0;
+  /* padding: 5rem 0; */
+  padding: clamp(1.5rem, 0.0099rem + 5.5446vw, 5rem) 0;
 }
 
 .photography-link {
@@ -126,5 +122,5 @@
 .photography-link__image {
   width: 100%;
   height: auto;
-  margin-top: 4.5rem;
+  margin-top: clamp(1.5rem, 0.0099rem + 5.5446vw, 5rem);
 }
