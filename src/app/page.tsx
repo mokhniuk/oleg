@@ -6,6 +6,26 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
 const FEATURED_WORDKS = [
   {
+    imageUrl: "./projects/u-bar.jpg",
+    bgColor: "#fff3f8",
+    title: "U Bar Berlin",
+    description: "Designed website for amazing speakeasy bar in Berlin.",
+    // platformsDescription: "string",
+    stack: "Figma",
+    url: "https://ubar.me",
+    urlLabel: "ubar.me",
+  },
+  {
+    imageUrl: "./projects/kashtan.jpg",
+    bgColor: "#E9F4E8",
+    title: "Kashtan Berlin",
+    description: "Website design and development for a marketplace of Ukrainian products in Berlin.",
+    // platformsDescription: "string",
+    stack: "Figma",
+    url: "https://kashtaninberlin.de",
+    urlLabel: "kashtaninberlin.de",
+  },
+  {
     // imageUrl: "./projects/vitsche/100.jpg",
     bgColor: "#fffff2",
     title: "The Bus That Never Arrives",
@@ -26,16 +46,6 @@ const FEATURED_WORDKS = [
     url: "https://vitsche.org/ecology",
     urlLabel: "vitsche.org/ecology",
   },
-  // {
-  //   imageUrl: "./projects/u-bar.jpg",
-  //   bgColor: "#fff3f8",
-  //   title: "U Bar Berlin",
-  //   description: "Designed website for amazing speakeasy bar in Berlin.",
-  //   // platformsDescription: "string",
-  //   stack: "Figma",
-  //   url: "https://ubar.me",
-  //   urlLabel: "ubar.me",
-  // },
   // {
   //   imageUrl: "./projects/pandora-cards.jpg",
   //   bgColor: "",

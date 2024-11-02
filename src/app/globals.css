@@ -141,3 +141,7 @@ h3 {
 p {
   color: #202020;
 }
+
+* {
+  box-sizing: border-box;
+} 

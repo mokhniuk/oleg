@@ -96,11 +96,11 @@
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  gap: 2rem;
 }
 @media screen and (min-width: 768px) {
   .projects {
     grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
-    gap: 4%;
   }
   
 }
