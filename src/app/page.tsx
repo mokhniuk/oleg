@@ -3,98 +3,8 @@ import styles from "@/app/page.module.css";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-
-const FEATURED_WORDKS = [
-  {
-    imageUrl: "./projects/2402.jpg",
-    bgColor: "#ffe0dc",
-    title: "2402 Foundation",
-    description:
-      "Support of the wordpress website for the foundation that helps journalists in Ukraine.",
-    // platformsDescription: "string",
-    stack: "Wordpress, HTML, CSS, JS",
-    url: "https://2402.org",
-    urlLabel: "2402.org",
-  },
-  {
-    imageUrl: "./projects/kashtan.jpg",
-    bgColor: "#E9F4E8",
-    title: "Kashtan Berlin",
-    description:
-      "Website design and development for a marketplace of Ukrainian products in Berlin.",
-    // platformsDescription: "string",
-    stack: "Figma",
-    url: "https://kashtaninberlin.de",
-    urlLabel: "Comming soon",
-  },
-  {
-    // imageUrl: "./projects/vitsche/100.jpg",
-    bgColor: "#fffff2",
-    title: "The Bus That Never Arrives",
-    description:
-      "Designing and implementing website for the soundscape project about Berlin's bus route #100",
-    // platformsDescription: "string",
-    stack: "HTML, CSS, JS, Figma",
-    url: "https://busthatneverarrives.com",
-    urlLabel: "busthatneverarrives.com",
-  },
-  {
-    imageUrl: "./projects/ecology.webp",
-    bgColor: "#fff3f8",
-    title: "Nature on the Edge",
-    description:
-      "Implemented responsive layout for the project page and integrated it in existing website.",
-    // platformsDescription: "string",
-    stack: "WordPress, HTML, CSS, JS, Figma",
-    url: "https://vitsche.org/ecology",
-    urlLabel: "vitsche.org/ecology",
-  },
-  {
-    imageUrl: "./projects/u-bar.jpg",
-    bgColor: "#fff2b0",
-    title: "U Bar Berlin",
-    description: "Designed website for amazing speakeasy bar in Berlin.",
-    // platformsDescription: "string",
-    stack: "Figma",
-    url: "https://ubar.me",
-    urlLabel: "Comming soon",
-  },
-  // {
-  //   imageUrl: "./projects/pandora-cards.jpg",
-  //   bgColor: "",
-  //   title: "Pandora Cards",
-  //   description: "Frontend development of web application.",
-  //   // platformsDescription: "string",
-  //   stack: "Next.js, TypeScript, CSS-modules, Figma",
-  //   // url: "Url",
-  //   // urlLabel: "string",
-  // },
-  {
-    imageUrl: "./projects/up.jpg",
-    bgColor: "#EBEDF0",
-    title: "Unlimited Paper",
-    description:
-      "Created a component library and designed landing pages for electronic price tags producer.",
-    platformsDescription: "Designed mobile app for iOS and Android.",
-    stack: "Figma, Webflow",
-    url: "https://u-paper.com",
-    urlLabel: "u-paper.com",
-  },
-  // {
-  //   imageUrl: "./projects/wundertax.jpg",
-  //   bgColor: "#F6FAFA",
-  //   title: "wundertax",
-  //   description:
-  //     "As part of the team I took ownership of unifying design elements and design facelifting. Result of my work was a wundertax Design System, created as a Figma library.",
-  //   platformsDescription:
-  //     " Usage of the design system was kickstarted with building new pricing page for the website and onboarding flow, using new components.",
-  //   stack: "Figma, React.js, TypeScript, Storybook, Wordpress, Hugo",
-  //   url: "https://wundertax.de/onboarding/en/",
-  //   urlLabel: "wundertax.de/onboarding",
-  //   url2: "https://wundertax.de/en/price/",
-  //   urlLabel2: "wundertax.de/price",
-  // },
-];
+import {WORKS} from "@/data/works";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -106,7 +16,7 @@ export default function Home() {
               Hey there, I’m Oleg. <br />I am designer and engineer from{" "}
               <span className={styles.nobr}>
                 Kyiv&nbsp;
-                <img
+                <Image
                   src="./images/kyiv-logo.png"
                   alt=""
                   width={34}
@@ -118,7 +28,7 @@ export default function Home() {
               based{" "}
               <span className={styles.nobr}>
                 in Berlin{" "}
-                <img
+                <Image
                   src="./images/berlin-logo.png"
                   alt=""
                   width={42}
@@ -143,9 +53,9 @@ export default function Home() {
           />
 
           <div className={styles.projects}>
-            {FEATURED_WORDKS.map((project) => {
+            {WORKS.map((project) => {
               return (
-                <ProjectCard
+                project.show && project.featured && <ProjectCard
                   key={project.title}
                   title={project.title}
                   imageUrl={project.imageUrl}
@@ -188,7 +98,7 @@ export default function Home() {
             className={styles["photography-link"]}
             hidden
           > */}
-          <img
+          <Image
             src="./images/berlin.jpg"
             alt=""
             width={1280}
