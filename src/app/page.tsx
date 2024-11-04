@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import styles from "@/app/page.module.css";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
@@ -102,7 +101,7 @@ export default function Home() {
             src="./images/berlin.jpg"
             alt=""
             width={1280}
-            height={845}
+            height={600}
             className={styles["photography-link__image"]}
             loading="lazy"
           />

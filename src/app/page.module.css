@@ -124,5 +124,11 @@
 .photography-link__image {
   width: 100%;
   height: auto;
+  object-fit: cover;
   margin-top: clamp(1.5rem, 0.0099rem + 5.5446vw, 5rem);
+}
+@media screen and (min-width: 768px) {
+  .photography-link__image {
+    height: 600px;
+  }
 }
