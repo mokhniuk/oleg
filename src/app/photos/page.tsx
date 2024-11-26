@@ -8,7 +8,6 @@ export default function Home() {
       <section className={styles.photography}>
         <Container width="fullscreen">
           <h1>Photography</h1>
-
           <Image src="/images/berlin.jpg" alt="U1" width={1376} height={600} />
         </Container>
       </section>
