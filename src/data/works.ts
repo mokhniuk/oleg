@@ -15,6 +15,31 @@ type WorksType = {
 
 export const WORKS: WorksType[] = [
   {
+    imageUrl: "./projects/u-bar.jpg",
+    bgColor: "#ffffd1",
+    title: "U Bar Berlin",
+    description: "Designed website for amazing speakeasy bar in Berlin.",
+    // platformsDescription: "string",
+    stack: "Figma",
+    url: "https://ubar.me",
+    urlLabel: "ubar.me",
+    show: true,
+    featured: true,
+  },
+  {
+    imageUrl: "./projects/kashtan.jpg",
+    bgColor: "#E9F4E8",
+    title: "Kashtan in Berlin",
+    description:
+      "Website for a marketplace of Ukrainian products in Berlin.",
+    // platformsDescription: "Hostinger Website Builder",
+    // stack: "Figma",
+    url: "https://kashtaninberlin.de",
+    urlLabel: "kashtaninberlin.de",
+    show: true,
+    featured: true,
+  },
+  {
     // imageUrl: "./projects/vitsche/t2j.jpg",
     bgColor: "#e5edff",
     title: "Truth to Justice",
@@ -24,31 +49,6 @@ export const WORKS: WorksType[] = [
     url: "https://truth-to-justice.org",
     urlLabel: "truth-to-justice.org",
     show: true,
-    featured: true,
-  },
-  {
-    imageUrl: "./projects/u-bar.jpg",
-    bgColor: "#fff3f8",
-    title: "U Bar Berlin",
-    description: "Designed website for amazing speakeasy bar in Berlin.",
-    // platformsDescription: "string",
-    stack: "Figma",
-    url: "https://ubar.me",
-    urlLabel: "Coming soon",
-    show: false,
-    featured: true,
-  },
-  {
-    imageUrl: "./projects/kashtan.jpg",
-    bgColor: "#E9F4E8",
-    title: "Kashtan Berlin",
-    description:
-      "Website design and development for a marketplace of Ukrainian products in Berlin.",
-    // platformsDescription: "string",
-    stack: "Figma",
-    url: "https://kashtaninberlin.de",
-    urlLabel: "kashtaninberlin.de",
-    show: false,
     featured: true,
   },
   {
@@ -114,7 +114,7 @@ export const WORKS: WorksType[] = [
     url2: "https://wundertax.de/en/price/",
     urlLabel2: "wundertax.de/price",
     show: true,
-    featured: true,
+    featured: false,
   },
   {
     imageUrl: "./projects/choice.jpg",
