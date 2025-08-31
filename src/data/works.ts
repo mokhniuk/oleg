@@ -15,6 +15,18 @@ type WorksType = {
 
 export const WORKS: WorksType[] = [
   {
+    imageUrl: "./projects/bagel-bro.jpg",
+    bgColor: "#feeadd",
+    title: "Bagel Bro",
+    description: "Designed and developen website for bagel placec in Berlin.",
+    // platformsDescription: "string",
+    stack: "Figma, Wordpress",
+    url: "https://bagelbro.de",
+    urlLabel: "bagelbro.de",
+    show: true,
+    featured: true,
+  },
+  {
     imageUrl: "./projects/u-bar.jpg",
     bgColor: "#ffffd1",
     title: "U Bar Berlin",
@@ -30,8 +42,7 @@ export const WORKS: WorksType[] = [
     imageUrl: "./projects/kashtan.jpg",
     bgColor: "#E9F4E8",
     title: "Kashtan in Berlin",
-    description:
-      "Website for a marketplace of Ukrainian products in Berlin.",
+    description: "Website for a marketplace of Ukrainian products in Berlin.",
     // platformsDescription: "Hostinger Website Builder",
     // stack: "Figma",
     url: "https://kashtaninberlin.de",
@@ -77,16 +88,6 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
   },
-  // {
-  //   imageUrl: "./projects/pandora-cards.jpg",
-  //   bgColor: "",
-  //   title: "Pandora Cards",
-  //   description: "Frontend development of web application.",
-  //   // platformsDescription: "string",
-  //   stack: "Next.js, TypeScript, CSS-modules, Figma",
-  //   // url: "Url",
-  //   // urlLabel: "string",
-  // },
   {
     imageUrl: "./projects/up.jpg",
     bgColor: "#EBEDF0",
@@ -97,7 +98,7 @@ export const WORKS: WorksType[] = [
     stack: "Figma, Webflow",
     url: "https://u-paper.com",
     urlLabel: "u-paper.com",
-    show: true,
+    show: false,
     featured: true,
   },
   {
@@ -113,8 +114,8 @@ export const WORKS: WorksType[] = [
     urlLabel: "wundertax.de/onboarding",
     url2: "https://wundertax.de/en/price/",
     urlLabel2: "wundertax.de/price",
-    show: true,
-    featured: false,
+    show: false,
+    featured: true,
   },
   {
     imageUrl: "./projects/choice.jpg",
