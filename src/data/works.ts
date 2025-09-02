@@ -18,7 +18,7 @@ export const WORKS: WorksType[] = [
     imageUrl: "./projects/bagel-bro.jpg",
     bgColor: "#feeadd",
     title: "Bagel Bro",
-    description: "Designed and developen website for bagel placec in Berlin.",
+    description: "Designed and developed website for bagel place in Berlin.",
     // platformsDescription: "string",
     stack: "Figma, Wordpress",
     url: "https://bagelbro.de",
