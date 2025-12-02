@@ -6,6 +6,8 @@ import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import ImageGallery from "@/components/ImageGallery/ImageGallery";
+import ScreensGrid from "@/components/ScreensGrid/ScreensGrid";
+import BrowserFrame from "@/components/BrowserFrame/BrowserFrame";
 import styles from "./page.module.scss";
 import Image from "next/image";
 interface CaseStudyPageProps {
@@ -121,13 +123,22 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
         )}
 
         {caseStudy?.blocks?.map((block, index) => {
+          // Auto-apply background color based on index for visual rhythm
+          const getAutoBgColor = () => {
+            if (block.type === "section" && !block.bgColor && work.colors?.faded) {
+              // Alternate between no background and faded background
+              return index % 2 === 1 ? work.colors.faded : undefined;
+            }
+            return undefined;
+          };
+
           switch (block.type) {
             case "section":
               return (
                 <CaseStudySection
                   key={index}
                   title={block.title}
-                  bgColor={block.bgColor}
+                  bgColor={block.bgColor || getAutoBgColor()}
                   colors={work.colors}
                   fonts={work.fonts}
                 >
@@ -164,14 +175,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <section className={styles["video-section"]} key={index}>
                   <Container>
-                    <figure className={styles.caseStudyVideo}>
-                      <div className={styles.browserChrome}>
-                        <div className={styles.trafficLights}>
-                          <span className={styles.trafficLight}></span>
-                          <span className={styles.trafficLight}></span>
-                          <span className={styles.trafficLight}></span>
-                        </div>
-                      </div>
+                    <BrowserFrame className={styles.caseStudyVideo}>
                       <video
                         src={block.url}
                         autoPlay={true}
@@ -180,7 +184,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                         style={{ backgroundColor: work.bgColor }}
                         className={styles.blockVideo}
                       />
-                    </figure>
+                    </BrowserFrame>
                   </Container>
                 </section>
               );
@@ -211,6 +215,18 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                       {block.position && <span>, {block.position}</span>}
                     </footer>
                   </blockquote>
+                </CaseStudySection>
+              );
+            case "screens-grid":
+              return (
+                <CaseStudySection
+                  key={index}
+                  colors={work.colors}
+                  fonts={work.fonts}
+                >
+                  <ScreensGrid
+                    images={block.images}
+                  />
                 </CaseStudySection>
               );
             default:

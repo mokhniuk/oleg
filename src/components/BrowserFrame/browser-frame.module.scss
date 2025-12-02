@@ -1,0 +1,55 @@
+.frame {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    width: 100%;
+}
+
+.chrome {
+    height: 40px;
+    background: #e8e8e8;
+    border-bottom: 1px solid #d0d0d0;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.trafficLights {
+    display: flex;
+    gap: 8px;
+}
+
+.trafficLight {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+
+    &:nth-child(1) {
+        background: #ff5f56;
+    }
+
+    &:nth-child(2) {
+        background: #ffbd2e;
+    }
+
+    &:nth-child(3) {
+        background: #27c93f;
+    }
+}
+
+.content {
+    width: 100%;
+    display: block;
+
+    img,
+    video {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}

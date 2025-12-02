@@ -31,12 +31,19 @@ export type VideoBlock = {
   caption?: string;
 };
 
+export type ScreensGridBlock = {
+  type: "screens-grid";
+  images: string[];
+  columns?: 2 | 3 | 4;
+};
+
 export type CaseStudyBlock =
   | SectionBlock
   | ImageBlock
   | VideoBlock
   | GalleryBlock
-  | TestimonialBlock;
+  | TestimonialBlock
+  | ScreensGridBlock;
 
 // Category constants for type safety
 export const CATEGORIES = {
@@ -236,6 +243,18 @@ export const WORKS: WorksType[] = [
           type: "video",
           url: "../../projects/u-bar/ubar.webm",
           caption: "U Bar Berlin cover video",
+        },
+        {
+          type: "screens-grid",
+          images: [
+            "../../projects/u-bar/screens/screen--1.jpg",
+            "../../projects/u-bar/screens/screen--2.jpg",
+            "../../projects/u-bar/screens/screen--3.jpg",
+            "../../projects/u-bar/screens/screen--4.jpg",
+            "../../projects/u-bar/screens/screen--5.jpg",
+            "../../projects/u-bar/screens/screen--6.jpg",
+            "../../projects/u-bar/screens/screen--7.jpg",
+          ],
         },
         {
           type: "section",
