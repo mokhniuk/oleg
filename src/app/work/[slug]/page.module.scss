@@ -108,11 +108,56 @@
   padding: 0;
 }
 
-.caseStudyVideo {
-  aspect-ratio: 2 / 1;
+.video-section {
   position: relative;
+  padding: 8rem 0;
   margin: 0 -2rem;
+}
+
+.caseStudyVideo {
+  position: relative;
+  margin: 0 auto 2rem;
   padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  width: 75%;
+  // max-width: 1200px;
+}
+
+.browserChrome {
+  height: 40px;
+  background: #e8e8e8;
+  border-bottom: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  box-shadow: 0 12px 4px rgba(0, 0, 0, 0.5);
+}
+
+.trafficLights {
+  display: flex;
+  gap: 8px;
+}
+
+.trafficLight {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+
+  &:nth-child(1) {
+    background: #ff5f56;
+  }
+
+  &:nth-child(2) {
+    background: #ffbd2e;
+  }
+
+  &:nth-child(3) {
+    background: #27c93f;
+  }
 }
 
 .blockVideo {

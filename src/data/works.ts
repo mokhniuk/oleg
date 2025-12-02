@@ -53,6 +53,7 @@ export type Category = typeof CATEGORIES[keyof typeof CATEGORIES];
 type CaseStudy = {
   // Header information (short overview)
   task?: string;
+  client?: string;
   releaseDate?: string;
   coverImage?: string;
   role?: string;
@@ -114,6 +115,7 @@ export const WORKS: WorksType[] = [
       task: "Create modern, appetizing website for Berlin bagel shop",
       releaseDate: "2025",
       role: "Designer & Developer",
+      client: "Bagel Bro",
       link: {
         url: "https://bagelbro.de",
         label: "bagelbro.de",
@@ -190,6 +192,7 @@ export const WORKS: WorksType[] = [
       task: "Design sophisticated website for Berlin speakeasy bar",
       releaseDate: "2024",
       role: "Web Designer",
+      client: "U Bar Berlin",
       link: {
         url: "https://ubar.me",
         label: "ubar.me",
@@ -257,6 +260,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
+      client: "Kashtan UG",
       coverImage: "../../projects/kashtan/kashtan--cover.webp",
       task: "Build e-commerce platform for Ukrainian products marketplace",
       releaseDate: "2023",
@@ -270,27 +274,7 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Overview",
           content:
-            "Kashtan in Berlin connects the Ukrainian community in Berlin with authentic products from home. The project involved creating a welcoming, easy-to-use marketplace website that serves both as a shopping platform and a community hub, helping Ukrainians in Berlin access familiar products and stay connected to their culture.",
-        },
-        {
-          type: "section",
-          title: "My Role",
-          bgColor: "#fafafa",
-          content:
-            "End-to-end responsibility including user research, visual design, frontend and backend development, payment integration, and ongoing maintenance and support.",
-        },
-        {
-          type: "section",
-          title: "Timeline",
-          content:
-            "User research and planning: 2 weeks. Design phase: 3 weeks. Development: 6 weeks. Testing and launch: 2 weeks. Total duration: 13 weeks.",
-        },
-        {
-          type: "section",
-          title: "Technology Stack",
-          bgColor: "#fafafa",
-          content:
-            "React, Next.js, TypeScript, Tailwind CSS, payment gateway integration, product management system, responsive design for mobile shopping.",
+            "Kashtan is a pop-up space highlighting Ukrainian businesses, handcrafts, and initiatives. We bring the rich culture of Ukrainian food, drinks, and creativity to Berlin.",
         },
         {
           type: "section",
@@ -312,6 +296,11 @@ export const WORKS: WorksType[] = [
           content:
             "Successfully launched a functional marketplace that serves Berlin's Ukrainian community. The platform has facilitated connections between community members and helped people access products that remind them of home, while supporting Ukrainian businesses.",
         },
+        {
+          type: "image",
+          url: "../../projects/kashtan/kashtan-bc.jpg",
+          caption: "Kashtan business cards",
+        },
       ],
     },
   },
@@ -328,12 +317,13 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
+      client: "Vitsche",
       task: "Develop and maintain conference website platform",
       releaseDate: "2023-2024",
       role: "Web Developer",
       link: {
         url: "https://truth-to-justice.org",
-        label: "visit site",
+        label: "truth-to-justice.org",
       },
       blocks: [
         {
@@ -399,6 +389,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
+      client: "Vitsche",
       task: "Create immersive digital experience for audio art project",
       releaseDate: "2024",
       role: "Designer & Developer",
@@ -474,6 +465,7 @@ export const WORKS: WorksType[] = [
       task: "Integrate new ecology project section into existing website",
       releaseDate: "2023",
       role: "Frontend Developer",
+      client: "Vitsche",
       link: {
         url: "https://vitsche.org/ecology",
         label: "visit project",
@@ -547,6 +539,7 @@ export const WORKS: WorksType[] = [
     show: false,
     featured: true,
     caseStudy: {
+      client: "Unlimited Paper",
       coverImage: "./projects/up.jpg",
       task: "Build design system and landing pages for ESL technology company",
       releaseDate: "2022-2023",

@@ -73,7 +73,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
         title={work.title}
         description={work.description}
         bgColor={work.bgColor}
-        task={caseStudy?.task}
+        client={caseStudy?.client}
         releaseDate={caseStudy?.releaseDate}
         role={caseStudy?.role}
         link={caseStudy?.link || work.link}
@@ -132,19 +132,27 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
             );
           case "video":
             return (
-              <figure className={styles.caseStudyVideo} key={index} >
-                <video
-                  src={block.url}
-                  autoPlay={true}
-                  loop={true}
-                  muted={true}
-                  style={{ objectFit: "cover", backgroundColor: work.bgColor }}
-                  className={styles.blockVideo}
-                />
-                {block.caption && (
-                  <p className={styles.caption}>{block.caption}</p>
-                )}
-              </figure>
+              <section className={styles["video-section"]} key={index}>
+                <Container>
+                  <figure className={styles.caseStudyVideo}>
+                    <div className={styles.browserChrome}>
+                      <div className={styles.trafficLights}>
+                        <span className={styles.trafficLight}></span>
+                        <span className={styles.trafficLight}></span>
+                        <span className={styles.trafficLight}></span>
+                      </div>
+                    </div>
+                    <video
+                      src={block.url}
+                      autoPlay={true}
+                      loop={true}
+                      muted={true}
+                      style={{ backgroundColor: work.bgColor }}
+                      className={styles.blockVideo}
+                    />
+                  </figure>
+                </Container>
+              </section>
             );
           case "gallery":
             return (

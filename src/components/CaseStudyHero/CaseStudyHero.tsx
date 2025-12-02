@@ -6,7 +6,7 @@ interface CaseStudyHeroProps {
   title: string;
   description: string;
   bgColor: string;
-  task?: string;
+  client?: string;
   releaseDate?: string;
   role?: string;
   link?: {
@@ -19,7 +19,7 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   title,
   description,
   bgColor,
-  task,
+  client,
   releaseDate,
   role,
   link,
@@ -31,26 +31,8 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.description}>{description}</p>
 
-          {(task || releaseDate || role || link) && (
+          {(client || releaseDate || role || link) && (
             <div className={styles.headerDetails}>
-              {task && (
-                <div className={styles.headerDetail}>
-                  <h4>Task</h4>
-                  <p>{task}</p>
-                </div>
-              )}
-              {releaseDate && (
-                <div className={styles.headerDetail}>
-                  <h4>Release</h4>
-                  <p>{releaseDate}</p>
-                </div>
-              )}
-              {role && (
-                <div className={styles.headerDetail}>
-                  <h4>Role</h4>
-                  <p>{role}</p>
-                </div>
-              )}
               {link && (
                 <div className={styles.headerDetail}>
                   <h4>Link</h4>
@@ -62,6 +44,24 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
                   >
                     {link.label}
                   </Link>
+                </div>
+              )}
+              {role && (
+                <div className={styles.headerDetail}>
+                  <h4>Role</h4>
+                  <p>{role}</p>
+                </div>
+              )}
+              {client && (
+                <div className={styles.headerDetail}>
+                  <h4>Client</h4>
+                  <p>{client}</p>
+                </div>
+              )}
+              {releaseDate && (
+                <div className={styles.headerDetail}>
+                  <h4>Release</h4>
+                  <p>{releaseDate}</p>
                 </div>
               )}
             </div>
