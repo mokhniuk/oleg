@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const MENU_ITEMS = [
   {
-    url: "#works",
+    url: "/#works",
     label: "Works",
     title: "Works",
     visible: true,

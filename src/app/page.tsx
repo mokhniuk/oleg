@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
-        <Container width="fullscreen">
+        <Container width="fullscreen" className={styles["hero-container"]}>
           <div className={styles["hero-content"]}>
             <p>
               Hey there, I’m Oleg. <br />I am designer and engineer from{" "}
@@ -54,20 +54,19 @@ export default function Home() {
           <div className={styles.projects}>
             {WORKS.map((project) => {
               return (
-                project.show && project.featured && <ProjectCard
-                  key={project.title}
-                  slug={project.slug}
-                  title={project.title}
-                  imageUrl={project.imageUrl}
-                  bgColor={project.bgColor}
-                  description={project.description}
-                  platformsDescription={project.platformsDescription}
-                  url={project.url}
-                  urlLabel={project.urlLabel}
-                  url2={project.url2}
-                  urlLabel2={project.urlLabel2}
-                  stack={project.stack}
-                />
+                project.show &&
+                project.featured && (
+                  <ProjectCard
+                    key={project.title}
+                    slug={project.slug}
+                    title={project.title}
+                    imageUrl={project.imageUrl}
+                    bgColor={project.bgColor}
+                    description={project.description}
+                    link={project.link}
+                    link2={project.link2}
+                  />
+                )
               );
             })}
           </div>

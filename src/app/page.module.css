@@ -59,6 +59,10 @@
   max-width: 956px;
 }
 
+.hero-container {
+  margin: auto;
+}
+
 .nobr {
   white-space: nowrap;
 }
@@ -98,12 +102,12 @@
   /* grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   */
 
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: 2rem;
 }
 @media screen and (min-width: 768px) {
   .projects {
-    /* grid-template-columns: repeat(auto-fill, minmax(48%, 1fr)); */
+    grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
   }
 }
 

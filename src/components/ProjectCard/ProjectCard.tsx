@@ -8,12 +8,14 @@ interface ProjectCardProps {
   bgColor?: string;
   title: string;
   description: string;
-  platformsDescription?: string;
-  stack?: string;
-  url?: Url;
-  urlLabel?: string;
-  url2?: Url;
-  urlLabel2?: string;
+  link?: {
+    url: string;
+    label: string;
+  };
+  link2?: {
+    url: string;
+    label: string;
+  };
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -21,13 +23,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageUrl,
   bgColor = "#fafafa",
   title,
-  platformsDescription,
-  stack,
-  url,
-  urlLabel,
-  url2,
-  urlLabel2,
   description,
+  link,
+  link2,
 }) => {
   return (
     <Link href={`/work/${slug}`} className={styles.projectLink}>
@@ -41,22 +39,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className={styles["project-description"]}>
           <h3>{title}</h3>
           {description && <p>{description}</p>}
-          {platformsDescription && <p>{platformsDescription}</p>}
 
-          {url && (
+          {link && (
             <p>
-              <span className={styles["project__link"]}>{urlLabel}</span>
+              <span className={styles["project__link"]}>{link.label}</span>
             </p>
           )}
 
-          {url2 && (
+          {link2 && (
             <p>
-              <span className={styles["project__link"]}>{urlLabel2}</span>
-            </p>
-          )}
-          {stack && (
-            <p>
-              <small>{stack}</small>
+              <span className={styles["project__link"]}>{link2.label}</span>
             </p>
           )}
         </div>
@@ -67,4 +59,3 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
 export default ProjectCard;
 ProjectCard;
-

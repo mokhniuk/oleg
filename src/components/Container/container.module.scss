@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
 
@@ -16,7 +16,6 @@
 }
 
 .fullscreen {
-  // max-width: 100%;
-
-  // max-width: 1400px;
+  /* Full width container variant */
+  max-width: none;
 }

@@ -1,8 +1,13 @@
 .hero {
-  padding: 8vh 0 6vh;
+  padding-top: 8vh;
+  padding-bottom: 2rem;
   min-height: 50vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .content {
@@ -24,14 +29,16 @@
   margin: 0;
 }
 
-.details {
+.headerDetails {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.detail {
+.headerDetail {
   h4 {
     font-size: 0.875rem;
     text-transform: uppercase;
@@ -45,6 +52,20 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
+    font-weight: 500;
+  }
+}
+
+.headerLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration-color: rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -80,8 +101,10 @@
     font-size: 1.125rem;
   }
 
-  .details {
-    grid-template-columns: 1fr;
+  .headerDetails {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
   }
 }

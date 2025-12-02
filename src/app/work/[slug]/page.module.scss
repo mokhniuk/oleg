@@ -1,41 +1,139 @@
 .main {
-    min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+  width: 100%;
+  /* padding: 6rem; */
+  min-height: 100vh;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
 .testimonial {
-    margin: 3rem 0;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 1rem;
-    border-left: 4px solid #000;
+  margin: 3rem 0;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  border-left: 4px solid #000;
 }
 
 .quote {
-    font-size: 1.5rem;
-    line-height: 1.6;
-    font-style: italic;
-    margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0 0 1.5rem 0;
 }
 
 .author {
-    font-size: 1rem;
-    font-style: normal;
+  font-size: 1rem;
+  font-style: normal;
 
-    strong {
-        font-weight: 600;
-    }
+  strong {
+    font-weight: 600;
+  }
 
-    span {
-        opacity: 0.7;
+  span {
+    opacity: 0.7;
+  }
+}
+
+.navigation {
+  padding: 4rem 0;
+}
+
+.navGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  //   min-height: 120px;
+  justify-content: center;
+  border: 0;
+  flex-grow: 1;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:first-child {
+    text-align: left;
+
+    .navDirection {
+      justify-self: flex-start;
     }
+  }
+
+  &:last-child {
+    text-align: right;
+
+    .navDirection {
+      justify-self: flex-end;
+    }
+  }
+}
+
+.navDirection {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.navTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.navPlaceholder {
+  /* Empty space for when there's no prev/next work */
+  display: block;
+}
+
+.contact {
+  padding: 4rem 0;
+  border-top: 1px solid #e5e5e5;
 }
 
 @media screen and (max-width: 768px) {
-    .quote {
-        font-size: 1.25rem;
-    }
+  .quote {
+    font-size: 1.25rem;
+  }
 
-    .testimonial {
-        padding: 1.5rem;
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .navigation {
+    padding: 3rem 0;
+  }
+
+  .navGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .navLink {
+    padding: 1.5rem;
+    min-height: 100px;
+    text-align: left !important;
+
+    .navDirection {
+      justify-self: flex-start !important;
     }
+  }
+
+  .contact {
+    padding: 3rem 0;
+  }
 }
