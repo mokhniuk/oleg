@@ -1,6 +1,5 @@
 import styles from "./footer.module.scss";
 import Container from "@/components/Container/Container";
-import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -26,27 +25,29 @@ const Footer: React.FC = () => {
 
         <ul className={styles["links-list"]}>
           <li className={styles["links-list__item"]}>
-            <Link href="https://github.com/mokhniuk" target="_blank" title="">
+            <a href="https://github.com/mokhniuk" target="_blank" rel="noopener noreferrer" title="">
               Github
-            </Link>
+            </a>
           </li>
           <li className={styles["links-list__item"]}>
-            <Link
+            <a
               href="https://www.behance.net/mokhniuk"
               target="_blank"
+              rel="noopener noreferrer"
               title=""
             >
               Behance
-            </Link>
+            </a>
           </li>
           <li className={styles["links-list__item"]}>
-            <Link
+            <a
               href="https://www.instagram.com/mokhniuk/"
               target="_blank"
+              rel="noopener noreferrer"
               title=""
             >
               Instagram
-            </Link>
+            </a>
           </li>
         </ul>
 
