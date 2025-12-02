@@ -60,11 +60,9 @@ export default function Home() {
                     key={project.title}
                     slug={project.slug}
                     title={project.title}
-                    imageUrl={project.imageUrl}
                     bgColor={project.bgColor}
                     description={project.description}
                     link={project.link}
-                    link2={project.link2}
                   />
                 )
               );

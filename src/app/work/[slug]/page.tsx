@@ -1,4 +1,4 @@
-import { WORKS } from "@/data/works";
+import { WORKS, CaseStudyBlock } from "@/data/works";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/Container/Container";
@@ -19,21 +19,12 @@ interface CaseStudy {
   task?: string;
   releaseDate?: string;
   role?: string;
-  link?: string;
-  overview?: string;
-  roleDetails?: string;
-  timeline?: string;
-  stack?: string;
-  challenge?: string;
-  solution?: string;
-  images?: string[];
-  outcome?: string;
-  testimonial?: {
-    quote: string;
-    author: string;
-    position?: string;
+  link?: {
+    url: string;
+    label: string;
   };
   coverImage?: string;
+  blocks: CaseStudyBlock[];
 }
 
 // Generate static params for all works
@@ -95,76 +86,75 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
             src={caseStudy?.coverImage}
             alt={work.title + " cover image"}
             fill
-            sizes="100vw"
             style={{ objectFit: "cover", backgroundColor: work.bgColor }}
             priority
           />
         </figure>
       )}
 
-      {caseStudy?.overview && (
-        <CaseStudySection title="Overview">
-          <p>{caseStudy.overview}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.roleDetails && (
-        <CaseStudySection title="My Role" bgColor="#fafafa">
-          <p>{caseStudy.roleDetails}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.timeline && (
-        <CaseStudySection title="Timeline">
-          <p>{caseStudy.timeline}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.stack && (
-        <CaseStudySection title="Technology Stack" bgColor="#fafafa">
-          <p>{caseStudy.stack}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.challenge && (
-        <CaseStudySection title="Challenge" bgColor="#fafafa">
-          <p>{caseStudy.challenge}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.solution && (
-        <CaseStudySection title="Solution">
-          <p>{caseStudy.solution}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.images && caseStudy.images.length > 0 && (
-        <CaseStudySection>
-          <ImageGallery images={caseStudy.images} columns={2} />
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.outcome && (
-        <CaseStudySection title="Outcome" bgColor="#fafafa">
-          <p>{caseStudy.outcome}</p>
-        </CaseStudySection>
-      )}
-
-      {caseStudy?.testimonial && (
-        <CaseStudySection>
-          <blockquote className={styles.testimonial}>
-            <p className={styles.quote}>
-              &ldquo;{caseStudy.testimonial.quote}&rdquo;
-            </p>
-            <footer className={styles.author}>
-              <strong>{caseStudy.testimonial.author}</strong>
-              {caseStudy.testimonial.position && (
-                <span>, {caseStudy.testimonial.position}</span>
-              )}
-            </footer>
-          </blockquote>
-        </CaseStudySection>
-      )}
+      {caseStudy?.blocks?.map((block, index) => {
+        switch (block.type) {
+          case "section":
+            return (
+              <CaseStudySection
+                key={index}
+                title={block.title}
+                bgColor={block.bgColor}
+              >
+                <p>{block.content}</p>
+                {block.image && (
+                  <Image
+                    src={block.image}
+                    alt=""
+                    fill
+                    style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+                    className={styles.blockImage}
+                  />
+                )}
+              </CaseStudySection>
+            );
+          case "image":
+            return (
+              <section key={index} >
+                <figure className={styles.caseStudyCoverImage}>
+                  <Image
+                    src={block.url}
+                    alt={block.caption || ""}
+                    fill 
+                    style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+                    className={styles.blockImage}
+                  />
+                  {block.caption && (
+                    <p className={styles.caption}>{block.caption}</p>
+                  )}
+                </figure>
+              </section>
+            );
+          case "gallery":
+            return (
+              <CaseStudySection key={index}>
+                <ImageGallery
+                  images={block.images}
+                  columns={block.columns || 2}
+                />
+              </CaseStudySection>
+            );
+          case "testimonial":
+            return (
+              <CaseStudySection key={index}>
+                <blockquote className={styles.testimonial}>
+                  <p className={styles.quote}>&ldquo;{block.quote}&rdquo;</p>
+                  <footer className={styles.author}>
+                    <strong>{block.author}</strong>
+                    {block.position && <span>, {block.position}</span>}
+                  </footer>
+                </blockquote>
+              </CaseStudySection>
+            );
+          default:
+            return null;
+        }
+      })}
 
       {/* Prev/Next Navigation */}
       {(prevWork || nextWork) && (
