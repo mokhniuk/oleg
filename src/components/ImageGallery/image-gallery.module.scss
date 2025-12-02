@@ -1,0 +1,45 @@
+.gallery {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2rem 0;
+
+    &[data-columns="1"] {
+        grid-template-columns: 1fr;
+    }
+
+    &[data-columns="2"] {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &[data-columns="3"] {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .gallery {
+
+        &[data-columns="2"],
+        &[data-columns="3"] {
+            grid-template-columns: 1fr;
+        }
+    }
+}

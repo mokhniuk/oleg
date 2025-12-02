@@ -3,6 +3,7 @@ import styles from "./project-card.module.scss";
 import Link from "next/link";
 
 interface ProjectCardProps {
+  slug: string;
   imageUrl?: Url;
   bgColor?: string;
   title: string;
@@ -16,6 +17,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
+  slug,
   imageUrl,
   bgColor = "#fafafa",
   title,
@@ -28,52 +30,41 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
 }) => {
   return (
-    <div
-      className={styles.project}
-      style={{
-        backgroundImage: `url(` + imageUrl + `)`,
-        backgroundColor: bgColor,
-      }}
-    >
-      <div className={styles["project-description"]}>
-        <h3>{title}</h3>
-        {description && <p>{description}</p>}
-        {platformsDescription && <p>{platformsDescription}</p>}
+    <Link href={`/work/${slug}`} className={styles.projectLink}>
+      <div
+        className={styles.project}
+        style={{
+          backgroundImage: `url(` + imageUrl + `)`,
+          backgroundColor: bgColor,
+        }}
+      >
+        <div className={styles["project-description"]}>
+          <h3>{title}</h3>
+          {description && <p>{description}</p>}
+          {platformsDescription && <p>{platformsDescription}</p>}
 
-        {url && (
-          <p>
-            <Link
-              href={url}
-              title={title}
-              target="_blank"
-              className={styles["project__link"]}
-            >
-              {urlLabel}
-            </Link>
-          </p>
-        )}
+          {url && (
+            <p>
+              <span className={styles["project__link"]}>{urlLabel}</span>
+            </p>
+          )}
 
-        {url2 && (
-          <p>
-            <Link
-              href={url2}
-              title={title}
-              target="_blank"
-              className={styles["project__link"]}
-            >
-              {urlLabel2}
-            </Link>
-          </p>
-        )}
-        {stack && (
-          <p>
-            <small>{stack}</small>
-          </p>
-        )}
+          {url2 && (
+            <p>
+              <span className={styles["project__link"]}>{urlLabel2}</span>
+            </p>
+          )}
+          {stack && (
+            <p>
+              <small>{stack}</small>
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 export default ProjectCard;
 ProjectCard;
+

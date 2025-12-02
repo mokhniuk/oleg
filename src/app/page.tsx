@@ -2,7 +2,7 @@ import styles from "@/app/page.module.css";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import {WORKS} from "@/data/works";
+import { WORKS } from "@/data/works";
 import Image from "next/image";
 
 export default function Home() {
@@ -56,6 +56,7 @@ export default function Home() {
               return (
                 project.show && project.featured && <ProjectCard
                   key={project.title}
+                  slug={project.slug}
                   title={project.title}
                   imageUrl={project.imageUrl}
                   bgColor={project.bgColor}

@@ -1,5 +1,21 @@
+type CaseStudy = {
+  overview?: string;
+  role?: string;
+  timeline?: string;
+  challenge?: string;
+  solution?: string;
+  outcome?: string;
+  images?: string[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    position: string;
+  };
+};
+
 type WorksType = {
   title: string;
+  slug: string;
   imageUrl?: string;
   bgColor: string;
   description: string;
@@ -11,10 +27,12 @@ type WorksType = {
   stack?: string;
   show: boolean;
   featured?: boolean;
+  caseStudy?: CaseStudy;
 };
 
 export const WORKS: WorksType[] = [
   {
+    slug: "bagel-bro",
     imageUrl: "./projects/bagel-bro.jpg",
     bgColor: "#feeadd",
     title: "Bagel Bro",
@@ -27,6 +45,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "u-bar-berlin",
     imageUrl: "./projects/u-bar.jpg",
     bgColor: "#ffffd1",
     title: "U Bar Berlin",
@@ -39,6 +58,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "kashtan-in-berlin",
     imageUrl: "./projects/kashtan.jpg",
     bgColor: "#E9F4E8",
     title: "Kashtan in Berlin",
@@ -51,6 +71,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "truth-to-justice",
     // imageUrl: "./projects/vitsche/t2j.jpg",
     bgColor: "#e5edff",
     title: "Truth to Justice",
@@ -63,6 +84,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "bus-that-never-arrives",
     // imageUrl: "./projects/vitsche/100.jpg",
     bgColor: "#fffff2",
     title: "The Bus That Never Arrives",
@@ -76,6 +98,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "nature-on-the-edge",
     imageUrl: "./projects/ecology.webp",
     bgColor: "#fff3f8",
     title: "Nature on the Edge",
@@ -89,6 +112,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "unlimited-paper",
     imageUrl: "./projects/up.jpg",
     bgColor: "#EBEDF0",
     title: "Unlimited Paper",
@@ -102,6 +126,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "wundertax",
     imageUrl: "./projects/wundertax.jpg",
     bgColor: "#F6FAFA",
     title: "wundertax",
@@ -118,6 +143,7 @@ export const WORKS: WorksType[] = [
     featured: true,
   },
   {
+    slug: "choice",
     imageUrl: "./projects/choice.jpg",
     bgColor: "#F6FAFA",
     title: "Choice",
@@ -130,6 +156,7 @@ export const WORKS: WorksType[] = [
     featured: false,
   },
   {
+    slug: "blackthorn-ai",
     imageUrl: "./projects/blackthorn.jpg",
     bgColor: "#F6FAFA",
     title: "Blackthorn AI",
@@ -142,6 +169,7 @@ export const WORKS: WorksType[] = [
     featured: false,
   },
   {
+    slug: "workademy",
     imageUrl: "./projects/workademy.jpg",
     bgColor: "#F6FAFA",
     title: "Workademy",
