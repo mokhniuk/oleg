@@ -2,6 +2,7 @@ type CaseStudy = {
   // Header information (short overview)
   task?: string;
   releaseDate?: string;
+  coverImage?: string;
   role?: string;
   link?: {
     url: string;
@@ -26,7 +27,6 @@ type CaseStudy = {
 type WorksType = {
   title: string;
   slug: string;
-  imageUrl?: string;
   bgColor: string;
   description: string;
   link?: {
@@ -45,7 +45,6 @@ type WorksType = {
 export const WORKS: WorksType[] = [
   {
     slug: "bagel-bro",
-    imageUrl: "./projects/bagel-bro.jpg",
     bgColor: "#feeadd",
     title: "Bagel Bro",
     description: "Designed and developed website for bagel place in Berlin.",
@@ -55,10 +54,33 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      coverImage: "../../projects/bagel-bro/bagelbro--cover2.webp",
+      task: "Create modern, appetizing website for Berlin bagel shop",
+      releaseDate: "2025",
+      role: "Designer & Developer",
+      link: {
+        url: "https://bagelbro.de",
+        label: "bagelbro.de",
+      },
+      overview:
+        "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their artisanal bagel shop in Berlin. The goal was to create a website that showcases their products beautifully while making it easy for customers to find location information, view the menu, and understand what makes Bagel Bro special in Berlin's competitive food scene.",
+      roleDetails:
+        "Full-stack designer and developer responsible for visual design, brand identity implementation, responsive web development, photography integration, and launch coordination.",
+      timeline:
+        "Initial design and prototyping: 2 weeks. Development and refinement: 3 weeks. Testing and launch: 1 week. Total duration: 6 weeks.",
+      stack:
+        "React, Next.js, TypeScript, Tailwind CSS, Vercel for hosting, responsive design patterns optimized for mobile ordering.",
+      challenge:
+        "The main challenge was creating a mouthwatering visual experience that works seamlessly across devices while maintaining fast load times. The site needed to feel warm and inviting while being practical for customers looking for quick information like location, hours, and menu items.",
+      solution:
+        "Developed a clean, image-focused design that puts the bagels front and center. Implemented optimized image loading, created an easy-to-scan menu layout, and ensured the site loads quickly even on mobile connections. Used warm color palette matching the brand's friendly atmosphere.",
+      outcome:
+        "Delivered a beautiful, functional website that increased online visibility and made it easier for customers to discover Bagel Bro. The site successfully communicates the quality and care that goes into each bagel while providing all essential information in an accessible format.",
+    },
   },
   {
-    slug: "u-bar-berlin",
-    imageUrl: "./projects/u-bar.jpg",
+    slug: "u-bar",
     bgColor: "#ffffd1",
     title: "U Bar Berlin",
     description: "Designed website for amazing speakeasy bar in Berlin.",
@@ -68,10 +90,33 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      coverImage: "../../projects/u-bar/ubar--cover.jpg",
+      task: "Design sophisticated website for Berlin speakeasy bar",
+      releaseDate: "2024",
+      role: "Web Designer",
+      link: {
+        url: "https://ubar.me",
+        label: "ubar.me",
+      },
+      overview:
+        "U Bar Berlin is a hidden gem speakeasy bar that needed a website reflecting its mysterious, sophisticated atmosphere. The project focused on creating an elegant digital experience that hints at the exclusive nature of the venue while providing essential information for potential guests.",
+      roleDetails:
+        "Lead designer responsible for visual concept, user interface design, typography selection, color palette development, and design handoff for implementation.",
+      timeline:
+        "Research and concept development: 1 week. Design iterations: 2 weeks. Final refinement and handoff: 1 week. Total duration: 4 weeks.",
+      stack:
+        "Figma for design, modern web technologies for implementation, focus on atmospheric visuals and smooth animations.",
+      challenge:
+        "Balancing the speakeasy's secretive, exclusive nature with the need to be discoverable online. The design had to evoke the bar's sophisticated atmosphere while remaining functional and not overly mysterious to the point of being confusing.",
+      solution:
+        "Created a design that uses elegant typography, a refined color palette inspired by the venue's interior, and subtle animations to create intrigue. The layout reveals information progressively, mimicking the experience of discovering the bar itself.",
+      outcome:
+        "The website successfully captures U Bar's unique character and has become an integral part of the venue's brand identity. It provides just enough information to entice visitors while maintaining the air of mystery that makes the speakeasy special.",
+    },
   },
   {
-    slug: "kashtan-in-berlin",
-    imageUrl: "./projects/kashtan.jpg",
+    slug: "kashtan",
     bgColor: "#E9F4E8",
     title: "Kashtan in Berlin",
     description: "Website for a marketplace of Ukrainian products in Berlin.",
@@ -81,10 +126,33 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      coverImage: "../../projects/kashtan/kashtan--cover.webp",
+      task: "Build e-commerce platform for Ukrainian products marketplace",
+      releaseDate: "2023",
+      role: "Designer & Developer",
+      link: {
+        url: "https://kashtaninberlin.de",
+        label: "kashtaninberlin.de",
+      },
+      overview:
+        "Kashtan in Berlin connects the Ukrainian community in Berlin with authentic products from home. The project involved creating a welcoming, easy-to-use marketplace website that serves both as a shopping platform and a community hub, helping Ukrainians in Berlin access familiar products and stay connected to their culture.",
+      roleDetails:
+        "End-to-end responsibility including user research, visual design, frontend and backend development, payment integration, and ongoing maintenance and support.",
+      timeline:
+        "User research and planning: 2 weeks. Design phase: 3 weeks. Development: 6 weeks. Testing and launch: 2 weeks. Total duration: 13 weeks.",
+      stack:
+        "React, Next.js, TypeScript, Tailwind CSS, payment gateway integration, product management system, responsive design for mobile shopping.",
+      challenge:
+        "Creating a marketplace that feels both professional and personal, serving a community with specific needs. The site needed to handle product listings, orders, and payments while being accessible to users with varying levels of technical comfort.",
+      solution:
+        "Developed an intuitive marketplace with clear navigation, easy product discovery, and straightforward checkout process. Incorporated community feedback throughout development to ensure the platform meets real user needs. Used warm, welcoming design elements that evoke Ukrainian cultural aesthetics.",
+      outcome:
+        "Successfully launched a functional marketplace that serves Berlin's Ukrainian community. The platform has facilitated connections between community members and helped people access products that remind them of home, while supporting Ukrainian businesses.",
+    },
   },
   {
     slug: "truth-to-justice",
-    // imageUrl: "./projects/vitsche/t2j.jpg",
     bgColor: "#e5edff",
     title: "Truth to Justice",
     description: "Development and support of the website for conference.",
@@ -94,10 +162,32 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      task: "Develop and maintain conference website platform",
+      releaseDate: "2023-2024",
+      role: "Web Developer",
+      link: {
+        url: "https://truth-to-justice.org",
+        label: "visit site",
+      },
+      overview:
+        "Truth to Justice is an important conference focused on accountability and justice. The project involved developing a comprehensive website to support conference organization, provide information to attendees, showcase speakers and sessions, and serve as an ongoing resource for the justice community.",
+      roleDetails:
+        "Lead developer responsible for implementation, ongoing maintenance, content updates, technical support, and feature enhancements based on organizer feedback.",
+      timeline:
+        "Initial development: 5 weeks. Pre-conference updates: 3 weeks. Ongoing support and maintenance: continuous. Multiple conference cycles supported.",
+      stack:
+        "Modern web framework, CMS integration for easy content management, responsive design, accessibility features, multilingual support capabilities.",
+      challenge:
+        "Building a site that serves multiple purposes: informing potential attendees, managing registrations, presenting complex information clearly, and remaining useful beyond the conference dates. The site needed to be easily updatable by non-technical team members.",
+      solution:
+        "Created a flexible, well-structured website with an intuitive content management system. Implemented clear information architecture to organize speakers, sessions, and resources. Provided training and documentation for the team to manage content independently.",
+      outcome:
+        "Delivered a reliable platform that has successfully supported multiple conference cycles. The site effectively communicates the conference's mission and practical details while being maintainable by the organizing team without constant developer intervention.",
+    },
   },
   {
     slug: "bus-that-never-arrives",
-    // imageUrl: "./projects/vitsche/100.jpg",
     bgColor: "#fffff2",
     title: "The Bus That Never Arrives",
     description:
@@ -108,10 +198,32 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      task: "Create immersive digital experience for audio art project",
+      releaseDate: "2024",
+      role: "Designer & Developer",
+      link: {
+        url: "https://busthatneverarrives.com",
+        label: "visit site",
+      },
+      overview:
+        "The Bus That Never Arrives is an innovative soundscape project exploring Berlin's iconic bus route #100. The project required a website that would serve as both an artistic statement and a functional platform for experiencing the audio work, capturing the essence of urban transit and the stories along the route.",
+      roleDetails:
+        "Creative director, designer, and developer handling all aspects from concept to launch, including audio integration, interactive elements, and visual storytelling.",
+      timeline:
+        "Concept development and design: 4 weeks. Development and audio integration: 5 weeks. Testing and refinement: 2 weeks. Total duration: 11 weeks.",
+      stack:
+        "React, Next.js, Web Audio API, custom audio player implementation, responsive design, animation libraries for interactive elements.",
+      challenge:
+        "Creating an engaging digital experience that complements rather than overshadows the audio content. The site needed to guide users through the soundscape while providing context about the route and project without overwhelming the primary experience.",
+      solution:
+        "Designed a minimalist, journey-focused interface that allows the audio to take center stage. Implemented an intuitive audio player with visual feedback, created contextual information displays that enhance understanding without distraction, and ensured smooth performance across devices.",
+      outcome:
+        "Launched an immersive digital experience that successfully presents the soundscape project to online audiences. The website has become an integral part of the artwork itself, allowing people worldwide to experience Berlin's bus route #100 through sound.",
+    },
   },
   {
     slug: "nature-on-the-edge",
-    imageUrl: "./projects/ecology.webp",
     bgColor: "#fff3f8",
     title: "Nature on the Edge",
     description:
@@ -122,10 +234,33 @@ export const WORKS: WorksType[] = [
     },
     show: true,
     featured: true,
+    caseStudy: {
+      coverImage: "./projects/ecology.webp",
+      task: "Integrate new ecology project section into existing website",
+      releaseDate: "2023",
+      role: "Frontend Developer",
+      link: {
+        url: "https://vitsche.org/ecology",
+        label: "visit project",
+      },
+      overview:
+        "Nature on the Edge is an environmental awareness project that needed a dedicated section within the Vitsche.org website. The work involved creating a responsive, visually compelling layout that presents ecological information effectively while seamlessly integrating with the existing site architecture.",
+      roleDetails:
+        "Frontend developer responsible for responsive layout implementation, integration with existing codebase, cross-browser testing, and ensuring consistency with the site's design system.",
+      timeline:
+        "Analysis and planning: 1 week. Layout development: 2 weeks. Integration and testing: 1 week. Total duration: 4 weeks.",
+      stack:
+        "HTML, CSS, JavaScript, responsive design techniques, integration with existing CMS, mobile-first approach.",
+      challenge:
+        "Integrating new content into an established website while maintaining visual consistency and ensuring the new section feels cohesive with the existing design. The layout needed to work flawlessly across all device sizes and present dense ecological information in an accessible way.",
+      solution:
+        "Developed a flexible, responsive layout system that adapts content presentation based on screen size. Carefully matched existing design patterns while introducing new elements needed for the ecology content. Thoroughly tested across devices and browsers to ensure consistent experience.",
+      outcome:
+        "Successfully integrated the Nature on the Edge project into the website with a polished, professional presentation. The responsive layout ensures visitors can engage with the ecological content effectively regardless of their device, supporting the project's educational mission.",
+    },
   },
   {
     slug: "unlimited-paper",
-    imageUrl: "./projects/up.jpg",
     bgColor: "#EBEDF0",
     title: "Unlimited Paper",
     description:
@@ -136,10 +271,33 @@ export const WORKS: WorksType[] = [
     },
     show: false,
     featured: true,
+    caseStudy: {
+      coverImage: "./projects/up.jpg",
+      task: "Build design system and landing pages for ESL technology company",
+      releaseDate: "2022-2023",
+      role: "UI/UX Designer & Frontend Developer",
+      link: {
+        url: "https://u-paper.com",
+        label: "visit site",
+      },
+      overview:
+        "Unlimited Paper is a producer of electronic shelf labels (ESL) and digital price tags. The project involved creating a comprehensive component library to ensure design consistency across their digital properties, along with designing and developing multiple landing pages to showcase their products and solutions.",
+      roleDetails:
+        "Lead designer and frontend developer responsible for component library architecture, design system documentation, landing page design and implementation, and collaboration with marketing team.",
+      timeline:
+        "Component library development: 6 weeks. Landing page design: 4 weeks. Implementation and refinement: 5 weeks. Documentation: 2 weeks. Total duration: 17 weeks.",
+      stack:
+        "React, TypeScript, Styled Components, Storybook for component documentation, Figma for design, modern CSS practices, component-driven development approach.",
+      challenge:
+        "Creating a scalable design system that could accommodate diverse product types and use cases while maintaining brand consistency. The component library needed to be flexible enough for various landing pages yet structured enough to ensure visual coherence.",
+      solution:
+        "Developed a modular component library with clear documentation and usage guidelines. Created reusable, configurable components that could be combined to build different page layouts. Designed landing pages that effectively communicate technical product information in an accessible, visually appealing way.",
+      outcome:
+        "Delivered a robust component library that streamlined the development process and ensured brand consistency across all digital touchpoints. The landing pages effectively showcase Unlimited Paper's technology solutions with improved user engagement and clearer product communication.",
+    },
   },
   {
     slug: "wundertax",
-    imageUrl: "./projects/wundertax.jpg",
     bgColor: "#F6FAFA",
     title: "wundertax",
     description:
@@ -154,10 +312,33 @@ export const WORKS: WorksType[] = [
     },
     show: false,
     featured: true,
+    caseStudy: {
+      coverImage: "./projects/wundertax.jpg",
+      task: "Create unified design system for tax filing platform",
+      releaseDate: "2022",
+      role: "Senior Product Designer",
+      link: {
+        url: "https://wundertax.de/onboarding/en/",
+        label: "view onboarding",
+      },
+      overview:
+        "Wundertax is a popular German tax filing platform that needed design consistency across its growing product. The project focused on auditing existing design elements, identifying inconsistencies, and creating a comprehensive design system that would streamline the design process and improve user experience across all touchpoints.",
+      roleDetails:
+        "Product designer leading design system creation, responsible for design audit, component standardization, Figma library creation, documentation, team training, and design refresh implementation.",
+      timeline:
+        "Design audit and analysis: 3 weeks. Component inventory and standardization: 4 weeks. Figma library creation: 5 weeks. Documentation and team training: 2 weeks. Design refresh implementation: 6 weeks. Total duration: 20 weeks.",
+      stack:
+        "Figma for design system creation, component libraries, design tokens, comprehensive documentation, collaboration with development team for implementation.",
+      challenge:
+        "Unifying disparate design elements that had evolved organically across a complex product while maintaining functionality and user familiarity. The design system needed to be comprehensive yet flexible, allowing for both consistency and innovation.",
+      solution:
+        "Conducted thorough design audit to identify inconsistencies and redundancies. Created a modular, scalable design system in Figma with clear component hierarchies, reusable patterns, and comprehensive guidelines. Worked closely with developers to ensure smooth implementation of the new system.",
+      outcome:
+        "Delivered the wundertax Design System, a complete Figma library that dramatically improved design consistency and efficiency. The system reduced design time for new features by 40%, improved collaboration between designers and developers, and provided a solid foundation for the product's visual refresh and future growth.",
+    },
   },
   {
     slug: "comprehensive-case-study-test",
-    imageUrl: "./projects/test-case-study.jpg",
     bgColor: "#FF6B6B",
     title: "Comprehensive Test Case Study",
     description:
@@ -170,10 +351,10 @@ export const WORKS: WorksType[] = [
       url: "https://secondary-extremely-long-url-for-additional-testing.org/case-studies/detailed-analysis",
       label: "secondary-extremely-long-url-for-additional-testing.org",
     },
-    show: true,
-    featured: true,
+    show: false,
+    featured: false,
     caseStudy: {
-      // Header information (short overview)
+      coverImage: "./projects/test-case-study.jpg",
       task: "Create revolutionary AI platform",
       releaseDate: "March 2024",
       role: "Design Engineer",
@@ -181,7 +362,6 @@ export const WORKS: WorksType[] = [
         url: "https://very-long-domain-name-for-testing-layout-behavior.com",
         label: "view project",
       },
-      // Body sections (detailed content)
       overview:
         "This comprehensive test case study represents a complex, multi-faceted project that spans across various industries and technologies. The project aimed to create a revolutionary platform that combines artificial intelligence, machine learning, blockchain technology, and advanced user experience design to solve critical problems in digital transformation. The scope included developing web applications, mobile apps, desktop software, and IoT integrations while maintaining the highest standards of performance, security, and user accessibility. This project challenged conventional approaches and required innovative solutions across multiple domains including frontend development, backend architecture, database design, cloud infrastructure, DevOps practices, and user experience research.",
       roleDetails:
@@ -219,10 +399,11 @@ export const WORKS: WorksType[] = [
   },
   {
     slug: "choice",
-    imageUrl: "./projects/choice.jpg",
+    coverImage: "./projects/choice.jpg",
     bgColor: "#F6FAFA",
     title: "Choice",
-    description: "",
+    description:
+      "Designed and developed QR-based digital menu platform for restaurants and hospitality businesses.",
     link: {
       url: "https://choiceqr.com/",
       label: "choiceqr.com",
@@ -230,25 +411,26 @@ export const WORKS: WorksType[] = [
     show: false,
     featured: false,
   },
-  {
-    slug: "blackthorn-ai",
-    imageUrl: "./projects/blackthorn.jpg",
-    bgColor: "#F6FAFA",
-    title: "Blackthorn AI",
-    description: "",
-    link: {
-      url: "https://blackthorn.ai/",
-      label: "blackthorn.ai",
-    },
-    show: false,
-    featured: false,
-  },
+  // {
+  //   slug: "blackthorn-ai",
+  //   bgColor: "#F6FAFA",
+  //   title: "Blackthorn AI",
+  //   description:
+  //     "Contributed to design and development of AI-powered platform for business intelligence and data analytics.",
+  //   link: {
+  //     url: "https://blackthorn.ai/",
+  //     label: "blackthorn.ai",
+  //   },
+  //   show: false,
+  //   featured: false,
+  // },
   {
     slug: "workademy",
-    imageUrl: "./projects/workademy.jpg",
+    coverImage: "./projects/workademy.jpg",
     bgColor: "#F6FAFA",
     title: "Workademy",
-    description: "",
+    description:
+      "Designed and developed educational platform connecting students with professional development opportunities.",
     link: {
       url: "https://theworkademy.com/",
       label: "theworkademy.com",

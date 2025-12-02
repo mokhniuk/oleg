@@ -7,11 +7,33 @@ import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import ImageGallery from "@/components/ImageGallery/ImageGallery";
 import styles from "./page.module.scss";
-
+import Image from "next/image";
 interface CaseStudyPageProps {
   params: {
     slug: string;
   };
+}
+
+// Add the CaseStudy type with coverImage property
+interface CaseStudy {
+  task?: string;
+  releaseDate?: string;
+  role?: string;
+  link?: string;
+  overview?: string;
+  roleDetails?: string;
+  timeline?: string;
+  stack?: string;
+  challenge?: string;
+  solution?: string;
+  images?: string[];
+  outcome?: string;
+  testimonial?: {
+    quote: string;
+    author: string;
+    position?: string;
+  };
+  coverImage?: string;
 }
 
 // Generate static params for all works
@@ -54,7 +76,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     currentIndex < displayedWorks.length - 1
       ? displayedWorks[currentIndex + 1]
       : null;
-
   return (
     <main className={styles.main}>
       <CaseStudyHero
@@ -66,6 +87,20 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
         role={caseStudy?.role}
         link={caseStudy?.link || work.link}
       />
+
+      {/* case study cover fullsize image */}
+      {caseStudy?.coverImage && (
+        <figure className={styles.caseStudyCoverImage}>
+          <Image
+            src={caseStudy?.coverImage}
+            alt={work.title + " cover image"}
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+            priority
+          />
+        </figure>
+      )}
 
       {caseStudy?.overview && (
         <CaseStudySection title="Overview">

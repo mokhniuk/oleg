@@ -25,18 +25,23 @@ const Footer: React.FC = () => {
 
         <ul className={styles["links-list"]}>
           <li className={styles["links-list__item"]}>
-            <a href="https://github.com/mokhniuk" target="_blank" rel="noopener noreferrer" title="">
+            <a
+              href="https://github.com/mokhniuk"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Oleg's Github"
+            >
               Github
             </a>
           </li>
           <li className={styles["links-list__item"]}>
             <a
-              href="https://www.behance.net/mokhniuk"
+              href="https://www.linkedin.com/in/mokhniuk"
               target="_blank"
               rel="noopener noreferrer"
-              title=""
+              title="Oleg's Linkedin"
             >
-              Behance
+              Linkedin
             </a>
           </li>
           <li className={styles["links-list__item"]}>
@@ -44,7 +49,7 @@ const Footer: React.FC = () => {
               href="https://www.instagram.com/mokhniuk/"
               target="_blank"
               rel="noopener noreferrer"
-              title=""
+              title="Oleg's Instagram"
             >
               Instagram
             </a>
