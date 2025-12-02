@@ -120,7 +120,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                   <Image
                     src={block.url}
                     alt={block.caption || ""}
-                    fill 
+                    fill
                     style={{ objectFit: "cover", backgroundColor: work.bgColor }}
                     className={styles.blockImage}
                   />
@@ -129,6 +129,22 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                   )}
                 </figure>
               </section>
+            );
+          case "video":
+            return (
+              <figure className={styles.caseStudyVideo} key={index} >
+                <video
+                  src={block.url}
+                  autoPlay={true}
+                  loop={true}
+                  muted={true}
+                  style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+                  className={styles.blockVideo}
+                />
+                {block.caption && (
+                  <p className={styles.caption}>{block.caption}</p>
+                )}
+              </figure>
             );
           case "gallery":
             return (

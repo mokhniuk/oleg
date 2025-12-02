@@ -25,9 +25,16 @@ export type TestimonialBlock = {
   position: string;
 };
 
+export type VideoBlock = {
+  type: "video";
+  url: string;
+  caption?: string;
+};
+
 export type CaseStudyBlock =
   | SectionBlock
   | ImageBlock
+  | VideoBlock
   | GalleryBlock
   | TestimonialBlock;
 
@@ -463,7 +470,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
-      coverImage: "./projects/ecology.webp",
+      // coverImage: "./projects/ecology.webp",
       task: "Integrate new ecology project section into existing website",
       releaseDate: "2023",
       role: "Frontend Developer",
@@ -472,6 +479,11 @@ export const WORKS: WorksType[] = [
         label: "visit project",
       },
       blocks: [
+        {
+          type: "video",
+          url: "../../projects/nature-on-the-edge/nature.webm",
+          caption: "Nature on the Edge cover video",
+        },
         {
           type: "section",
           title: "Overview",

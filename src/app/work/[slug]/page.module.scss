@@ -108,6 +108,20 @@
   padding: 0;
 }
 
+.caseStudyVideo {
+  aspect-ratio: 2 / 1;
+  position: relative;
+  margin: 0 -2rem;
+  padding: 0;
+}
+
+.blockVideo {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 .contact {
   padding: 4rem 0;
   border-top: 1px solid #e5e5e5;
