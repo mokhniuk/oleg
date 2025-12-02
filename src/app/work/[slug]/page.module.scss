@@ -13,7 +13,7 @@
   padding: 2rem;
   background-color: #f9f9f9;
   border-radius: 1rem;
-  border-left: 4px solid #000;
+  border-left: 4px solid var(--color-primary, #000);
 }
 
 .quote {
@@ -21,11 +21,13 @@
   line-height: 1.6;
   font-style: italic;
   margin: 0 0 1.5rem 0;
+  font-family: var(--font-text, inherit);
 }
 
 .author {
   font-size: 1rem;
   font-style: normal;
+  font-family: var(--font-text, inherit);
 
   strong {
     font-weight: 600;

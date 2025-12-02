@@ -13,6 +13,15 @@ interface CaseStudyHeroProps {
     url: string;
     label: string;
   };
+  colors?: {
+    primary: string;
+    contrast: string;
+    faded: string;
+  };
+  fonts?: {
+    title: string;
+    text: string;
+  };
 }
 
 const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
@@ -23,13 +32,36 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   releaseDate,
   role,
   link,
+  colors,
+  fonts,
 }) => {
+  const customStyles = {
+    backgroundColor: colors?.faded || bgColor,
+    color: colors?.primary || "inherit",
+    // CSS custom properties for use in child elements
+    "--color-primary": colors?.primary || "#000",
+    "--color-contrast": colors?.contrast || "#666",
+    "--color-faded": colors?.faded || bgColor,
+    "--font-title": fonts?.title ? `"${fonts.title}", serif` : "inherit",
+    "--font-text": fonts?.text ? `"${fonts.text}", sans-serif` : "inherit",
+  } as React.CSSProperties;
+
   return (
-    <section className={styles.hero} style={{ backgroundColor: bgColor }}>
+    <section className={styles.hero} style={customStyles}>
       <Container>
         <div className={styles.content}>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.description}>{description}</p>
+          <h1
+            className={styles.title}
+            style={{ fontFamily: fonts?.title ? `"${fonts.title}", serif` : undefined }}
+          >
+            {title}
+          </h1>
+          <p
+            className={styles.description}
+            style={{ fontFamily: fonts?.text ? `"${fonts.text}", sans-serif` : undefined }}
+          >
+            {description}
+          </p>
 
           {(client || releaseDate || role || link) && (
             <div className={styles.headerDetails}>

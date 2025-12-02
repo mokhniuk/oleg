@@ -67,172 +67,211 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     currentIndex < displayedWorks.length - 1
       ? displayedWorks[currentIndex + 1]
       : null;
+
+  // Generate Google Fonts URL
+  const getFontsUrl = () => {
+    if (!work.fonts) return null;
+    const fonts = [work.fonts.title, work.fonts.text]
+      .filter(Boolean)
+      .map(font => font.replace(/ /g, '+'))
+      .join('&family=');
+    return `https://fonts.googleapis.com/css2?family=${fonts}&display=swap`;
+  };
+
+  const fontsUrl = getFontsUrl();
+
+  // Create global styles for fonts
+  const mainStyles = {
+    "--font-title": work.fonts?.title ? `"${work.fonts.title}", serif` : "inherit",
+    "--font-text": work.fonts?.text ? `"${work.fonts.text}", sans-serif` : "inherit",
+    "--color-primary": work.colors?.primary || "#000",
+    "--color-contrast": work.colors?.contrast || "#666",
+    fontFamily: work.fonts?.text ? `"${work.fonts.text}", sans-serif` : undefined,
+  } as React.CSSProperties;
+
   return (
-    <main className={styles.main}>
-      <CaseStudyHero
-        title={work.title}
-        description={work.description}
-        bgColor={work.bgColor}
-        client={caseStudy?.client}
-        releaseDate={caseStudy?.releaseDate}
-        role={caseStudy?.role}
-        link={caseStudy?.link || work.link}
-      />
-
-      {/* case study cover fullsize image */}
-      {caseStudy?.coverImage && (
-        <figure className={styles.caseStudyCoverImage}>
-          <Image
-            src={caseStudy?.coverImage}
-            alt={work.title + " cover image"}
-            fill
-            style={{ objectFit: "cover", backgroundColor: work.bgColor }}
-            priority
-          />
-        </figure>
+    <>
+      {fontsUrl && (
+        <link rel="stylesheet" href={fontsUrl} />
       )}
+      <main className={styles.main} style={mainStyles}>
+        <CaseStudyHero
+          title={work.title}
+          description={work.description}
+          bgColor={work.bgColor}
+          client={caseStudy?.client}
+          releaseDate={caseStudy?.releaseDate}
+          role={caseStudy?.role}
+          link={caseStudy?.link || work.link}
+          colors={work.colors}
+          fonts={work.fonts}
+        />
 
-      {caseStudy?.blocks?.map((block, index) => {
-        switch (block.type) {
-          case "section":
-            return (
-              <CaseStudySection
-                key={index}
-                title={block.title}
-                bgColor={block.bgColor}
-              >
-                <p>{block.content}</p>
-                {block.image && (
-                  <Image
-                    src={block.image}
-                    alt=""
-                    fill
-                    style={{ objectFit: "cover", backgroundColor: work.bgColor }}
-                    className={styles.blockImage}
-                  />
-                )}
-              </CaseStudySection>
-            );
-          case "image":
-            return (
-              <section key={index} >
-                <figure className={styles.caseStudyCoverImage}>
-                  <Image
-                    src={block.url}
-                    alt={block.caption || ""}
-                    fill
-                    style={{ objectFit: "cover", backgroundColor: work.bgColor }}
-                    className={styles.blockImage}
-                  />
-                  {block.caption && (
-                    <p className={styles.caption}>{block.caption}</p>
-                  )}
-                </figure>
-              </section>
-            );
-          case "video":
-            return (
-              <section className={styles["video-section"]} key={index}>
-                <Container>
-                  <figure className={styles.caseStudyVideo}>
-                    <div className={styles.browserChrome}>
-                      <div className={styles.trafficLights}>
-                        <span className={styles.trafficLight}></span>
-                        <span className={styles.trafficLight}></span>
-                        <span className={styles.trafficLight}></span>
-                      </div>
-                    </div>
-                    <video
-                      src={block.url}
-                      autoPlay={true}
-                      loop={true}
-                      muted={true}
-                      style={{ backgroundColor: work.bgColor }}
-                      className={styles.blockVideo}
+        {/* case study cover fullsize image */}
+        {caseStudy?.coverImage && (
+          <figure className={styles.caseStudyCoverImage}>
+            <Image
+              src={caseStudy?.coverImage}
+              alt={work.title + " cover image"}
+              fill
+              style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+              priority
+            />
+          </figure>
+        )}
+
+        {caseStudy?.blocks?.map((block, index) => {
+          switch (block.type) {
+            case "section":
+              return (
+                <CaseStudySection
+                  key={index}
+                  title={block.title}
+                  bgColor={block.bgColor}
+                  colors={work.colors}
+                  fonts={work.fonts}
+                >
+                  <p>{block.content}</p>
+                  {block.image && (
+                    <Image
+                      src={block.image}
+                      alt=""
+                      fill
+                      style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+                      className={styles.blockImage}
                     />
+                  )}
+                </CaseStudySection>
+              );
+            case "image":
+              return (
+                <section key={index} >
+                  <figure className={styles.caseStudyCoverImage}>
+                    <Image
+                      src={block.url}
+                      alt={block.caption || ""}
+                      fill
+                      style={{ objectFit: "cover", backgroundColor: work.bgColor }}
+                      className={styles.blockImage}
+                    />
+                    {block.caption && (
+                      <p className={styles.caption}>{block.caption}</p>
+                    )}
                   </figure>
-                </Container>
-              </section>
-            );
-          case "gallery":
-            return (
-              <CaseStudySection key={index}>
-                <ImageGallery
-                  images={block.images}
-                  columns={block.columns || 2}
-                />
-              </CaseStudySection>
-            );
-          case "testimonial":
-            return (
-              <CaseStudySection key={index}>
-                <blockquote className={styles.testimonial}>
-                  <p className={styles.quote}>&ldquo;{block.quote}&rdquo;</p>
-                  <footer className={styles.author}>
-                    <strong>{block.author}</strong>
-                    {block.position && <span>, {block.position}</span>}
-                  </footer>
-                </blockquote>
-              </CaseStudySection>
-            );
-          default:
-            return null;
-        }
-      })}
+                </section>
+              );
+            case "video":
+              return (
+                <section className={styles["video-section"]} key={index}>
+                  <Container>
+                    <figure className={styles.caseStudyVideo}>
+                      <div className={styles.browserChrome}>
+                        <div className={styles.trafficLights}>
+                          <span className={styles.trafficLight}></span>
+                          <span className={styles.trafficLight}></span>
+                          <span className={styles.trafficLight}></span>
+                        </div>
+                      </div>
+                      <video
+                        src={block.url}
+                        autoPlay={true}
+                        loop={true}
+                        muted={true}
+                        style={{ backgroundColor: work.bgColor }}
+                        className={styles.blockVideo}
+                      />
+                    </figure>
+                  </Container>
+                </section>
+              );
+            case "gallery":
+              return (
+                <CaseStudySection
+                  key={index}
+                  colors={work.colors}
+                  fonts={work.fonts}
+                >
+                  <ImageGallery
+                    images={block.images}
+                    columns={block.columns || 2}
+                  />
+                </CaseStudySection>
+              );
+            case "testimonial":
+              return (
+                <CaseStudySection
+                  key={index}
+                  colors={work.colors}
+                  fonts={work.fonts}
+                >
+                  <blockquote className={styles.testimonial}>
+                    <p className={styles.quote}>&ldquo;{block.quote}&rdquo;</p>
+                    <footer className={styles.author}>
+                      <strong>{block.author}</strong>
+                      {block.position && <span>, {block.position}</span>}
+                    </footer>
+                  </blockquote>
+                </CaseStudySection>
+              );
+            default:
+              return null;
+          }
+        })}
 
-      {/* Prev/Next Navigation */}
-      {(prevWork || nextWork) && (
-        <section className={styles.navigation}>
+        {/* Prev/Next Navigation */}
+        {(prevWork || nextWork) && (
+          <section className={styles.navigation}>
+            <Container>
+              <div className={styles.navGrid}>
+                {prevWork ? (
+                  <Link
+                    href={`/work/${prevWork.slug}`}
+                    className={styles.navLink}
+                  >
+                    <div className={styles.navDirection}>← Previous</div>
+                    <div className={styles.navTitle}>{prevWork.title}</div>
+                  </Link>
+                ) : (
+                  <div className={styles.navPlaceholder}></div>
+                )}
+
+                {nextWork ? (
+                  <Link
+                    href={`/work/${nextWork.slug}`}
+                    className={styles.navLink}
+                  >
+                    <div className={styles.navDirection}>Next →</div>
+                    <div className={styles.navTitle}>{nextWork.title}</div>
+                  </Link>
+                ) : (
+                  <div className={styles.navPlaceholder}></div>
+                )}
+              </div>
+            </Container>
+          </section>
+        )}
+
+        {/* Contact Section */}
+        <section className={styles.contact}>
           <Container>
-            <div className={styles.navGrid}>
-              {prevWork ? (
-                <Link
-                  href={`/work/${prevWork.slug}`}
-                  className={styles.navLink}
-                >
-                  <div className={styles.navDirection}>← Previous</div>
-                  <div className={styles.navTitle}>{prevWork.title}</div>
-                </Link>
-              ) : (
-                <div className={styles.navPlaceholder}></div>
-              )}
-
-              {nextWork ? (
-                <Link
-                  href={`/work/${nextWork.slug}`}
-                  className={styles.navLink}
-                >
-                  <div className={styles.navDirection}>Next →</div>
-                  <div className={styles.navTitle}>{nextWork.title}</div>
-                </Link>
-              ) : (
-                <div className={styles.navPlaceholder}></div>
-              )}
-            </div>
+            <SectionHeader
+              title="Let's Work Together"
+              sectionDescription={
+                <>
+                  Interested in collaborating or have a project in mind? I&apos;d
+                  love to hear from you. Feel free to reach out via{" "}
+                  <a href="mailto:oleg.mokhniuk+hello@gmail.com">email</a> or
+                  connect with me on{" "}
+                  <a href="https://www.linkedin.com/in/mokhniuk/" target="_blank">
+                    LinkedIn
+                  </a>
+                  .
+                </>
+              }
+            />
           </Container>
         </section>
-      )}
-
-      {/* Contact Section */}
-      <section className={styles.contact}>
-        <Container>
-          <SectionHeader
-            title="Let's Work Together"
-            sectionDescription={
-              <>
-                Interested in collaborating or have a project in mind? I&apos;d
-                love to hear from you. Feel free to reach out via{" "}
-                <a href="mailto:oleg.mokhniuk+hello@gmail.com">email</a> or
-                connect with me on{" "}
-                <a href="https://www.linkedin.com/in/mokhniuk/" target="_blank">
-                  LinkedIn
-                </a>
-                .
-              </>
-            }
-          />
-        </Container>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }
