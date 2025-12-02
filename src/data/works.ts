@@ -31,6 +31,18 @@ export type CaseStudyBlock =
   | GalleryBlock
   | TestimonialBlock;
 
+// Category constants for type safety
+export const CATEGORIES = {
+  WEB: 'web',
+  PRINT: 'print',
+  PHOTOGRAPHY: 'photography',
+  DEVELOPMENT: 'development',
+  DESIGN: 'design',
+  BRANDING: 'branding',
+} as const;
+
+export type Category = typeof CATEGORIES[keyof typeof CATEGORIES];
+
 type CaseStudy = {
   // Header information (short overview)
   task?: string;
@@ -41,7 +53,21 @@ type CaseStudy = {
     url: string;
     label: string;
   };
-  blocks: CaseStudyBlock[];
+  // Body sections (detailed content)
+  overview?: string;
+  roleDetails?: string;
+  timeline?: string;
+  stack?: string;
+  challenge?: string;
+  solution?: string;
+  outcome?: string;
+  images?: string[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    position: string;
+  };
+  blocks?: CaseStudyBlock[];
 };
 
 type WorksType = {
@@ -49,7 +75,7 @@ type WorksType = {
   slug: string;
   bgColor: string;
   description: string;
-  coverImage?: string;
+  categories: string[]; // Array of category tags
   link?: {
     url: string;
     label: string;
@@ -69,6 +95,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#feeadd",
     title: "Bagel Bro",
     description: "Designed and developed website for bagel place in Berlin.",
+    categories: ["web", "development", "design", "photography"],
     link: {
       url: "https://bagelbro.de",
       label: "bagelbro.de",
@@ -144,6 +171,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#ffffd1",
     title: "U Bar Berlin",
     description: "Designed website for amazing speakeasy bar in Berlin.",
+    categories: ["web", "design"],
     link: {
       url: "https://ubar.me",
       label: "ubar.me",
@@ -214,6 +242,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#E9F4E8",
     title: "Kashtan in Berlin",
     description: "Website for a marketplace of Ukrainian products in Berlin.",
+    categories: ["web", "development"],
     link: {
       url: "https://kashtaninberlin.de",
       label: "kashtaninberlin.de",
@@ -284,6 +313,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#e5edff",
     title: "Truth to Justice",
     description: "Development and support of the website for conference.",
+    categories: ["web", "development"],
     link: {
       url: "https://truth-to-justice.org",
       label: "truth-to-justice.org",
@@ -354,6 +384,7 @@ export const WORKS: WorksType[] = [
     title: "The Bus That Never Arrives",
     description:
       "Designing and implementing website for the soundscape project about Berlin's bus route #100",
+    categories: ["web", "development", "design"],
     link: {
       url: "https://busthatneverarrives.com",
       label: "busthatneverarrives.com",
@@ -424,6 +455,7 @@ export const WORKS: WorksType[] = [
     title: "Nature on the Edge",
     description:
       "Implemented responsive layout for the project page and integrated it in existing website.",
+    categories: ["web", "development"],
     link: {
       url: "https://vitsche.org/ecology",
       label: "vitsche.org/ecology",
@@ -495,6 +527,7 @@ export const WORKS: WorksType[] = [
     title: "Unlimited Paper",
     description:
       "Created a component library and designed landing pages for electronic price tags producer.",
+    categories: ["web", "development", "design"],
     link: {
       url: "https://u-paper.com",
       label: "u-paper.com",
@@ -566,6 +599,7 @@ export const WORKS: WorksType[] = [
     title: "wundertax",
     description:
       "As part of the team I took ownership of unifying design elements and design facelifting. Result of my work was a wundertax Design System, created as a Figma library.",
+    categories: ["design"],
     link: {
       url: "https://wundertax.de/onboarding/en/",
       label: "wundertax.de/onboarding",
@@ -641,6 +675,7 @@ export const WORKS: WorksType[] = [
     title: "Comprehensive Test Case Study",
     description:
       "A comprehensive case study designed to test layout behavior with extensive content and complex case study sections.",
+    categories: ["web", "development", "design"],
     link: {
       url: "https://very-long-domain-name-for-testing-layout-behavior.com/projects/comprehensive-case-study",
       label: "very-long-domain-name-for-testing-layout-behavior.com",
@@ -735,11 +770,11 @@ export const WORKS: WorksType[] = [
   },
   {
     slug: "choice",
-    coverImage: "./projects/choice.jpg",
     bgColor: "#F6FAFA",
     title: "Choice",
     description:
       "Designed and developed QR-based digital menu platform for restaurants and hospitality businesses.",
+    categories: ["web", "development", "design"],
     link: {
       url: "https://choiceqr.com/",
       label: "choiceqr.com",
@@ -749,11 +784,11 @@ export const WORKS: WorksType[] = [
   },
   {
     slug: "workademy",
-    coverImage: "./projects/workademy.jpg",
     bgColor: "#F6FAFA",
     title: "Workademy",
     description:
       "Designed and developed educational platform connecting students with professional development opportunities.",
+    categories: ["web", "development", "design"],
     link: {
       url: "https://theworkademy.com/",
       label: "theworkademy.com",

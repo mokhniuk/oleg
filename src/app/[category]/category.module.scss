@@ -1,0 +1,59 @@
+.categoryPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary, #000);
+}
+
+.description {
+    font-size: 1.125rem;
+    color: var(--text-secondary, #666);
+    margin-bottom: 0.5rem;
+}
+
+.count {
+    font-size: 0.875rem;
+    color: var(--text-tertiary, #999);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary, #666);
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .projectsGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+    }
+}
