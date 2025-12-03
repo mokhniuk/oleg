@@ -123,13 +123,13 @@ export const WORKS: WorksType[] = [
     description: "Designed and developed website for bagel place in Berlin.",
     categories: ["web", "development", "design", "photography"],
     colors: {
-      primary: "#E87722",
-      contrast: "#2278E8",
-      faded: "#feeadd",
+      primary: "#E7650D",
+      contrast: "#1F6686",
+      faded: "#FFFEFE",
     },
     fonts: {
-      title: "Playfair Display",
-      text: "Inter",
+      title: "Helvetica Neue",
+      text: "Helvetica Neue",
     },
     link: {
       url: "https://bagelbro.de",
@@ -158,6 +158,16 @@ export const WORKS: WorksType[] = [
           title: "Overview",
           content:
             "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their artisanal bagel shop in Berlin. The goal was to create a website that showcases their products beautifully while making it easy for customers to find location information, view the menu, and understand what makes Bagel Bro special in Berlin's competitive food scene.",
+        },
+        {
+          type: "screens-grid",
+          images: [
+            "../../projects/bagel-bro/screens/screen--1.jpg",
+            "../../projects/bagel-bro/screens/screen--2.jpg",
+            "../../projects/bagel-bro/screens/screen--3.jpg",
+            "../../projects/bagel-bro/screens/screen--4.jpg",
+            "../../projects/bagel-bro/screens/screen--5.jpg"
+          ],
         },
         {
           type: "image",
