@@ -57,15 +57,7 @@
 
 .headerLink {
   color: var(--color-primary, inherit);
-  text-decoration: underline;
-  text-decoration-color: rgba(0, 0, 0, 0.3);
-  text-underline-offset: 3px;
   font-weight: 500;
-  transition: all 0.2s ease;
-
-  &:hover {
-    text-decoration-color: var(--color-primary, rgba(0, 0, 0, 0.8));
-  }
 }
 
 .links {

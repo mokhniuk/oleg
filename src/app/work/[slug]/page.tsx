@@ -70,7 +70,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
       ? displayedWorks[currentIndex + 1]
       : null;
 
-  // Generate Google Fonts URL
+  // Generate Google Fonts URL for inline style injection
   const getFontsUrl = () => {
     if (!work.fonts) return null;
     const fonts = [work.fonts.title, work.fonts.text]
@@ -82,7 +82,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const fontsUrl = getFontsUrl();
 
-  // Create global styles for fonts
   const mainStyles = {
     "--font-title": work.fonts?.title ? `"${work.fonts.title}", serif` : "inherit",
     "--font-text": work.fonts?.text ? `"${work.fonts.text}", sans-serif` : "inherit",
@@ -94,7 +93,9 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   return (
     <>
       {fontsUrl && (
-        <link rel="stylesheet" href={fontsUrl} />
+        <style dangerouslySetInnerHTML={{
+          __html: `@import url('${fontsUrl}');`
+        }} />
       )}
       <main className={styles.main} style={mainStyles}>
         <CaseStudyHero

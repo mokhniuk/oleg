@@ -4,9 +4,12 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export", // <=== enables static exports
+  // Only use static export for production builds to preserve hot reload in dev
+  ...(!isDev && { output: "export" }),
   reactStrictMode: true,
   
   // Image optimization for static export
@@ -16,18 +19,14 @@ const nextConfig = {
     unoptimized: true
   },
   
-  assetPrefix: "/",
+  // Only use assetPrefix in production
+  ...(!isDev && { assetPrefix: "/" }),
   
   // Compression and optimization
   compress: true,
   
-  // Bundle optimization
-  experimental: {
-    optimizePackageImports: ['@components', '@assets'],
-  },
-  
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Optimize bundle size
+    // Only apply optimizations in production
     if (!dev && !isServer) {
       // Remove unused imports automatically
       config.optimization.usedExports = true;
@@ -65,4 +64,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 };
 
-export default withBundleAnalyzer(nextConfig);
+// Only wrap with bundle analyzer when explicitly enabled
+export default process.env.ANALYZE === 'true' 
+  ? withBundleAnalyzer(nextConfig) 
+  : nextConfig;
