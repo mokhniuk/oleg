@@ -125,7 +125,7 @@ export const WORKS: WorksType[] = [
     colors: {
       primary: "#E7650D",
       contrast: "#1F6686",
-      faded: "#FFFEFE",
+      faded: "#fafafa",
     },
     fonts: {
       title: "Helvetica Neue",
@@ -138,7 +138,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
-      coverImage: "../../projects/bagel-bro/bagelbro--cover.jpg",
+      coverImage: "../../projects/bagel-bro/bagelbro--cover2.webp",
       task: "Create modern, appetizing website for Berlin bagel shop",
       releaseDate: "2025",
       role: "Designer & Developer",
@@ -156,6 +156,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Overview",
+          bgColor: "#fafafa",
           content:
             "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their artisanal bagel shop in Berlin. The goal was to create a website that showcases their products beautifully while making it easy for customers to find location information, view the menu, and understand what makes Bagel Bro special in Berlin's competitive food scene.",
         },
@@ -169,15 +170,15 @@ export const WORKS: WorksType[] = [
             "../../projects/bagel-bro/screens/screen--5.jpg"
           ],
         },
-        {
-          type: "image",
-          url: "../../projects/bagel-bro/bagelbro--cover2.webp",
-          caption: "Bagel Bro cover image",
-        },
+        // {
+        //   type: "image",
+        //   url: "../../projects/bagel-bro/bagelbro--cover2.webp",
+        //   caption: "Bagel Bro cover image",
+        // },
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          bgColor: "#feeadd",
           content:
             "Full-stack designer and developer responsible for visual design, brand identity implementation, responsive web development, photography integration, and launch coordination.",
         },
@@ -190,27 +191,27 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          bgColor: "#feeadd",
           content:
             "React, Next.js, TypeScript, Tailwind CSS, Vercel for hosting, responsive design patterns optimized for mobile ordering.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "The main challenge was creating a mouthwatering visual experience that works seamlessly across devices while maintaining fast load times. The site needed to feel warm and inviting while being practical for customers looking for quick information like location, hours, and menu items.",
         },
         {
           type: "section",
           title: "Solution",
+          bgColor: "#feeadd",
           content:
             "Developed a clean, image-focused design that puts the bagels front and center. Implemented optimized image loading, created an easy-to-scan menu layout, and ensured the site loads quickly even on mobile connections. Used warm color palette matching the brand's friendly atmosphere.",
         },
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
           content:
             "Delivered a beautiful, functional website that increased online visibility and made it easier for customers to discover Bagel Bro. The site successfully communicates the quality and care that goes into each bagel while providing all essential information in an accessible format.",
         },
@@ -224,13 +225,13 @@ export const WORKS: WorksType[] = [
     description: "Designed website for amazing speakeasy bar in Berlin.",
     categories: ["web", "design"],
     colors: {
-      primary: "#D4AF37",
-      contrast: "#1A1A1A",
-      faded: "#FFFEF5",
+      primary: "#000",
+      contrast: "#EBEB6F",
+      faded: "#ffffd1",
     },
     fonts: {
-      title: "Cormorant Garamond",
-      text: "Lato",
+      title: "Instrument Serif",
+      text: "Roboto",
     },
     link: {
       url: "https://ubar.me",
@@ -275,7 +276,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Lead designer responsible for visual concept, user interface design, typography selection, color palette development, and design handoff for implementation.",
         },
@@ -288,14 +289,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Figma for design, modern web technologies for implementation, focus on atmospheric visuals and smooth animations.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Balancing the speakeasy's secretive, exclusive nature with the need to be discoverable online. The design had to evoke the bar's sophisticated atmosphere while remaining functional and not overly mysterious to the point of being confusing.",
         },
@@ -308,7 +309,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "The website successfully captures U Bar's unique character and has become an integral part of the venue's brand identity. It provides just enough information to entice visitors while maintaining the air of mystery that makes the speakeasy special.",
         },
@@ -322,13 +323,13 @@ export const WORKS: WorksType[] = [
     description: "Website for a marketplace of Ukrainian products in Berlin.",
     categories: ["web", "development"],
     colors: {
-      primary: "#4A7C59",
-      contrast: "#C45B5B",
-      faded: "#F5FAF4",
+      primary: "#286E22",
+      contrast: "#643D44", // 0A0A08
+      faded: "#F1F5F0",
     },
     fonts: {
-      title: "Merriweather",
-      text: "Open Sans",
+      title: "Young Serif",
+      text: "Work Sans",
     },
     link: {
       url: "https://kashtaninberlin.de",
@@ -393,13 +394,13 @@ export const WORKS: WorksType[] = [
     description: "Development and support of the website for conference.",
     categories: ["web", "development"],
     colors: {
-      primary: "#3366CC",
-      contrast: "#CC6633",
-      faded: "#F2F5FF",
+      primary: "#0046DD",
+      contrast: "#16171B",
+      faded: "#E4E4E4",
     },
     fonts: {
-      title: "Libre Baskerville",
-      text: "Source Sans Pro",
+      title: "Krona One",
+      text: "Helvetica Neue",
     },
     link: {
       url: "https://truth-to-justice.org",
@@ -431,7 +432,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Lead developer responsible for implementation, ongoing maintenance, content updates, technical support, and feature enhancements based on organizer feedback.",
         },
@@ -444,14 +445,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Modern web framework, CMS integration for easy content management, responsive design, accessibility features, multilingual support capabilities.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Building a site that serves multiple purposes: informing potential attendees, managing registrations, presenting complex information clearly, and remaining useful beyond the conference dates. The site needed to be easily updatable by non-technical team members.",
         },
@@ -464,7 +465,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Delivered a reliable platform that has successfully supported multiple conference cycles. The site effectively communicates the conference's mission and practical details while being maintainable by the organizing team without constant developer intervention.",
         },
@@ -479,13 +480,13 @@ export const WORKS: WorksType[] = [
       "Designing and implementing website for the soundscape project about Berlin's bus route #100",
     categories: ["web", "development", "design"],
     colors: {
-      primary: "#F4D03F",
-      contrast: "#3F4DF4",
-      faded: "#FFFEF8",
+      primary: "#ede869",
+      contrast: "#222",
+      faded: "#fffff2",
     },
     fonts: {
-      title: "Space Grotesk",
-      text: "IBM Plex Sans",
+      title: "Permanent Marker",
+      text: "Arial",
     },
     link: {
       url: "https://busthatneverarrives.com",
@@ -517,7 +518,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Creative director, designer, and developer handling all aspects from concept to launch, including audio integration, interactive elements, and visual storytelling.",
         },
@@ -530,14 +531,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "React, Next.js, Web Audio API, custom audio player implementation, responsive design, animation libraries for interactive elements.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Creating an engaging digital experience that complements rather than overshadows the audio content. The site needed to guide users through the soundscape while providing context about the route and project without overwhelming the primary experience.",
         },
@@ -550,7 +551,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Launched an immersive digital experience that successfully presents the soundscape project to online audiences. The website has become an integral part of the artwork itself, allowing people worldwide to experience Berlin's bus route #100 through sound.",
         },
@@ -604,7 +605,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Frontend developer responsible for responsive layout implementation, integration with existing codebase, cross-browser testing, and ensuring consistency with the site's design system.",
         },
@@ -617,14 +618,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "HTML, CSS, JavaScript, responsive design techniques, integration with existing CMS, mobile-first approach.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Integrating new content into an established website while maintaining visual consistency and ensuring the new section feels cohesive with the existing design. The layout needed to work flawlessly across all device sizes and present dense ecological information in an accessible way.",
         },
@@ -637,7 +638,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Successfully integrated the Nature on the Edge project into the website with a polished, professional presentation. The responsive layout ensures visitors can engage with the ecological content effectively regardless of their device, supporting the project's educational mission.",
         },
@@ -686,7 +687,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Lead designer and frontend developer responsible for component library architecture, design system documentation, landing page design and implementation, and collaboration with marketing team.",
         },
@@ -699,14 +700,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "React, TypeScript, Styled Components, Storybook for component documentation, Figma for design, modern CSS practices, component-driven development approach.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Creating a scalable design system that could accommodate diverse product types and use cases while maintaining brand consistency. The component library needed to be flexible enough for various landing pages yet structured enough to ensure visual coherence.",
         },
@@ -719,7 +720,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Delivered a robust component library that streamlined the development process and ensured brand consistency across all digital touchpoints. The landing pages effectively showcase Unlimited Paper's technology solutions with improved user engagement and clearer product communication.",
         },
@@ -771,7 +772,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Product designer leading design system creation, responsible for design audit, component standardization, Figma library creation, documentation, team training, and design refresh implementation.",
         },
@@ -784,14 +785,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Figma for design system creation, component libraries, design tokens, comprehensive documentation, collaboration with development team for implementation.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Unifying disparate design elements that had evolved organically across a complex product while maintaining functionality and user familiarity. The design system needed to be comprehensive yet flexible, allowing for both consistency and innovation.",
         },
@@ -804,7 +805,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Delivered the wundertax Design System, a complete Figma library that dramatically improved design consistency and efficiency. The system reduced design time for new features by 40%, improved collaboration between designers and developers, and provided a solid foundation for the product's visual refresh and future growth.",
         },
@@ -856,7 +857,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "My Role",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "Lead Full-Stack Developer, UI/UX Designer, Product Manager, Technical Architect, DevOps Engineer, Quality Assurance Lead, User Experience Researcher, Data Analyst, Project Coordinator, and Strategic Technology Consultant. Additionally served as the primary liaison between stakeholders, managed cross-functional teams of 15+ developers, designers, and analysts, conducted extensive user research sessions, performed code reviews, established development workflows, implemented CI/CD pipelines, and maintained comprehensive documentation throughout the project lifecycle.",
         },
@@ -869,14 +870,14 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "React.js, Next.js, TypeScript, Node.js, Express, MongoDB, PostgreSQL, Redis, AWS, Docker, Kubernetes, GraphQL, REST APIs, WebSockets, Three.js, WebGL, D3.js, Chart.js, Framer Motion, GSAP, Tailwind CSS, SCSS, Jest, Cypress, Storybook, Figma, Adobe Creative Suite, Sketch, InVision, Principle, After Effects. Built for web, iOS, Android, desktop applications, smart TVs, wearable devices, IoT platforms, and emerging AR/VR technologies with cross-platform compatibility and responsive design patterns.",
         },
         {
           type: "section",
           title: "Challenge",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "The project faced numerous complex challenges that required innovative solutions and strategic thinking. Technical challenges included integrating multiple legacy systems with modern technologies, handling massive data volumes with real-time processing requirements, ensuring cross-platform compatibility across diverse devices and browsers, implementing robust security measures to protect sensitive user data, and maintaining optimal performance under high traffic loads. Business challenges encompassed tight deadlines with changing requirements, limited budget constraints, coordinating remote teams across different time zones, managing stakeholder expectations with conflicting priorities, and adapting to rapidly evolving market conditions. User experience challenges involved designing intuitive interfaces for complex workflows, ensuring accessibility compliance across all platforms, conducting extensive user testing with diverse demographics, and balancing advanced functionality with simplicity and ease of use.",
         },
@@ -904,7 +905,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Outcome",
-          bgColor: "#fafafa",
+          // bgColor: "#fafafa",
           content:
             "The project achieved exceptional results exceeding all initial goals and expectations. Delivered a high-performance platform that serves over 100,000 active users with 99.9% uptime and sub-second response times. Increased user engagement by 350% compared to the previous solution, with user satisfaction scores consistently above 4.8/5. Generated significant revenue growth of 280% within the first year of launch, establishing the platform as a market leader in its category. The solution successfully processed over 10 million transactions monthly while maintaining robust security standards with zero major security incidents. Performance metrics showed 60% faster load times compared to competitors, 85% reduction in user-reported issues, and 95% improvement in conversion rates. The project received industry recognition including multiple design awards, technical innovation awards, and was featured in leading technology publications. The scalable architecture successfully supported a 500% increase in user base without performance degradation, demonstrating the effectiveness of the technical decisions and implementation strategies.",
         },

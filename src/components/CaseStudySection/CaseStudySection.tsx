@@ -24,7 +24,7 @@ const CaseStudySection: React.FC<CaseStudySectionProps> = ({
     fonts,
 }) => {
     const customStyles = {
-        backgroundColor: bgColor || (colors?.faded ? `${colors.faded}15` : undefined),
+        backgroundColor: bgColor || (colors?.faded ? `${colors.faded}` : undefined),
         "--color-primary": colors?.primary || "#000",
         "--color-contrast": colors?.contrast || "#666",
         "--font-title": fonts?.title ? `"${fonts.title}", serif` : "inherit",
