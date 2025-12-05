@@ -70,32 +70,82 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
       ? displayedWorks[currentIndex + 1]
       : null;
 
-  // Generate Google Fonts URL for inline style injection
-  const getFontsUrl = () => {
-    if (!work.fonts) return null;
-    const fonts = [work.fonts.title, work.fonts.text]
+  // Generate Google Fonts URL or custom font styles
+  const getFontsStyles = () => {
+    if (!work.caseStudy?.fonts) return null;
+
+    const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
+
+    // If both fonts are custom, inject @font-face rules
+    if (customTitleFont && customTextFont) {
+      return `
+        @font-face {
+          font-family: "${title}";
+          src: url('/fonts/${title.replace(/ /g, '-')}.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "${text}";
+          src: url('/fonts/${text.replace(/ /g, '-')}.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+        }
+      `;
+    }
+
+    // If only title font is custom
+    if (customTitleFont && !customTextFont) {
+      const googleFonts = [text].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
+      return `
+        @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
+        @font-face {
+          font-family: "${title}";
+          src: url('/fonts/${title.replace(/ /g, '-')}.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+        }
+      `;
+    }
+
+    // If only text font is custom
+    if (!customTitleFont && customTextFont) {
+      const googleFonts = [title].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
+      return `
+        @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
+        @font-face {
+          font-family: "${text}";
+          src: url('/fonts/${text.replace(/ /g, '-')}.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+        }
+      `;
+    }
+
+    // Both fonts from Google
+    const googleFonts = [title, text]
       .filter(Boolean)
       .map(font => font.replace(/ /g, '+'))
       .join('&family=');
-    return `https://fonts.googleapis.com/css2?family=${fonts}&display=swap`;
+    return `@import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');`;
   };
 
-  const fontsUrl = getFontsUrl();
+  const fontsStyles = getFontsStyles();
 
   const mainStyles = {
-    "--font-title": work.fonts?.title ? `"${work.fonts.title}", serif` : "inherit",
-    "--font-text": work.fonts?.text ? `"${work.fonts.text}", sans-serif` : "inherit",
-    "--color-primary": work.colors?.primary || "#000",
-    "--color-contrast": work.colors?.contrast || "#666",
-    "--color-faded": work.colors?.faded || work.bgColor,
-    fontFamily: work.fonts?.text ? `"${work.fonts.text}", sans-serif` : undefined,
+    "--font-title": work.caseStudy?.fonts?.title ? `"${work.caseStudy.fonts.title}", serif` : "inherit",
+    "--font-text": work.caseStudy?.fonts?.text ? `"${work.caseStudy.fonts.text}", sans-serif` : "inherit",
+    "--color-primary": work.caseStudy?.colors?.primary || "#000",
+    "--color-contrast": work.caseStudy?.colors?.contrast || "#666",
+    "--color-faded": work.caseStudy?.colors?.faded || work.bgColor,
+    fontFamily: work.caseStudy?.fonts?.text ? `"${work.caseStudy.fonts.text}", sans-serif` : undefined,
   } as React.CSSProperties;
 
   return (
     <>
-      {fontsUrl && (
+      {fontsStyles && (
         <style dangerouslySetInnerHTML={{
-          __html: `@import url('${fontsUrl}');`
+          __html: fontsStyles
         }} />
       )}
       <main className={styles.main} style={mainStyles}>
@@ -125,9 +175,9 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
         {caseStudy?.blocks?.map((block, index) => {
           // Auto-apply background color based on index for visual rhythm
           const getAutoBgColor = () => {
-            if (block.type === "section" && !block.bgColor && work.colors?.faded) {
+            if (block.type === "section" && !block.bgColor && work.caseStudy?.colors?.faded) {
               // Alternate between no background and faded background
-              return index % 2 === 1 ? work.colors.faded : undefined;
+              return index % 2 === 1 ? work.caseStudy.colors.faded : undefined;
             }
             return undefined;
           };

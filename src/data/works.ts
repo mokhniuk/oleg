@@ -68,6 +68,19 @@ type CaseStudy = {
     url: string;
     label: string;
   };
+  // Color palette for the project
+  colors?: {
+    primary: string;      // Main brand color
+    contrast: string;     // Opposite/complementary color
+    faded: string;        // 5-10% opacity of primary for backgrounds
+  };
+  // Font pairing for the project
+  fonts?: {
+    title: string;        // Font for headings/titles
+    text: string;         // Font for body text
+    customTitleFont?: boolean;  // If true, load from /fonts/ instead of Google
+    customTextFont?: boolean;   // If true, load from /fonts/ instead of Google
+  };
   // Body sections (detailed content)
   overview?: string;
   roleDetails?: string;
@@ -91,17 +104,6 @@ type WorksType = {
   bgColor: string;
   description: string;
   categories: string[]; // Array of category tags
-  // Color palette for the project
-  colors?: {
-    primary: string;      // Main brand color
-    contrast: string;     // Opposite/complementary color
-    faded: string;        // 5-10% opacity of primary for backgrounds
-  };
-  // Font pairing for the project
-  fonts?: {
-    title: string;        // Font for headings/titles
-    text: string;         // Font for body text
-  };
   link?: {
     url: string;
     label: string;
@@ -122,15 +124,6 @@ export const WORKS: WorksType[] = [
     title: "Bagel Bro",
     description: "Designed and developed website for bagel place in Berlin.",
     categories: ["web", "development", "design", "photography"],
-    colors: {
-      primary: "#E7650D",
-      contrast: "#1F6686",
-      faded: "#fafafa",
-    },
-    fonts: {
-      title: "Helvetica Neue",
-      text: "Helvetica Neue",
-    },
     link: {
       url: "https://bagelbro.de",
       label: "bagelbro.de",
@@ -146,6 +139,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://bagelbro.de",
         label: "bagelbro.de",
+      },
+      colors: {
+        primary: "#E7650D",
+        contrast: "#1F6686",
+        faded: "#fafafa",
+      },
+      fonts: {
+        title: "Helvetica Neue",
+        text: "Helvetica Neue",
       },
       blocks: [
         {
@@ -224,15 +226,6 @@ export const WORKS: WorksType[] = [
     title: "U Bar Berlin",
     description: "Designed website for amazing speakeasy bar in Berlin.",
     categories: ["web", "design"],
-    colors: {
-      primary: "#000",
-      contrast: "#EBEB6F",
-      faded: "#ffffd1",
-    },
-    fonts: {
-      title: "Instrument Serif",
-      text: "Roboto",
-    },
     link: {
       url: "https://ubar.me",
       label: "ubar.me",
@@ -248,6 +241,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://ubar.me",
         label: "ubar.me",
+      },
+      colors: {
+        primary: "#000",
+        contrast: "#EBEB6F",
+        faded: "#ffffd1",
+      },
+      fonts: {
+        title: "Instrument Serif",
+        text: "Roboto",
       },
       blocks: [
         {
@@ -322,15 +324,6 @@ export const WORKS: WorksType[] = [
     title: "Kashtan in Berlin",
     description: "Website for a marketplace of Ukrainian products in Berlin.",
     categories: ["web", "development"],
-    colors: {
-      primary: "#286E22",
-      contrast: "#643D44", // 0A0A08
-      faded: "#F1F5F0",
-    },
-    fonts: {
-      title: "Young Serif",
-      text: "Work Sans",
-    },
     link: {
       url: "https://kashtaninberlin.de",
       label: "kashtaninberlin.de",
@@ -346,6 +339,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://kashtaninberlin.de",
         label: "kashtaninberlin.de",
+      },
+      colors: {
+        primary: "#286E22",
+        contrast: "#643D44",
+        faded: "#F1F5F0",
+      },
+      fonts: {
+        title: "Young Serif",
+        text: "Work Sans",
       },
       blocks: [
         {
@@ -393,15 +395,6 @@ export const WORKS: WorksType[] = [
     title: "Truth to Justice",
     description: "Development and support of the website for conference.",
     categories: ["web", "development"],
-    colors: {
-      primary: "#0046DD",
-      contrast: "#16171B",
-      faded: "#E4E4E4",
-    },
-    fonts: {
-      title: "Krona One",
-      text: "Helvetica Neue",
-    },
     link: {
       url: "https://truth-to-justice.org",
       label: "truth-to-justice.org",
@@ -416,6 +409,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://truth-to-justice.org",
         label: "truth-to-justice.org",
+      },
+      colors: {
+        primary: "#0046DD",
+        contrast: "#16171B",
+        faded: "#E4E4E4",
+      },
+      fonts: {
+        title: "Krona One",
+        text: "Helvetica Neue",
       },
       blocks: [
         {
@@ -479,15 +481,6 @@ export const WORKS: WorksType[] = [
     description:
       "Designing and implementing website for the soundscape project about Berlin's bus route #100",
     categories: ["web", "development", "design"],
-    colors: {
-      primary: "#ede869",
-      contrast: "#222",
-      faded: "#fffff2",
-    },
-    fonts: {
-      title: "Permanent Marker",
-      text: "Arial",
-    },
     link: {
       url: "https://busthatneverarrives.com",
       label: "busthatneverarrives.com",
@@ -502,6 +495,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://busthatneverarrives.com",
         label: "visit site",
+      },
+      colors: {
+        primary: "#ede869",
+        contrast: "#222",
+        faded: "#fffff2",
+      },
+      fonts: {
+        title: "Permanent Marker",
+        text: "Arial",
       },
       blocks: [
         {
@@ -565,15 +567,6 @@ export const WORKS: WorksType[] = [
     description:
       "Implemented responsive layout for the project page and integrated it in existing website.",
     categories: ["web", "development"],
-    colors: {
-      primary: "#E91E63",
-      contrast: "#1EE963",
-      faded: "#FFF9FB",
-    },
-    fonts: {
-      title: "Montserrat",
-      text: "Roboto",
-    },
     link: {
       url: "https://vitsche.org/ecology",
       label: "vitsche.org/ecology",
@@ -581,7 +574,6 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
-      // coverImage: "./projects/ecology.webp",
       task: "Integrate new ecology project section into existing website",
       releaseDate: "2023",
       role: "Frontend Developer",
@@ -589,6 +581,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://vitsche.org/ecology",
         label: "visit project",
+      },
+      colors: {
+        primary: "#E91E63",
+        contrast: "#1EE963",
+        faded: "#FFF9FB",
+      },
+      fonts: {
+        title: "Montserrat",
+        text: "Roboto",
       },
       blocks: [
         {
@@ -652,15 +653,6 @@ export const WORKS: WorksType[] = [
     description:
       "Created a component library and designed landing pages for electronic price tags producer.",
     categories: ["web", "development", "design"],
-    colors: {
-      primary: "#5A6C7D",
-      contrast: "#D97C5A",
-      faded: "#F7F8F9",
-    },
-    fonts: {
-      title: "Poppins",
-      text: "Inter",
-    },
     link: {
       url: "https://u-paper.com",
       label: "u-paper.com",
@@ -676,6 +668,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://u-paper.com",
         label: "visit site",
+      },
+      colors: {
+        primary: "#5A6C7D",
+        contrast: "#D97C5A",
+        faded: "#F7F8F9",
+      },
+      fonts: {
+        title: "Poppins",
+        text: "Inter",
       },
       blocks: [
         {
@@ -734,15 +735,6 @@ export const WORKS: WorksType[] = [
     description:
       "As part of the team I took ownership of unifying design elements and design facelifting. Result of my work was a wundertax Design System, created as a Figma library.",
     categories: ["design"],
-    colors: {
-      primary: "#00B8A9",
-      contrast: "#F8B400",
-      faded: "#F0FFFE",
-    },
-    fonts: {
-      title: "Raleway",
-      text: "Nunito Sans",
-    },
     link: {
       url: "https://wundertax.de/onboarding/en/",
       label: "wundertax.de/onboarding",
@@ -761,6 +753,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://wundertax.de/onboarding/en/",
         label: "view onboarding",
+      },
+      colors: {
+        primary: "#00B8A9",
+        contrast: "#F8B400",
+        faded: "#F0FFFE",
+      },
+      fonts: {
+        title: "Raleway",
+        text: "Nunito Sans",
       },
       blocks: [
         {
@@ -819,15 +820,6 @@ export const WORKS: WorksType[] = [
     description:
       "A comprehensive case study designed to test layout behavior with extensive content and complex case study sections.",
     categories: ["web", "development", "design"],
-    colors: {
-      primary: "#FF6B6B",
-      contrast: "#6BFF6B",
-      faded: "#FFF0F0",
-    },
-    fonts: {
-      title: "DM Serif Display",
-      text: "DM Sans",
-    },
     link: {
       url: "https://very-long-domain-name-for-testing-layout-behavior.com/projects/comprehensive-case-study",
       label: "very-long-domain-name-for-testing-layout-behavior.com",
@@ -846,6 +838,15 @@ export const WORKS: WorksType[] = [
       link: {
         url: "https://very-long-domain-name-for-testing-layout-behavior.com",
         label: "view project",
+      },
+      colors: {
+        primary: "#FF6B6B",
+        contrast: "#6BFF6B",
+        faded: "#FFF0F0",
+      },
+      fonts: {
+        title: "DM Serif Display",
+        text: "DM Sans",
       },
       blocks: [
         {
@@ -927,15 +928,6 @@ export const WORKS: WorksType[] = [
     description:
       "Designed and developed QR-based digital menu platform for restaurants and hospitality businesses.",
     categories: ["web", "development", "design"],
-    colors: {
-      primary: "#6C63FF",
-      contrast: "#FFD663",
-      faded: "#F5F4FF",
-    },
-    fonts: {
-      title: "Outfit",
-      text: "Work Sans",
-    },
     link: {
       url: "https://choiceqr.com/",
       label: "choiceqr.com",
@@ -950,15 +942,6 @@ export const WORKS: WorksType[] = [
     description:
       "Designed and developed educational platform connecting students with professional development opportunities.",
     categories: ["web", "development", "design"],
-    colors: {
-      primary: "#2D3561",
-      contrast: "#F4A261",
-      faded: "#F0F1F5",
-    },
-    fonts: {
-      title: "Sora",
-      text: "Inter",
-    },
     link: {
       url: "https://theworkademy.com/",
       label: "theworkademy.com",
