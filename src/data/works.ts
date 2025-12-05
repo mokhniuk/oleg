@@ -147,8 +147,10 @@ export const WORKS: WorksType[] = [
         faded: "#fafafa",
       },
       fonts: {
-        title: "Helvetica Neue",
-        text: "Helvetica Neue",
+        title: "HelveticaNeue",
+        text: "HelveticaNeue",
+        customTitleFont: true,
+        customTextFont: true,
       },
       blocks: [
         {
