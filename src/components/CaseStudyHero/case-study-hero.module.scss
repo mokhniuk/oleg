@@ -17,22 +17,26 @@
 }
 
 .title {
-  font-size: 3rem;
+  // font-size: clamp(2rem, 1.1485rem + 3.1683vw, 3rem);
+
+  font-size: clamp(2rem, 1.1485rem + 3.1683vw, 4rem);
   line-height: 1.2;
   margin: 0;
   font-family: var(--font-title, inherit);
+  max-width: 768px;
 }
 
 .description {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 0.7871rem + 0.7921vw, 1.25rem);
   line-height: 1.6;
   margin: 0;
   font-family: var(--font-text, inherit);
+  max-width: 768px;
 }
 
 .headerDetails {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
   padding-top: 2rem;
@@ -40,8 +44,10 @@
 }
 
 .headerDetail {
+  font-size: clamp(0.8125rem, 0.7859rem + 0.0990vw, 0.875rem);
+
   h4 {
-    font-size: 0.875rem;
+    font-size: smaller;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin: 0 0 0.5rem 0;
@@ -51,7 +57,7 @@
 
   p {
     margin: 0;
-    font-size: 1rem;
+    font-size: clamp(0.9375rem, 0.8906rem + 0.1742vw, 1rem);
     line-height: 1.5;
     font-weight: 500;
   }
@@ -82,22 +88,5 @@
   &:hover {
     background-color: rgba(0, 0, 0, 1);
     transform: translateY(-2px);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .description {
-    font-size: 1.125rem;
-  }
-
-  .headerDetails {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
   }
 }
