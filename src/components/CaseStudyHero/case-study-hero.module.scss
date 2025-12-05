@@ -20,12 +20,14 @@
   font-size: 3rem;
   line-height: 1.2;
   margin: 0;
+  font-family: var(--font-title, inherit);
 }
 
 .description {
   font-size: 1.25rem;
   line-height: 1.6;
   margin: 0;
+  font-family: var(--font-text, inherit);
 }
 
 .headerDetails {

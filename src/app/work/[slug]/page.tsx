@@ -87,6 +87,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     "--font-text": work.fonts?.text ? `"${work.fonts.text}", sans-serif` : "inherit",
     "--color-primary": work.colors?.primary || "#000",
     "--color-contrast": work.colors?.contrast || "#666",
+    "--color-faded": work.colors?.faded || work.bgColor,
     fontFamily: work.fonts?.text ? `"${work.fonts.text}", sans-serif` : undefined,
   } as React.CSSProperties;
 
@@ -106,8 +107,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           releaseDate={caseStudy?.releaseDate}
           role={caseStudy?.role}
           link={caseStudy?.link || work.link}
-          colors={work.colors}
-          fonts={work.fonts}
         />
 
         {/* case study cover fullsize image */}
@@ -140,8 +139,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                   key={index}
                   title={block.title}
                   bgColor={block.bgColor || getAutoBgColor()}
-                  colors={work.colors}
-                  fonts={work.fonts}
                 >
                   <p>{block.content}</p>
                   {block.image && (
@@ -193,8 +190,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
-                  colors={work.colors}
-                  fonts={work.fonts}
                 >
                   <ImageGallery
                     images={block.images}
@@ -206,8 +201,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
-                  colors={work.colors}
-                  fonts={work.fonts}
                 >
                   <blockquote className={styles.testimonial}>
                     <p className={styles.quote}>&ldquo;{block.quote}&rdquo;</p>
@@ -222,8 +215,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
-                  colors={work.colors}
-                  fonts={work.fonts}
                 >
                   <ScreensGrid
                     images={block.images}
