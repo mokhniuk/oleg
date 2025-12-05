@@ -33,6 +33,7 @@ export type VideoBlock = {
 
 export type ScreensGridBlock = {
   type: "screens-grid";
+  bgColor?: string;
   images: string[];
   columns?: 2 | 3 | 4;
 };
@@ -158,12 +159,13 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Overview",
-          bgColor: "#fafafa",
+          bgColor: "#feeadd",
           content:
             "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their artisanal bagel shop in Berlin. The goal was to create a website that showcases their products beautifully while making it easy for customers to find location information, view the menu, and understand what makes Bagel Bro special in Berlin's competitive food scene.",
         },
         {
           type: "screens-grid",
+          bgColor: "#feeadd",
           images: [
             "../../projects/bagel-bro/screens/screen--1.jpg",
             "../../projects/bagel-bro/screens/screen--2.jpg",
@@ -172,50 +174,20 @@ export const WORKS: WorksType[] = [
             "../../projects/bagel-bro/screens/screen--5.jpg"
           ],
         },
-        // {
-        //   type: "image",
-        //   url: "../../projects/bagel-bro/bagelbro--cover2.webp",
-        //   caption: "Bagel Bro cover image",
-        // },
-        {
-          type: "section",
-          title: "My Role",
-          bgColor: "#feeadd",
-          content:
-            "Full-stack designer and developer responsible for visual design, brand identity implementation, responsive web development, photography integration, and launch coordination.",
-        },
-        {
-          type: "section",
-          title: "Timeline",
-          content:
-            "Initial design and prototyping: 2 weeks. Development and refinement: 3 weeks. Testing and launch: 1 week. Total duration: 6 weeks.",
-        },
         {
           type: "section",
           title: "Technology Stack",
-          bgColor: "#feeadd",
+          bgColor: "#fafafa",
           content:
-            "React, Next.js, TypeScript, Tailwind CSS, Vercel for hosting, responsive design patterns optimized for mobile ordering.",
+            "Figma, Wordpress, HTML, CSS, JS, PHP, MySQL.",
         },
         {
-          type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "The main challenge was creating a mouthwatering visual experience that works seamlessly across devices while maintaining fast load times. The site needed to feel warm and inviting while being practical for customers looking for quick information like location, hours, and menu items.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          bgColor: "#feeadd",
-          content:
-            "Developed a clean, image-focused design that puts the bagels front and center. Implemented optimized image loading, created an easy-to-scan menu layout, and ensured the site loads quickly even on mobile connections. Used warm color palette matching the brand's friendly atmosphere.",
-        },
-        {
-          type: "section",
-          title: "Outcome",
-          content:
-            "Delivered a beautiful, functional website that increased online visibility and made it easier for customers to discover Bagel Bro. The site successfully communicates the quality and care that goes into each bagel while providing all essential information in an accessible format.",
+          type: "testimonial",
+          quote:
+            "Oleg helped us create this website! We are so grateful for his expertise and support. He was always available to answer our questions and provided us with clear and concise guidance. We highly recommend Oleg for any web development project.",
+          author: "Anastasiia Mizko & Oleksandr Danylin",
+          position:
+            "Founders of Bagel Bro",
         },
       ],
     },
@@ -258,7 +230,15 @@ export const WORKS: WorksType[] = [
           caption: "U Bar Berlin cover video",
         },
         {
+          type: "section",
+          title: "Overview",
+          bgColor: "#ffffd1",
+          content:
+            "U Bar Berlin is a hidden gem speakeasy bar that needed a website reflecting its mysterious, sophisticated atmosphere. The project focused on creating an elegant digital experience that hints at the exclusive nature of the venue while providing essential information for potential guests.",
+        },
+        {
           type: "screens-grid",
+          bgColor: "#ffffd1",
           images: [
             "../../projects/u-bar/screens/screen--1.jpg",
             "../../projects/u-bar/screens/screen--2.jpg",
@@ -271,12 +251,6 @@ export const WORKS: WorksType[] = [
         },
         {
           type: "section",
-          title: "Overview",
-          content:
-            "U Bar Berlin is a hidden gem speakeasy bar that needed a website reflecting its mysterious, sophisticated atmosphere. The project focused on creating an elegant digital experience that hints at the exclusive nature of the venue while providing essential information for potential guests.",
-        },
-        {
-          type: "section",
           title: "My Role",
           // bgColor: "#fafafa",
           content:
@@ -284,29 +258,10 @@ export const WORKS: WorksType[] = [
         },
         {
           type: "section",
-          title: "Timeline",
-          content:
-            "Research and concept development: 1 week. Design iterations: 2 weeks. Final refinement and handoff: 1 week. Total duration: 4 weeks.",
-        },
-        {
-          type: "section",
           title: "Technology Stack",
           // bgColor: "#fafafa",
           content:
-            "Figma for design, modern web technologies for implementation, focus on atmospheric visuals and smooth animations.",
-        },
-        {
-          type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "Balancing the speakeasy's secretive, exclusive nature with the need to be discoverable online. The design had to evoke the bar's sophisticated atmosphere while remaining functional and not overly mysterious to the point of being confusing.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          content:
-            "Created a design that uses elegant typography, a refined color palette inspired by the venue's interior, and subtle animations to create intrigue. The layout reveals information progressively, mimicking the experience of discovering the bar itself.",
+            "This website was designed in Figma.",
         },
         {
           type: "section",

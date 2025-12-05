@@ -259,6 +259,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
+                  bgColor={block.bgColor}
                 >
                   <ScreensGrid
                     images={block.images}
