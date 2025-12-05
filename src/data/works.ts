@@ -588,8 +588,10 @@ export const WORKS: WorksType[] = [
         faded: "#FFF9FB",
       },
       fonts: {
-        title: "Montserrat",
-        text: "Roboto",
+        title: "KyivTypeTitling",
+        text: "KyivTypeSans",
+        customTitleFont: true,
+        customTextFont: true,
       },
       blocks: [
         {

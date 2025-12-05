@@ -75,19 +75,20 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     if (!work.caseStudy?.fonts) return null;
 
     const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
+    const projectFontsPath = `../../projects/${work.slug}/fonts`;
 
     // If both fonts are custom, inject @font-face rules
-    if (customTitleFont && customTextFont) {
+    if (customTitleFont === true && customTextFont === true) {
       return `
         @font-face {
           font-family: "${title}";
-          src: url('/fonts/${title.replace(/ /g, '-')}.woff2') format('woff2');
+          src: url('${projectFontsPath}/${title.replace(/ /g, '-')}.woff2') format('woff2');
           font-weight: normal;
           font-style: normal;
         }
         @font-face {
           font-family: "${text}";
-          src: url('/fonts/${text.replace(/ /g, '-')}.woff2') format('woff2');
+          src: url('${projectFontsPath}/${text.replace(/ /g, '-')}.woff2') format('woff2');
           font-weight: normal;
           font-style: normal;
         }
@@ -95,13 +96,13 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     }
 
     // If only title font is custom
-    if (customTitleFont && !customTextFont) {
+    if (customTitleFont === true && customTextFont !== true) {
       const googleFonts = [text].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
       return `
         @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
         @font-face {
           font-family: "${title}";
-          src: url('/fonts/${title.replace(/ /g, '-')}.woff2') format('woff2');
+          src: url('${projectFontsPath}/${title.replace(/ /g, '-')}.woff2') format('woff2');
           font-weight: normal;
           font-style: normal;
         }
@@ -109,20 +110,20 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     }
 
     // If only text font is custom
-    if (!customTitleFont && customTextFont) {
+    if (customTitleFont !== true && customTextFont === true) {
       const googleFonts = [title].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
       return `
         @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
         @font-face {
           font-family: "${text}";
-          src: url('/fonts/${text.replace(/ /g, '-')}.woff2') format('woff2');
+          src: url('${projectFontsPath}/${text.replace(/ /g, '-')}.woff2') format('woff2');
           font-weight: normal;
           font-style: normal;
         }
       `;
     }
 
-    // Both fonts from Google
+    // Both fonts from Google (default case when flags are undefined or false)
     const googleFonts = [title, text]
       .filter(Boolean)
       .map(font => font.replace(/ /g, '+'))
