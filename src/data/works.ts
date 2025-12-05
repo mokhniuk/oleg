@@ -101,7 +101,7 @@ type CaseStudy = {
 
 type WorksType = {
   title: string;
-  slug: string;
+  slug?: string;
   bgColor: string;
   description: string;
   categories: string[]; // Array of category tags
