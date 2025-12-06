@@ -191,6 +191,11 @@ export const WORKS: WorksType[] = [
           position:
             "Founders of Bagel Bro",
         },
+
+        {
+          type: "image",
+          url: "../../projects/bagel-bro/store.webp",
+        }
       ],
     },
   },
@@ -359,6 +364,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
+      coverImage: "../../projects/truth-to-justice/gallery/01.jpg",
       client: "Vitsche",
       task: "Develop and maintain conference website platform",
       releaseDate: "2023-2024",
@@ -386,7 +392,7 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Overview",
           content:
-            "Truth to Justice is an important conference focused on accountability and justice. The project involved developing a comprehensive website to support conference organization, provide information to attendees, showcase speakers and sessions, and serve as an ongoing resource for the justice community.",
+            "Truth to Justice conference was organized by Vitsche, in collaboration with the Kyiv School of Economics, Center for Cultural Projects Arta Azi, and with the Ukrainian Institute in Germany supporting the conference program, funded by the German Foreign Office.",
         },
         {
           type: "section",
@@ -397,23 +403,10 @@ export const WORKS: WorksType[] = [
         },
         {
           type: "section",
-          title: "Timeline",
-          content:
-            "Initial development: 5 weeks. Pre-conference updates: 3 weeks. Ongoing support and maintenance: continuous. Multiple conference cycles supported.",
-        },
-        {
-          type: "section",
           title: "Technology Stack",
           // bgColor: "#fafafa",
           content:
-            "Modern web framework, CMS integration for easy content management, responsive design, accessibility features, multilingual support capabilities.",
-        },
-        {
-          type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "Building a site that serves multiple purposes: informing potential attendees, managing registrations, presenting complex information clearly, and remaining useful beyond the conference dates. The site needed to be easily updatable by non-technical team members.",
+            "Vue.js",
         },
         {
           type: "section",
@@ -422,12 +415,26 @@ export const WORKS: WorksType[] = [
             "Created a flexible, well-structured website with an intuitive content management system. Implemented clear information architecture to organize speakers, sessions, and resources. Provided training and documentation for the team to manage content independently.",
         },
         {
+          type: "gallery",
+          images: [
+            "../../projects/truth-to-justice/gallery/03.jpg",
+            "../../projects/truth-to-justice/gallery/12.jpg",
+            "../../projects/truth-to-justice/gallery/14.jpg",
+            // "../../projects/truth-to-justice/gallery/17.jpg",
+            "../../projects/truth-to-justice/gallery/19.jpg",
+          ]
+        },
+        {
           type: "section",
           title: "Outcome",
           // bgColor: "#fafafa",
           content:
-            "Delivered a reliable platform that has successfully supported multiple conference cycles. The site effectively communicates the conference's mission and practical details while being maintainable by the organizing team without constant developer intervention.",
+            "Truth to Justice conference brought together 200+ attendees and over 4,000 livestream views.",
         },
+        {
+          type: "image",
+          url: "../../projects/truth-to-justice/gallery/02.jpg",
+        }
       ],
     },
   },
@@ -445,6 +452,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
+      coverImage: "../../projects/busthatneverarrives/bus--cover.webp",
       client: "Vitsche",
       task: "Create immersive digital experience for audio art project",
       releaseDate: "2024",
@@ -514,6 +522,21 @@ export const WORKS: WorksType[] = [
           content:
             "Launched an immersive digital experience that successfully presents the soundscape project to online audiences. The website has become an integral part of the artwork itself, allowing people worldwide to experience Berlin's bus route #100 through sound.",
         },
+        {
+          type: "gallery",
+          images: [
+            "../../projects/busthatneverarrives/gallery/1.webp",
+            "../../projects/busthatneverarrives/gallery/2.webp",
+            "../../projects/busthatneverarrives/gallery/3.webp",
+            "../../projects/busthatneverarrives/gallery/4.webp",
+            "../../projects/busthatneverarrives/gallery/5.webp",
+            "../../projects/busthatneverarrives/gallery/6.webp",
+          ]
+        },
+        {
+          type: "image",
+          url: "../../projects/busthatneverarrives/gallery/kate.webp"
+        }
       ],
     },
   },
@@ -532,7 +555,7 @@ export const WORKS: WorksType[] = [
     featured: true,
     caseStudy: {
       task: "Integrate new ecology project section into existing website",
-      releaseDate: "2023",
+      releaseDate: "2024",
       role: "Frontend Developer",
       client: "Vitsche",
       link: {
@@ -580,7 +603,7 @@ export const WORKS: WorksType[] = [
           title: "Technology Stack",
           // bgColor: "#fafafa",
           content:
-            "HTML, CSS, JavaScript, responsive design techniques, integration with existing CMS, mobile-first approach.",
+            "Figma, Wordpress, HTML, CSS, JavaScript.",
         },
         {
           type: "section",
@@ -602,6 +625,17 @@ export const WORKS: WorksType[] = [
           content:
             "Successfully integrated the Nature on the Edge project into the website with a polished, professional presentation. The responsive layout ensures visitors can engage with the ecological content effectively regardless of their device, supporting the project's educational mission.",
         },
+        {
+          type: "gallery",
+          images: [
+            "../../projects/nature-on-the-edge/gallery/street-1.webp",
+            "../../projects/nature-on-the-edge/gallery/street-2.webp",
+          ]
+        },
+        {
+          type: "image",
+          url: "../../projects/nature-on-the-edge/gallery/street-3.webp",
+        }
       ],
     },
   },
