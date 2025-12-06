@@ -77,67 +77,30 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
     const projectFontsPath = `../../projects/${work.slug}/fonts`;
 
-    // If both fonts are custom, inject @font-face rules
-    if (customTitleFont === true && customTextFont === true) {
-      return `
-        @font-face {
-          font-family: "${title}";
-          src: url('${projectFontsPath}/${title.replace(/ /g, '-')}.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-        }
-        @font-face {
-          font-family: "${text}";
-          src: url('${projectFontsPath}/${text.replace(/ /g, '-')}.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-        }
-      `;
-    }
+    const fonts = [
+      { name: title, isCustom: customTitleFont === true },
+      { name: text, isCustom: customTextFont === true }
+    ];
 
-    // If only title font is custom
-    if (customTitleFont === true && customTextFont !== true) {
-      const googleFonts = [text].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
-      return `
-        @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
-        @font-face {
-          font-family: "${title}";
-          src: url('${projectFontsPath}/${title.replace(/ /g, '-')}.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-        }
-      `;
-    }
+    const customFonts = fonts.filter(f => f.isCustom && f.name);
+    const googleFonts = fonts.filter(f => !f.isCustom && f.name);
 
-    // If only text font is custom
-    if (customTitleFont !== true && customTextFont === true) {
-      const googleFonts = [title].filter(Boolean).map(font => font.replace(/ /g, '+')).join('&family=');
-      return `
-        @import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');
-        @font-face {
-          font-family: "${text}";
-          src: url('${projectFontsPath}/${text.replace(/ /g, '-')}.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-        }
-      `;
-    }
+    const customFontFaces = customFonts.map(f => `
+      @font-face {
+        font-family: "${f.name}";
+        src: url('${projectFontsPath}/${f.name.replace(/ /g, '-')}.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }`).join('');
 
-    // Both fonts from Google (default case when flags are undefined or false)
-    const googleFonts = [title, text]
-      .filter(Boolean)
-      .map(font => font.replace(/ /g, '+'))
-      .join('&family=');
-    return `@import url('https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap');`;
+    const googleFontsImport = googleFonts.length > 0
+      ? `@import url('https://fonts.googleapis.com/css2?family=${googleFonts.map(f => f.name.replace(/ /g, '+')).join('&family=')}&display=swap');`
+      : '';
+
+    return googleFontsImport + customFontFaces || null;
   };
 
   const fontsStyles = getFontsStyles();
-
-  // DEBUG: Log what's being generated
-  if (work.slug === 'u-bar') {
-    console.log('U Bar fonts config:', work.caseStudy?.fonts);
-    console.log('Generated fontsStyles:', fontsStyles);
-  }
 
   const mainStyles = {
     "--font-title": work.caseStudy?.fonts?.title ? `"${work.caseStudy.fonts.title}", serif` : "inherit",
