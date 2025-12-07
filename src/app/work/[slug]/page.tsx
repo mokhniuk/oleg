@@ -70,37 +70,27 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
       ? displayedWorks[currentIndex + 1]
       : null;
 
-  // Generate Google Fonts URL or custom font styles
-  const getFontsStyles = () => {
+  // Google Fonts are now imported via CSS or should be handled globally if possible.
+  // For now, we'll generate specific Google Fonts links if they are not standard, 
+  // but custom fonts are handled via project-fonts.css.
+
+  const getGoogleFontLink = () => {
     if (!work.caseStudy?.fonts) return null;
-
     const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
-    const projectFontsPath = `../../projects/${work.slug}/fonts`;
-
-    const fonts = [
-      { name: title, isCustom: customTitleFont === true },
-      { name: text, isCustom: customTextFont === true }
-    ];
-
-    const customFonts = fonts.filter(f => f.isCustom && f.name);
-    const googleFonts = fonts.filter(f => !f.isCustom && f.name);
-
-    const customFontFaces = customFonts.map(f => `
-      @font-face {
-        font-family: "${f.name}";
-        src: url('${projectFontsPath}/${f.name.replace(/ /g, '-')}.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-      }`).join('');
-
-    const googleFontsImport = googleFonts.length > 0
-      ? `@import url('https://fonts.googleapis.com/css2?family=${googleFonts.map(f => f.name.replace(/ /g, '+')).join('&family=')}&display=swap');`
-      : '';
-
-    return googleFontsImport + customFontFaces || null;
+    
+    const googleFonts = [];
+    if (!customTitleFont) googleFonts.push(title);
+    if (!customTextFont) googleFonts.push(text);
+    
+    if (googleFonts.length > 0) {
+       // De-duplicate
+       const uniqueFonts = Array.from(new Set(googleFonts));
+       return `https://fonts.googleapis.com/css2?family=${uniqueFonts.map(f => f.replace(/ /g, '+')).join('&family=')}&display=swap`;
+    }
+    return null;
   };
 
-  const fontsStyles = getFontsStyles();
+  const googleFontUrl = getGoogleFontLink();
 
   const mainStyles = {
     "--font-title": work.caseStudy?.fonts?.title ? `"${work.caseStudy.fonts.title}", serif` : "inherit",
@@ -113,10 +103,8 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <>
-      {fontsStyles && (
-        <style dangerouslySetInnerHTML={{
-          __html: fontsStyles
-        }} />
+      {googleFontUrl && (
+          <link rel="stylesheet" href={googleFontUrl} />
       )}
       <main className={styles.main} style={mainStyles}>
         <CaseStudyHero

@@ -6,7 +6,7 @@ interface SectionHeaderProps {
   title: string;
   linkLabel?: string;
   linkUrl?: Url;
-  sectionDescription?: string | JSX.Element;
+  sectionDescription?: string | React.ReactNode;
 }
 
 export default function SectionHeader({

@@ -1,0 +1,27 @@
+/* Custom Fonts for Projects */
+
+/* Bagel Bro */
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url('/projects/bagel-bro/fonts/HelveticaNeue.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Nature on the Edge */
+@font-face {
+  font-family: "KyivTypeTitling";
+  src: url('/projects/nature-on-the-edge/fonts/KyivTypeTitling.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KyivTypeSans";
+  src: url('/projects/nature-on-the-edge/fonts/KyivTypeSans.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

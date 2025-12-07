@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { WORKS } from "@/data/works";
 import { PET_PROJECTS } from "@/data/pet-projects";
 import Image from "next/image";
+import HomePrefetcher from "@/components/HomePrefetcher/HomePrefetcher";
 
 export default function Home() {
   return (
@@ -64,6 +65,7 @@ export default function Home() {
                     bgColor={project.bgColor}
                     description={project.description}
                     link={project.link}
+                    fonts={project.caseStudy?.fonts}
                   />
                 )
               );
@@ -135,6 +137,11 @@ export default function Home() {
           {/* </Link> */}
         </Container>
       </section>
+      
+      {/* <HomePrefetcher targets={WORKS.filter(w => w.show && w.slug).map(w => ({
+        slug: w.slug!,
+        fonts: w.caseStudy?.fonts
+      }))} /> */}
     </main>
   );
 }

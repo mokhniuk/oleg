@@ -73,7 +73,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: sans-serif;
+  font-family: var(--font-inter), sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -147,3 +147,5 @@ p {
 * {
   box-sizing: border-box;
 }
+
+@import "./project-fonts.css";
