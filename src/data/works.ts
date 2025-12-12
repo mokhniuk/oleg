@@ -228,7 +228,7 @@ export const WORKS: WorksType[] = [
       },
       fonts: {
         title: "Instrument Serif",
-        text: "Roboto",
+        text: "Roboto Sans",
       },
       blocks: [
         {

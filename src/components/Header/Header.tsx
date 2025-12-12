@@ -53,6 +53,7 @@ const MENU_ITEMS = [
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
@@ -62,9 +63,10 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       const atTop = currentScrollY < 50;
 
       setIsAtTop(atTop);
+      setHasInteracted(true);
 
-      // If not at top, hide the header after scrolling
-      if (!atTop) {
+      // If not at top, hide the header after scrolling (only after user has interacted)
+      if (!atTop && hasInteracted) {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           setIsVisible(false);
@@ -76,10 +78,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+      setHasInteracted(true);
       // Show header when mouse is near the top of the screen (within 100px)
       if (e.clientY < 100 && !isAtTop) {
         setIsVisible(true);
-      } else if (e.clientY > 150 && !isAtTop) {
+      } else if (e.clientY > 150 && !isAtTop && hasInteracted) {
         setIsVisible(false);
       }
     };
@@ -95,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       window.removeEventListener("mousemove", handleMouseMove);
       clearTimeout(scrollTimeout);
     };
-  }, [isAtTop]);
+  }, [isAtTop, hasInteracted]);
 
   return (
     <header

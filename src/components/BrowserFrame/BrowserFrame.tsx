@@ -3,12 +3,13 @@ import styles from "./browser-frame.module.scss";
 
 interface BrowserFrameProps {
     children: React.ReactNode;
+    mode?: "small";
     className?: string;
 }
 
-const BrowserFrame: React.FC<BrowserFrameProps> = ({ children, className }) => {
+const BrowserFrame: React.FC<BrowserFrameProps> = ({ children, mode, className }) => {
     return (
-        <figure className={`${styles.frame} ${className || ""}`}>
+        <figure className={`${styles.frame} ${mode === "small" && styles.small} ${className || ""}`}>
             <div className={styles.chrome}>
                 <div className={styles.trafficLights}>
                     <span className={styles.trafficLight}></span>

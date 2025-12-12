@@ -77,15 +77,15 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   const getGoogleFontLink = () => {
     if (!work.caseStudy?.fonts) return null;
     const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
-    
+
     const googleFonts = [];
     if (!customTitleFont) googleFonts.push(title);
     if (!customTextFont) googleFonts.push(text);
-    
+
     if (googleFonts.length > 0) {
-       // De-duplicate
-       const uniqueFonts = Array.from(new Set(googleFonts));
-       return `https://fonts.googleapis.com/css2?family=${uniqueFonts.map(f => f.replace(/ /g, '+')).join('&family=')}&display=swap`;
+      // De-duplicate
+      const uniqueFonts = Array.from(new Set(googleFonts));
+      return `https://fonts.googleapis.com/css2?family=${uniqueFonts.map(f => f.replace(/ /g, '+')).join('&family=')}&display=swap`;
     }
     return null;
   };
@@ -93,18 +93,18 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   const googleFontUrl = getGoogleFontLink();
 
   const mainStyles = {
-    "--font-title": work.caseStudy?.fonts?.title ? `"${work.caseStudy.fonts.title}", serif` : "inherit",
-    "--font-text": work.caseStudy?.fonts?.text ? `"${work.caseStudy.fonts.text}", sans-serif` : "inherit",
+    "--font-title": work.caseStudy?.fonts?.title ? `${work.caseStudy.fonts.title}, serif` : "inherit",
+    "--font-text": work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, sans-serif` : "inherit",
     "--color-primary": work.caseStudy?.colors?.primary || "#000",
     "--color-contrast": work.caseStudy?.colors?.contrast || "#666",
     "--color-faded": work.caseStudy?.colors?.faded || work.bgColor,
-    fontFamily: work.caseStudy?.fonts?.text ? `"${work.caseStudy.fonts.text}", sans-serif` : undefined,
+    fontFamily: work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, sans-serif` : undefined,
   } as React.CSSProperties;
 
   return (
     <>
       {googleFontUrl && (
-          <link rel="stylesheet" href={googleFontUrl} />
+        <link rel="stylesheet" href={googleFontUrl} />
       )}
       <main className={styles.main} style={mainStyles}>
         <CaseStudyHero

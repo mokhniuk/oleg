@@ -54,7 +54,7 @@ const ScreensGrid: React.FC<ScreensGridProps> = ({ images }) => {
             <div className={styles.column} ref={leftColumnRef}>
                 {leftImages.map((image, index) => (
                     <div key={`left-${index}`} className={styles.gridItem}>
-                        <BrowserFrame>
+                        <BrowserFrame mode="small">
                             <Image
                                 src={image}
                                 alt={`Screenshot L${index + 1}`}
@@ -69,7 +69,7 @@ const ScreensGrid: React.FC<ScreensGridProps> = ({ images }) => {
             <div className={styles.column} ref={rightColumnRef}>
                 {rightImages.map((image, index) => (
                     <div key={`right-${index}`} className={styles.gridItem}>
-                        <BrowserFrame>
+                        <BrowserFrame mode="small">
                             <Image
                                 src={image}
                                 alt={`Screenshot R${index + 1}`}
