@@ -8,6 +8,7 @@ import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import ImageGallery from "@/components/ImageGallery/ImageGallery";
 import ScreensGrid from "@/components/ScreensGrid/ScreensGrid";
 import BrowserFrame from "@/components/BrowserFrame/BrowserFrame";
+import PageTransitionTrigger from "@/components/PageTransitionTrigger/PageTransitionTrigger";
 import styles from "./page.module.scss";
 import Image from "next/image";
 interface CaseStudyPageProps {
@@ -103,6 +104,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <>
+      <PageTransitionTrigger />
       {googleFontUrl && (
         <link rel="stylesheet" href={googleFontUrl} />
       )}

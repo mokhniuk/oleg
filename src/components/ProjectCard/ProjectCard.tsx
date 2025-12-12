@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import styles from "./project-card.module.scss";
 import Link from "next/link";
 import { preloadFonts } from "@/utils/fontLoader";
+import { usePageTransition } from "@/contexts/PageTransitionContext";
 
 interface ProjectCardProps {
   slug?: string;
@@ -31,6 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   fonts,
 }) => {
   const router = useRouter();
+  const { startTransition } = usePageTransition();
 
   // Determine the link destination
   // Priority: 1) Case study page if slug exists, 2) External link, 3) Fallback to #
@@ -40,18 +42,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const handleMouseEnter = () => {
     if (slug) {
-        router.prefetch(href);
-        preloadFonts(fonts, slug);
+      router.prefetch(href);
+      preloadFonts(fonts, slug);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (slug) {
+      e.preventDefault();
+      startTransition(bgColor);
+
+      // Navigate after animation starts
+      setTimeout(() => {
+        router.push(href);
+      }, 400);
     }
   };
 
   return (
-    <Link 
-        href={href} 
-        target={target} 
-        rel={rel} 
-        className={styles.projectLink}
-        onMouseEnter={handleMouseEnter}
+    <Link
+      href={href}
+      target={target}
+      rel={rel}
+      className={styles.projectLink}
+      onMouseEnter={handleMouseEnter}
+      onClick={handleClick}
     >
       <div
         className={styles.project}

@@ -52,42 +52,46 @@ const MENU_ITEMS = [
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isAtTop, setIsAtTop] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
+    let ticking = false;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const atTop = currentScrollY < 50;
 
-      setIsAtTop(atTop);
-      setHasInteracted(true);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Always show header when at the top
+          if (currentScrollY < 50) {
+            setIsVisible(true);
+          } else {
+            // Show header when scrolling up, hide when scrolling down
+            if (currentScrollY < lastScrollY) {
+              // Scrolling up
+              setIsVisible(true);
+            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+              // Scrolling down and not near the top
+              setIsVisible(false);
+            }
+          }
 
-      // If not at top, hide the header after scrolling (only after user has interacted)
-      if (!atTop && hasInteracted) {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          setIsVisible(false);
-        }, 150);
-      } else {
-        // Show header when at top
-        setIsVisible(true);
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      setHasInteracted(true);
       // Show header when mouse is near the top of the screen (within 100px)
-      if (e.clientY < 100 && !isAtTop) {
+      if (e.clientY < 80) {
         setIsVisible(true);
-      } else if (e.clientY > 150 && !isAtTop && hasInteracted) {
-        setIsVisible(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("mousemove", handleMouseMove);
 
     // Initial check
@@ -96,15 +100,13 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(scrollTimeout);
     };
-  }, [isAtTop, hasInteracted]);
+  }, [lastScrollY]);
 
   return (
     <header
-      className={`${styles.header} ${
-        isVisible ? styles.visible : styles.hidden
-      }`}
+      className={`${styles.header} ${isVisible ? styles.visible : styles.hidden
+        }`}
     >
       <Container width="fullscreen" mode="flex" className={styles.container}>
         <Logo />
