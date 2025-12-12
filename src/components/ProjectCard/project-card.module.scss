@@ -11,35 +11,17 @@
 }
 
 .project {
-  // margin-bottom: 1.5rem;
   background-color: #fafafa;
   border-radius: 1rem;
   padding: 4vh;
   height: 100%;
-  // min-height: 320px;
-
-  // background-size: 40% auto;
-  // background-repeat: no-repeat;
-  // background-position: right bottom;
-  background-image: none !important;
-
-  // transition: all 3s ease;
+  background-image: none;
 
   position: relative;
 
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  // &:hover {
-  //   background-position: 90% bottom;
-  // }
-}
-
-@media screen and (min-width: 768px) {
-  .project {
-    padding: 4vw;
-  }
 }
 
 .project-description {
@@ -49,37 +31,6 @@
   flex-direction: column;
   gap: 1rem;
   line-height: 1.55;
-}
-
-.in-progress {
-  position: relative;
-  display: inline-block;
-
-  &:before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background-color: lightseagreen;
-    display: block;
-    position: relative;
-    left: 100%;
-    top: 14px;
-    z-index: 1;
-    margin-left: 14px;
-    border-radius: 50%;
-  }
-
-  &:after {
-    position: absolute;
-    white-space: nowrap;
-    vertical-align: top;
-    margin-left: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    padding: 3px 4px 3px 16px;
-    font-size: 12px;
-    content: "in progress";
-  }
 }
 
 .project__link {
