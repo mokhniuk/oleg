@@ -16,19 +16,22 @@
 
 .bubble {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(3px);
+
+  color: rgba(0, 0, 0, 0.8);
   padding: 8px 16px;
-  border-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 2px solid;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   pointer-events: none;
   z-index: 100;
   transform: translate(16px, 16px);
   transition: opacity 0.2s ease;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .project {

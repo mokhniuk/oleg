@@ -97,10 +97,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,
-            backgroundColor: bgColor,
+            // backgroundColor: bgColor,
           }}
         >
-          Read case study
+          View case study
         </div>
       )}
 
