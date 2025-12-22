@@ -70,6 +70,11 @@
   border: 0;
   flex-grow: 1;
   height: 100%;
+  // cursor: pointer;
+
+  &>* {
+    cursor: inherit;
+  }
 
   &:hover {
     transform: translateY(-2px);

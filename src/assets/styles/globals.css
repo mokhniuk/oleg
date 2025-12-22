@@ -75,6 +75,40 @@ body {
   overflow-x: hidden;
   font-family: var(--font-inter), sans-serif;
   scroll-behavior: smooth;
+  /* Custom cursor - default arrow */
+  cursor: url('/images/cursors/arrow.svg') 8 8, auto;
+}
+
+/* Custom cursor for links, buttons, and interactive elements */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+  cursor: url('/images/cursors/hand.svg') 8 0, pointer;
+}
+
+/* Custom cursor for text input areas */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+[contenteditable="true"] {
+  cursor: url('/images/cursors/text.svg') 12 12, text;
+}
+
+/* Regular text elements keep arrow cursor, browser handles selection */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+div {
+  cursor: url('/images/cursors/arrow.svg') 8 8, auto;
 }
 
 @keyframes fadeInUp {
