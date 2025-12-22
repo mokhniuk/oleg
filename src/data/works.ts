@@ -116,6 +116,7 @@ type WorksType = {
   show: boolean;
   featured?: boolean;
   caseStudy?: CaseStudy;
+  inProgress?: boolean;
 };
 
 export const WORKS: WorksType[] = [
@@ -125,6 +126,7 @@ export const WORKS: WorksType[] = [
     title: "Bagel Bro",
     description: "Designed and developed website for bagel place in Berlin.",
     categories: ["web", "development", "design", "photography"],
+    inProgress: true,
     link: {
       url: "https://bagelbro.de",
       label: "bagelbro.de",

@@ -17,7 +17,7 @@ export default function Home() {
               <span className={styles.nobr}>
                 Kyiv&nbsp;
                 <Image
-                  src="./images/kyiv-logo.png"
+                  src="/images/kyiv-logo.png"
                   alt=""
                   width={34}
                   height={36}
@@ -29,7 +29,7 @@ export default function Home() {
               <span className={styles.nobr}>
                 in Berlin{" "}
                 <Image
-                  src="./images/berlin-logo.png"
+                  src="/images/berlin-logo.png"
                   alt=""
                   width={42}
                   height={46}
@@ -65,6 +65,7 @@ export default function Home() {
                     description={project.description}
                     link={project.link}
                     fonts={project.caseStudy?.fonts}
+                  // inProgress={project.inProgress}
                   />
                 )
               );
@@ -126,7 +127,7 @@ export default function Home() {
             hidden
           > */}
           <Image
-            src="./images/berlin.jpg"
+            src="/images/berlin.jpg"
             alt=""
             width={1280}
             height={600}

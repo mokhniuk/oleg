@@ -3,11 +3,29 @@
   color: inherit;
   display: block;
   transition: transform 0.2s ease;
+  position: relative;
   border: 0;
 
   &:hover {
     transform: translateY(-4px);
   }
+}
+
+.bubble {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 100;
+  transform: translate(16px, 16px);
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .project {
@@ -57,5 +75,39 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+
+.in-progress {
+  position: absolute;
+  display: inline-block;
+  top: 1rem;
+  right: 1rem;
+
+  &:before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: lightseagreen;
+    display: block;
+    position: relative;
+    left: 100%;
+    top: 14px;
+    z-index: 1;
+    margin-left: 14px;
+    border-radius: 50%;
+  }
+
+  &:after {
+    position: absolute;
+    white-space: nowrap;
+    vertical-align: top;
+    margin-left: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 3px 4px 3px 16px;
+    font-size: 12px;
+    content: "in progress";
   }
 }
