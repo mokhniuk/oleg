@@ -14,11 +14,9 @@ export default function CVPage() {
   return (
     <main className={styles.main}>
       <CaseStudyHero
-        title="Curriculum Vitae"
+        title="Resume"
         description={CV.summary}
-        bgColor="var(--color-bg-secondary)"
-        role={CV.personalInfo.title}
-        client={CV.personalInfo.location}
+        bgColor="#fafafa"
       />
 
       <CaseStudySection title="Experience">
@@ -88,17 +86,17 @@ export default function CVPage() {
 
       <CaseStudySection title="Skills">
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-            {CV.stack.frameworks.concat(CV.stack.design).map((skill, index) => (
-                <span key={index} style={{
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--color-bg-secondary)",
-                    borderRadius: "20px",
-                    fontSize: "0.9rem",
-                    color: "var(--color-text-secondary)"
-                }}>
-                    {skill}
-                </span>
-            ))}
+          {CV.stack.frameworks.concat(CV.stack.design).map((skill, index) => (
+            <span key={index} style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "var(--color-bg-secondary)",
+              borderRadius: "20px",
+              fontSize: "0.9rem",
+              color: "var(--color-text-secondary)"
+            }}>
+              {skill}
+            </span>
+          ))}
         </div>
       </CaseStudySection>
 

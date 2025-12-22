@@ -13,8 +13,8 @@ export const CV = {
   personalInfo: {
     name: "Oleg Mokhniuk",
     title: "Frontend Engineer with UX/UI Design expertise",
-    location: "10319 Berlin",
-    phone: "+4915221025885",
+    // location: "10319 Berlin",
+    // phone: "+4915221025885",
     website: "https://mokhniuk.online",
     email: "oleg.mokhniuk@gmail.com",
   },

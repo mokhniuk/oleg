@@ -1,7 +1,6 @@
 import styles from "@/app/page.module.css";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
-import Container from "@/components/Container/Container";
 import { CV } from "@/data/cv";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -17,9 +16,7 @@ export default function AboutPage() {
       <CaseStudyHero
         title="About"
         description={CV.summary}
-        bgColor="var(--color-bg-secondary)"
-        role={CV.personalInfo.title}
-        client={CV.personalInfo.location}
+        bgColor="#fafafa"
       />
 
       <CaseStudySection title="Background">
@@ -116,23 +113,15 @@ export default function AboutPage() {
 
       <CaseStudySection title="Experience">
         <p style={{
-              fontSize: "1.125rem",
-              lineHeight: 1.6,
-              color: "var(--color-text-secondary)",
-              marginBottom: "2rem",
-            }}>
-            I have over 10 years of experience in frontend engineering and UI/UX design, working with various clients and companies to deliver high-quality digital products.
-        </p>
-        <Link href="/cv" style={{
-            display: "inline-block",
-            padding: "0.75rem 1.5rem",
-            backgroundColor: "var(--color-text-primary)",
-            color: "var(--color-bg-primary)",
-            borderRadius: "4px",
-            fontWeight: 600,
-            textDecoration: "none"
+          fontSize: "1.125rem",
+          lineHeight: 1.6,
+          color: "var(--color-text-secondary)",
+          marginBottom: "2rem",
         }}>
-            View full CV
+          I have over 10 years of experience in frontend engineering and UI/UX design, working with various clients and companies to deliver high-quality digital products.
+        </p>
+        <Link href="/cv" className={styles['cv-button']}>
+          View full CV
         </Link>
       </CaseStudySection>
     </main>
