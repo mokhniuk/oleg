@@ -76,7 +76,7 @@ body {
   font-family: var(--font-inter), sans-serif;
   scroll-behavior: smooth;
   /* Custom cursor - default arrow */
-  cursor: url('/images/cursors/arrow.svg') 8 8, auto;
+  cursor: url('/images/cursors/arrow-2.svg') 8 8, auto;
 }
 
 /* Custom cursor for links, buttons, and interactive elements */
@@ -85,7 +85,7 @@ button,
 [role="button"],
 input[type="submit"],
 input[type="button"] {
-  cursor: url('/images/cursors/hand.svg') 8 0, pointer;
+  cursor: url('/images/cursors/hand-2.svg') 8 0, pointer;
 }
 
 /* Custom cursor for text input areas */
@@ -108,7 +108,7 @@ h5,
 h6,
 span,
 div {
-  cursor: url('/images/cursors/arrow.svg') 8 8, auto;
+  cursor: url('/images/cursors/arrow-2.svg') 8 8, auto;
 }
 
 @keyframes fadeInUp {
