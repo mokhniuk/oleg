@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import Logo from "@/components/Logo/Logo";
 import SiteMenu from "@/components/SiteMenu/SiteMenu";
@@ -34,7 +35,7 @@ const MENU_ITEMS = [
     url: "/about",
     label: "About",
     title: "",
-    visible: false,
+    visible: true,
   },
   {
     url: "/retainer",
@@ -46,13 +47,37 @@ const MENU_ITEMS = [
     url: "/#contact",
     label: "Contact",
     title: "Contact",
-    visible: false,
+    visible: true,
   },
 ];
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+  const lastScrollYRef = useRef(0);
+  const isVisibleRef = useRef(true);
+
+  // Function to update visibility state and ref
+  const updateVisibility = (visible: boolean) => {
+    if (isVisibleRef.current !== visible) {
+      isVisibleRef.current = visible;
+      setIsVisible(visible);
+    }
+  };
+
+  // Reset visibility on navigation
+  useEffect(() => {
+    updateVisibility(true);
+    lastScrollYRef.current = window.scrollY;
+
+    // Small timeout to handle cases where the jump happens shortly after navigation
+    const timer = setTimeout(() => {
+      updateVisibility(true);
+      lastScrollYRef.current = window.scrollY;
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   useEffect(() => {
     let ticking = false;
@@ -62,21 +87,23 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          const lastScrollY = lastScrollYRef.current;
+
           // Always show header when at the top
           if (currentScrollY < 50) {
-            setIsVisible(true);
+            updateVisibility(true);
           } else {
             // Show header when scrolling up, hide when scrolling down
             if (currentScrollY < lastScrollY) {
               // Scrolling up
-              setIsVisible(true);
+              updateVisibility(true);
             } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
               // Scrolling down and not near the top
-              setIsVisible(false);
+              updateVisibility(false);
             }
           }
 
-          setLastScrollY(currentScrollY);
+          lastScrollYRef.current = currentScrollY;
           ticking = false;
         });
 
@@ -85,14 +112,21 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Show header when mouse is near the top of the screen (within 100px)
+      // Show header when mouse is near the top of the screen (within 80px)
       if (e.clientY < 80) {
-        setIsVisible(true);
+        updateVisibility(true);
       }
+    };
+
+    // Also handle hash changes (e.g. clicking #works from same page)
+    const handleHashChange = () => {
+      updateVisibility(true);
+      lastScrollYRef.current = window.scrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("hashchange", handleHashChange);
 
     // Initial check
     handleScroll();
@@ -100,8 +134,9 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("hashchange", handleHashChange);
     };
-  }, [lastScrollY]);
+  }, []); // Re-run effect only on mount
 
   return (
     <header

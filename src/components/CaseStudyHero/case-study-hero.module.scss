@@ -4,10 +4,10 @@
   min-height: 50vh;
   display: flex;
   align-items: flex-end;
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  margin-left: calc(-1 * var(--content-padding));
+  margin-right: calc(-1 * var(--content-padding));
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
 }
 
 .content {

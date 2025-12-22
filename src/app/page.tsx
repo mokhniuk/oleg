@@ -13,9 +13,9 @@ export default function Home() {
         <Container width="fullscreen" className={styles["hero-container"]}>
           <div className={styles["hero-content"]}>
             <p>
-              Hey there, I’m Oleg. <br />I am designer and engineer from{" "}
+              Hey there, I’m Oleg. <br />I am designer and engineer{" "}
               <span className={styles.nobr}>
-                Kyiv&nbsp;
+                from Kyiv{" "}
                 <span className={styles["kyiv-logo"]} aria-label="Kyiv logo" />
                 ,
               </span>{" "}
