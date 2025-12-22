@@ -224,8 +224,8 @@ export const WORKS: WorksType[] = [
         label: "ubar.me",
       },
       colors: {
-        primary: "#000",
-        contrast: "#EBEB6F",
+        primary: "#EBEB6F",
+        contrast: "#000000",
         faded: "#ffffd1",
       },
       fonts: {
@@ -461,7 +461,7 @@ export const WORKS: WorksType[] = [
       role: "Designer & Developer",
       link: {
         url: "https://busthatneverarrives.com",
-        label: "visit site",
+        label: "busthatneverarrives.com",
       },
       colors: {
         primary: "#ede869",
@@ -562,7 +562,7 @@ export const WORKS: WorksType[] = [
       client: "Vitsche",
       link: {
         url: "https://vitsche.org/ecology",
-        label: "visit project",
+        label: "vitsche.org/ecology",
       },
       colors: {
         primary: "#E91E63",
@@ -662,7 +662,7 @@ export const WORKS: WorksType[] = [
       role: "UI/UX Designer & Frontend Developer",
       link: {
         url: "https://u-paper.com",
-        label: "visit site",
+        label: "u-paper.com",
       },
       colors: {
         primary: "#5A6C7D",
