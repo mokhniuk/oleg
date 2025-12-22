@@ -4,6 +4,7 @@ export type SectionBlock = {
   content: string;
   image?: string;
   bgColor?: string;
+  titleColor?: "primary" | "contrast";
 };
 
 export type ImageBlock = {
@@ -16,6 +17,7 @@ export type GalleryBlock = {
   type: "gallery";
   images: string[];
   columns?: 1 | 2 | 3;
+  titleColor?: "primary" | "contrast";
 };
 
 export type TestimonialBlock = {
@@ -36,6 +38,7 @@ export type ScreensGridBlock = {
   bgColor?: string;
   images: string[];
   columns?: 2 | 3 | 4;
+  titleColor?: "primary" | "contrast";
 };
 
 export type CaseStudyBlock =
@@ -96,6 +99,7 @@ type CaseStudy = {
     author: string;
     position: string;
   };
+  titleColor?: 'primary' | 'contrast';
   blocks?: CaseStudyBlock[];
 };
 
@@ -217,15 +221,16 @@ export const WORKS: WorksType[] = [
       coverImage: "../../projects/u-bar/ubar--cover.jpg",
       task: "Design sophisticated website for Berlin speakeasy bar",
       releaseDate: "2024",
-      role: "Web Designer",
-      client: "U Bar Berlin",
+      role: "Design & Development",
+      client: "U Bar",
       link: {
         url: "https://ubar.me",
         label: "ubar.me",
       },
+      titleColor: "contrast",
       colors: {
         primary: "#EBEB6F",
-        contrast: "#000000",
+        contrast: "#141414",
         faded: "#ffffd1",
       },
       fonts: {
@@ -268,7 +273,7 @@ export const WORKS: WorksType[] = [
         {
           type: "section",
           title: "Technology Stack",
-          // bgColor: "#fafafa",
+          bgColor: "#ffffff",
           content:
             "This website was designed in Figma.",
         },
@@ -298,7 +303,7 @@ export const WORKS: WorksType[] = [
       client: "Kashtan UG",
       coverImage: "../../projects/kashtan/kashtan--cover.webp",
       task: "Build e-commerce platform for Ukrainian products marketplace",
-      releaseDate: "2023",
+      releaseDate: "2024",
       role: "Designer & Developer",
       link: {
         url: "https://kashtaninberlin.de",
@@ -369,7 +374,7 @@ export const WORKS: WorksType[] = [
       coverImage: "../../projects/truth-to-justice/gallery/01.jpg",
       client: "Vitsche",
       task: "Develop and maintain conference website platform",
-      releaseDate: "2023-2024",
+      releaseDate: "2024",
       role: "Web Developer",
       link: {
         url: "https://truth-to-justice.org",
@@ -458,6 +463,7 @@ export const WORKS: WorksType[] = [
       client: "Vitsche",
       task: "Create immersive digital experience for audio art project",
       releaseDate: "2024",
+      titleColor: "contrast",
       role: "Designer & Developer",
       link: {
         url: "https://busthatneverarrives.com",

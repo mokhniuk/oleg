@@ -142,6 +142,11 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
             return undefined;
           };
 
+          const currentTitleColor = (block as any).titleColor || caseStudy?.titleColor;
+          const titleColorValue = currentTitleColor === 'contrast'
+            ? 'var(--color-contrast)'
+            : 'var(--color-primary)';
+
           switch (block.type) {
             case "section":
               return (
@@ -149,6 +154,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                   key={index}
                   title={block.title}
                   bgColor={block.bgColor || getAutoBgColor()}
+                  titleColor={titleColorValue}
                 >
                   <p>{block.content}</p>
                   {block.image && (
@@ -200,6 +206,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
+                  titleColor={titleColorValue}
                 >
                   <ImageGallery
                     images={block.images}
@@ -211,6 +218,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               return (
                 <CaseStudySection
                   key={index}
+                  titleColor={titleColorValue}
                 >
                   <blockquote className={styles.testimonial}>
                     <p className={styles.quote}>&ldquo;{block.quote}&rdquo;</p>
@@ -226,6 +234,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                 <CaseStudySection
                   key={index}
                   bgColor={block.bgColor}
+                  titleColor={titleColorValue}
                 >
                   <ScreensGrid
                     images={block.images}
