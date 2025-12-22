@@ -17,7 +17,7 @@ export default function Home() {
               <span className={styles.nobr}>
                 Kyiv&nbsp;
                 <Image
-                  src="/images/kyiv-logo.png"
+                  src="/images/chestnut.svg"
                   alt=""
                   width={34}
                   height={36}
@@ -29,10 +29,10 @@ export default function Home() {
               <span className={styles.nobr}>
                 in Berlin{" "}
                 <Image
-                  src="/images/berlin-logo.png"
+                  src="/images/bear.svg"
                   alt=""
-                  width={42}
-                  height={46}
+                  width={36}
+                  height={60}
                   className={styles["berlin-logo"]}
                 />
                 .
