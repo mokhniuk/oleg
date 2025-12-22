@@ -83,27 +83,53 @@
 
 .kyiv-logo {
   width: clamp(2rem, 1.1485rem + 3.1683vw, 4rem);
-  height: auto;
-  line-height: 24px;
+  aspect-ratio: 34 / 36;
   display: inline-block;
   margin-left: -1%;
   margin-right: -0.5%;
   user-select: none;
-  opacity: 0.9;
+  background-color: #202020;
+  -webkit-mask-image: url("/images/chestnut.svg");
+  mask-image: url("/images/chestnut.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: background 0.2s ease;
+  vertical-align: baseline;
 }
 
+/* .kyiv-logo:hover {
+  background-image: url("/images/kyiv.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+} */
+
 .berlin-logo {
-  line-height: 24px;
   display: inline-block;
   width: clamp(1.2rem, 0.6998rem + 1.8614vw, 2.375rem);
-  opacity: 0.9;
-
-  height: auto;
+  aspect-ratio: 36 / 60;
   position: relative;
   margin-left: -1%;
   user-select: none;
-  vertical-align: text-top;
+  vertical-align: baseline;
+  background-color: #202020;
+  -webkit-mask-image: url("/images/bear.svg");
+  mask-image: url("/images/bear.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: background 0.9s ease;
 }
+
+/* .berlin-logo:hover {
+  background-image: url("/images/berlin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+} */
 
 /* works */
 

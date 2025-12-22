@@ -16,25 +16,13 @@ export default function Home() {
               Hey there, I’m Oleg. <br />I am designer and engineer from{" "}
               <span className={styles.nobr}>
                 Kyiv&nbsp;
-                <Image
-                  src="/images/chestnut.svg"
-                  alt=""
-                  width={34}
-                  height={36}
-                  className={styles["kyiv-logo"]}
-                />
+                <span className={styles["kyiv-logo"]} aria-label="Kyiv logo" />
                 ,
               </span>{" "}
               based{" "}
               <span className={styles.nobr}>
                 in Berlin{" "}
-                <Image
-                  src="/images/bear.svg"
-                  alt=""
-                  width={36}
-                  height={60}
-                  className={styles["berlin-logo"]}
-                />
+                <span className={styles["berlin-logo"]} aria-label="Berlin logo" />
                 .
               </span>
             </p>
