@@ -98,7 +98,7 @@ export default function DJPage() {
                 </div>
             </section>
 
-            <CaseStudySection title="Moments">
+            <CaseStudySection >
                 <ImageGallery images={DJ_PHOTOS} columns={2} />
             </CaseStudySection>
 

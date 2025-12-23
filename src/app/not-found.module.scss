@@ -1,0 +1,32 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.title {
+    font-size: clamp(4.04rem, -11.44rem + 57.6vw, 40.4rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0px;
+    color: var(--foreground-rgb);
+    // Add a subtle gradient or texture if desired, consistent with the site design
+}
+
+.description {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.link {
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+}
