@@ -76,7 +76,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       // Navigate after animation starts
       setTimeout(() => {
         router.push(href);
-      }, 400);
+      }, 200);
     }
   };
 

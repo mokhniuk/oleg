@@ -1,7 +1,8 @@
 .gallery {
+    margin: 2rem 0;
+
     display: grid;
     gap: 1.5rem;
-    margin: 2rem 0;
 
     &[data-columns="1"] {
         grid-template-columns: 1fr;
@@ -25,13 +26,9 @@
 
 .image {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
-
-    &:hover {
-        transform: scale(1.02);
-    }
 }
 
 @media screen and (max-width: 768px) {

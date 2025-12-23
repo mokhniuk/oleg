@@ -60,8 +60,8 @@ export default function DJPage() {
                                         day: "numeric",
                                     })}
                                 </span>
-                                <span className={styles.eventVenue}>{event.venue}</span>
                                 <span className={styles.eventCity}>{event.city}</span>
+                                <span className={styles.eventVenue}>{event.venue}</span>
 
                                 {event.link ? (
                                     <a
@@ -104,15 +104,15 @@ export default function DJPage() {
 
             <CaseStudySection title="Technical Rider">
                 <div style={{ maxWidth: 800 }}>
-                    <p style={{ color: "#666", marginBottom: "2rem", fontSize: "1.1rem" }}>
-                        For performances involving vinyl records, the following setup is required to ensure the best sound quality and performance stability.
+                    <p style={{ marginBottom: "2rem", fontSize: "1.1rem" }}>
+                        I will need the following equipment to perform:
                     </p>
                 </div>
-                <div className={styles.riderMasonry}>
+                <div className={styles.riderGrid}>
                     {DJ_INFO.technicalRider.map((item, index) => (
-                        <div key={index} className={styles.riderCard}>
+                        <div key={index} className={styles.riderItem}>
                             {item.image && (
-                                <div className={styles.riderImage}>
+                                <div className={styles.riderThumb}>
                                     <Image
                                         src={item.image}
                                         alt={item.name}
@@ -121,8 +121,9 @@ export default function DJPage() {
                                     />
                                 </div>
                             )}
-                            <div className={styles.riderInfo}>
-                                <p>{item.name}</p>
+                            <div className={styles.riderMeta}>
+                                <h3>{item.name}</h3>
+                                <p>{item.description}</p>
                             </div>
                         </div>
                     ))}
@@ -132,8 +133,8 @@ export default function DJPage() {
             <CaseStudySection title="Booking Request">
                 <div style={{ maxWidth: 800 }}>
                     <p style={{ color: "#666", marginBottom: "3rem", fontSize: "1.1rem" }}>
-                        Interested in booking me for your event? Please fill out the form below or send an email to{" "}
-                        <a href={`mailto:${DJ_INFO.bookingEmail}`} style={{ color: "#000", borderBottom: "1px solid #000" }}>{DJ_INFO.bookingEmail}</a>.
+                        Interested in booking me for your event? <br />Feel free to reach me out by email:{" "}
+                        <a href={`mailto:${DJ_INFO.bookingEmail}`}>{DJ_INFO.bookingEmail}</a>.
                     </p>
 
                 </div>
