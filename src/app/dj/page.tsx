@@ -23,6 +23,17 @@ export default function DJPage() {
                 />
             </header>
 
+            <section className={styles.coverImage}>
+                <figure className={styles.caseStudyCoverImage}>
+                    <Image
+                        src="/images/dj/cover-2.jpg"
+                        alt="DJ Record"
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className={styles.recordImage}
+                    />
+                </figure>
+            </section>
             <CaseStudySection title="Upcoming & Past Events">
                 <div className={styles.eventsList}>
                     {DJ_EVENTS
@@ -75,17 +86,6 @@ export default function DJPage() {
                 </div>
             </CaseStudySection>
 
-            <section className={styles.coverImage}>
-                <figure className={styles.caseStudyCoverImage}>
-                    <Image
-                        src="/images/dj/cover-2.jpg"
-                        alt="DJ Record"
-                        fill
-                        style={{ objectFit: "cover" }}
-                        className={styles.recordImage}
-                    />
-                </figure>
-            </section>
 
             <section className={styles.marquee}>
                 <div className={styles.marqueeContent}>

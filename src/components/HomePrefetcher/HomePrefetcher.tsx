@@ -20,14 +20,14 @@ export default function HomePrefetcher({ targets }: { targets: PrefetchTarget[] 
   useEffect(() => {
     const prefetchQueue = async () => {
       // Wait a bit for the main page logic/hydration to settle
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 300));
 
       for (const target of targets) {
         if (!target.slug) continue;
-        
+
         // Prefetch the page code/data using Next.js router
         router.prefetch(`/work/${target.slug}`);
-        
+
         // Preload fonts (low priority)
         preloadFonts(target.fonts, target.slug, 'prefetch');
 
@@ -42,7 +42,7 @@ export default function HomePrefetcher({ targets }: { targets: PrefetchTarget[] 
         prefetchQueue();
       });
     } else {
-        setTimeout(prefetchQueue, 1000);
+      setTimeout(prefetchQueue, 400);
     }
   }, [targets, router]);
 

@@ -55,7 +55,7 @@ export const DJ_PHOTOS = [
     "/images/dj/1.jpg",
     "/images/dj/2.jpg",
     "/images/dj/3.jpg",
-    "/images/dj/4.jpg",
+    "/images/dj/cover-4.jpg",
 ];
 
 export const DJ_PARTNERS = [

@@ -106,7 +106,7 @@
   overflow: hidden;
   padding: 4rem 0;
   background-color: #fafafa;
-  border-top: 1px solid #eee;
+  // border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   white-space: nowrap;
   position: relative;
@@ -125,14 +125,14 @@
   font-weight: 700;
   text-transform: uppercase;
   margin-right: 4rem;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  // color: transparent;
+  // -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 
-  &:hover {
-    color: #000;
-    -webkit-text-stroke: 1px #000;
-  }
+  // &:hover {
+  //   color: #000;
+  //   -webkit-text-stroke: 1px #000;
+  // }
 }
 
 .section {
