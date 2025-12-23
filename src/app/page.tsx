@@ -62,7 +62,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section  >
+      <section hidden >
         <Container>
           <SectionHeader
             title="Pet projects"

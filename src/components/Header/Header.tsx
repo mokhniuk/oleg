@@ -38,12 +38,6 @@ const MENU_ITEMS = [
     visible: true,
   },
   {
-    url: "/retainer",
-    label: "Retainer",
-    title: "",
-    visible: false,
-  },
-  {
     url: "/#contact",
     label: "Contact",
     title: "Contact",

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./site-menu.module.scss";
+import Link from "next/link";
 
 interface MenuItem {
   label: string;
@@ -19,9 +20,9 @@ const SiteMenu: React.FC<SiteMenuProps> = ({ menuItems }) => {
           (menuItem: MenuItem) =>
             menuItem.visible && (
               <li key={menuItem.label} className={styles["menu__item"]}>
-                <a href={menuItem.url} className={styles["menu__link"]}>
+                <Link href={menuItem.url} className={styles["menu__link"]}>
                   {menuItem.label}
-                </a>
+                </Link>
               </li>
             )
         )}
