@@ -1,0 +1,445 @@
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes noise {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -5%);
+  }
+
+  20% {
+    transform: translate(-10%, 5%);
+  }
+
+  30% {
+    transform: translate(5%, -10%);
+  }
+
+  40% {
+    transform: translate(-5%, 15%);
+  }
+
+  50% {
+    transform: translate(-10%, 5%);
+  }
+
+  60% {
+    transform: translate(15%, 0);
+  }
+
+  70% {
+    transform: translate(0, 10%);
+  }
+
+  80% {
+    transform: translate(-15%, 0);
+  }
+
+  90% {
+    transform: translate(10%, 5%);
+  }
+}
+
+.main {
+  background-color: #fff;
+  color: #202020;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 0 var(--content-padding);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Custom properties for DJ page
+  --color-text-primary: #202020;
+  --color-text-secondary: #666;
+  --color-accent: #2f80ed;
+
+  // Analog noise overlay (very subtle for light mode)
+  &:before {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 10;
+    animation: noise 8s steps(10) infinite;
+  }
+}
+
+.hero {
+  border-bottom: 1px solid #eee;
+
+  h1 {
+    color: #000;
+  }
+}
+
+.coverImage {
+  position: relative;
+  aspect-ratio: 16/10;
+  margin: 0 calc(var(--content-padding) * -1);
+}
+
+// .caseStudyCoverImage {
+//     position: relative;
+//     width: 100%;
+//     aspect-ratio: 16/9;
+// }
+
+.marquee {
+  overflow: hidden;
+  padding: 4rem 0;
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  position: relative;
+  margin: 0 calc(var(--content-padding) * -1);
+}
+
+.marqueeContent {
+  display: inline-block;
+  animation: scroll 40s linear infinite;
+  padding-left: 2rem;
+}
+
+.marqueeItem {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-right: 4rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #000;
+    -webkit-text-stroke: 1px #000;
+  }
+}
+
+.section {
+  padding: 8rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #000;
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.eventItem {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr 120px 40px;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 1.5rem;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.eventLink {
+  color: #000;
+  font-size: 1.25rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translate(2px, -2px);
+  }
+}
+
+.eventDate {
+  font-weight: 400;
+  color: #888;
+  font-family: var(--font-mono);
+}
+
+.eventVenue {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #000;
+}
+
+.eventCity {
+  color: #888;
+}
+
+.eventStatus {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: 700;
+  border: 1px solid;
+
+  &[data-status="upcoming"] {
+    border-color: #000;
+    color: #000;
+  }
+
+  &[data-status="past"] {
+    border-color: #eee;
+    color: #aaa;
+  }
+}
+
+.recordsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.recordCard {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &:hover {
+    transform: translateY(-8px);
+
+    .recordCover:after {
+      transform: translate(15px, -15px);
+      opacity: 0.5;
+    }
+  }
+}
+
+.recordCover {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: visible;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    position: relative;
+    z-index: 2;
+  }
+
+  // Record inner platter effect (simplified)
+  &:after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background: #111;
+    border-radius: 50%;
+    z-index: 1;
+    transform: translate(0, 0);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+}
+
+.recordInfo {
+  h4 {
+    font-size: 1.1rem;
+    color: #000;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    color: #888;
+    font-size: 0.9rem;
+  }
+}
+
+.riderMasonry {
+  column-count: 2;
+  column-gap: 2rem;
+  width: 100%;
+}
+
+.riderCard {
+  break-inside: avoid;
+  margin-bottom: 2rem;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.riderImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #eee;
+}
+
+.riderInfo {
+  padding: 1.5rem;
+
+  p {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #202020;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .riderMasonry {
+    column-count: 1;
+  }
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px;
+  margin-top: 3rem;
+  background: #fff;
+  padding: 3rem;
+  border-radius: 2px;
+  border: 1px solid #eee;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+  }
+
+  input,
+  textarea {
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #000;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #000;
+    }
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+}
+
+.submitButton {
+  background-color: #000;
+  color: #fff;
+  padding: 1.25rem 2.5rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  width: fit-content;
+
+  &:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .eventItem {
+    grid-template-columns: 1fr 1fr 40px;
+    grid-template-areas:
+      "date status link"
+      "venue venue link"
+      "city city link";
+    gap: 0.75rem;
+  }
+
+  .eventDate {
+    grid-area: date;
+  }
+
+  .eventStatus {
+    grid-area: status;
+    justify-self: end;
+  }
+
+  .eventVenue {
+    grid-area: venue;
+    margin-top: 0.5rem;
+  }
+
+  .eventCity {
+    grid-area: city;
+  }
+
+  .eventLink {
+    grid-area: link;
+  }
+
+  .marqueeItem {
+    font-size: 2rem;
+    margin-right: 2rem;
+  }
+
+  .bookingForm {
+    padding: 1.5rem;
+  }
+}

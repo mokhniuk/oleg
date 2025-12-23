@@ -26,10 +26,10 @@ const MENU_ITEMS = [
     visible: false,
   },
   {
-    url: "/djing",
-    label: "DJing",
-    title: "DJing",
-    visible: false,
+    url: "/dj",
+    label: "DJ",
+    title: "DJ",
+    visible: true,
   },
   {
     url: "/about",
