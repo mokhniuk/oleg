@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
-        <Container width="fullscreen" className={styles["hero-container"]}>
+        <Container className={styles["hero-container"]}>
           <div className={styles["hero-content"]}>
             <p>
               Hey there, I’m Oleg. <br />I am designer and engineer{" "}

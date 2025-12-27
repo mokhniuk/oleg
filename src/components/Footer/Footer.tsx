@@ -4,7 +4,7 @@ import Container from "@/components/Container/Container";
 const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
-      <Container width="fullscreen" mode="flex" className={styles.container}>
+      <Container mode="flex" className={styles.container}>
         {/* <ul className={styles["links-list"]}>
           <li className={styles["links-list__item"]}>
             <Link href="#work" title="">

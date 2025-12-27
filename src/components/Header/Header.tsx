@@ -137,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       className={`${styles.header} ${isVisible ? styles.visible : styles.hidden
         }`}
     >
-      <Container width="fullscreen" mode="flex" className={styles.container}>
+      <Container mode="flex" className={styles.container}>
         <Logo />
         <SiteMenu menuItems={MENU_ITEMS} />
       </Container>
