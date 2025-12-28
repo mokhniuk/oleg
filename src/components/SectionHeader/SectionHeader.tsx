@@ -7,6 +7,7 @@ interface SectionHeaderProps {
   linkLabel?: string;
   linkUrl?: Url;
   sectionDescription?: string | React.ReactNode;
+  titleColor?: string;
 }
 
 export default function SectionHeader({
@@ -14,11 +15,12 @@ export default function SectionHeader({
   linkLabel,
   linkUrl,
   sectionDescription,
+  titleColor,
 }: SectionHeaderProps) {
   return (
     <header className={styles["section-header"]}>
       <div className={styles["section-header__container"]}>
-        <h2>{title}</h2>
+        <h2 style={titleColor ? { color: titleColor } : undefined}>{title}</h2>
         {linkUrl && (
           <Link
             href={linkUrl}

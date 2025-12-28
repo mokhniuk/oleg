@@ -11,6 +11,9 @@ import BrowserFrame from "@/components/BrowserFrame/BrowserFrame";
 import PageTransitionTrigger from "@/components/PageTransitionTrigger/PageTransitionTrigger";
 import styles from "./page.module.scss";
 import Image from "next/image";
+import FontTemplate from "@/components/Templates/FontTemplate/FontTemplate";
+import MovieTemplate from "@/components/Templates/MovieTemplate/MovieTemplate";
+
 interface CaseStudyPageProps {
   params: {
     slug: string;
@@ -102,13 +105,54 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     fontFamily: work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, sans-serif` : undefined,
   } as React.CSSProperties;
 
+  // ... 
+
+  if (work.caseStudy?.template === 'font') {
+      return (
+          <>
+             <PageTransitionTrigger />
+             <FontTemplate 
+                title={work.title}
+                description={work.description}
+                bgColor={work.bgColor}
+                blocks={work.caseStudy.blocks}
+                fontFile={work.caseStudy.fontFile}
+                downloadLink={work.caseStudy.downloadLink}
+                fonts={work.caseStudy.fonts as any} // Cast because fonts structure might differ slightly or need alignment
+             />
+          </>
+      )
+  }
+
+  if (work.caseStudy?.template === 'movie') {
+      return (
+          <>
+             <PageTransitionTrigger />
+             <MovieTemplate 
+                title={work.title}
+                description={work.description}
+                bgColor={work.bgColor}
+                blocks={work.caseStudy.blocks}
+                movieData={work.caseStudy.movieData}
+                link={work.caseStudy.link}
+                coverImage={work.caseStudy.coverImage}
+             />
+          </>
+      )
+  }
+  
+  // Default Case Study Render
   return (
     <>
       <PageTransitionTrigger />
+      {/* ... existing render ... */
+      }
       {googleFontUrl && (
         <link rel="stylesheet" href={googleFontUrl} />
       )}
       <main className={styles.main} style={mainStyles}>
+        {/* ... existing content ... */}
+
         <CaseStudyHero
           title={work.title}
           description={work.description}

@@ -62,6 +62,20 @@ export const CATEGORIES = {
 export type Category = typeof CATEGORIES[keyof typeof CATEGORIES];
 
 type CaseStudy = {
+  // Template type
+  template?: 'case-study' | 'font' | 'movie';
+  
+  // Font specific fields
+  fontFile?: string;
+  downloadLink?: string;
+  
+  // Movie specific fields
+  movieData?: {
+    duration?: string;
+    director?: string;
+    // Add other specific movie fields if needed
+  };
+
   // Header information (short overview)
   task?: string;
   client?: string;
@@ -949,5 +963,71 @@ export const WORKS: WorksType[] = [
     },
     show: false,
     featured: false,
+  },
+  {
+    slug: "olegs-handwriting",
+    bgColor: "#ffffff",
+    title: "Oleg's Handwriting",
+    description: "",
+    categories: ["design", "fonts"],
+    show: true,
+    featured: false,
+    caseStudy: {
+      template: "font",
+      client: "Personal",
+      releaseDate: "2024 v0.1",
+      fonts: {
+        title: "Om Handwriting",
+        text: "Om Handwriting",
+      },
+      fontFile: "../../projects/fonts/OmHandwriting.woff2",
+      downloadLink: "../../projects/fonts/OmHandwriting.woff2", 
+      blocks: [
+         {
+          type: "image",
+          url: "../../projects/fonts/om-example.jpg"
+         },
+         {
+          type: "section",
+          title: "Overview",
+          content: "Om Handwriting is a digital version of my own handwriting, created using Calligraphr. It covers both Latin and Cyrillic scripts, making it suitable for bilingual projects that need a personal touch.",
+         }
+      ]
+    },
+  },
+  {
+    slug: "example-movie",
+    bgColor: "#000000",
+    title: "Cinematic Journey",
+    description: "A short film exploring the depths of urban solitude.",
+    categories: ["photography"], // "video" category doesn't exist yet, using photography or similar
+    show: true,
+    featured: true,
+    caseStudy: {
+      template: "movie",
+      coverImage: "../../projects/bagel-bro/bagelbro--cover2.webp", // Placeholder
+      client: "Personal Project",
+      releaseDate: "2024",
+      movieData: {
+        duration: "12:34",
+        director: "Oleg Mokhniuk",
+      },
+      link: {
+        url: "https://vimeo.com",
+        label: "Watch on Vimeo"
+      },
+      blocks: [
+        {
+          type: "section",
+          title: "Synopsis",
+          content: "In the heart of a bustling metropolis, one soul wanders through the neon-lit streets, seeking connection in a world of digital noise. This short film captures the essence of modern isolation and the subtle beauty found in overlooked moments."
+        },
+        {
+           type: "section",
+           title: "Credits",
+           content: "Director of Photography: Oleg Mokhniuk\nSound Design: Oleg Mokhniuk\nEditor: Oleg Mokhniuk"
+        }
+      ]
+    },
   },
 ];
