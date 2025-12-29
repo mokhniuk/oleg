@@ -51,7 +51,7 @@ const FontTemplate: React.FC<FontTemplateProps> = ({
   };
 
   return (
-    <div className={styles.fontTemplate} style={{ backgroundColor: bgColor }}>
+    <main className={styles.fontTemplate} style={{ backgroundColor: bgColor }}>
       <Container>
         <header className={styles.header}>
           <h1 className={styles.title} style={fontStyle}>
@@ -87,21 +87,31 @@ const FontTemplate: React.FC<FontTemplateProps> = ({
         </section>
 
         <section className={styles.specimen}>
-             <div className={styles.specimenGrid} style={fontStyle}>
-                {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(char => (
-                    <span key={char}>{char}</span>
-                ))}
-             </div>
-             <div className={styles.specimenGrid} style={fontStyle}>
-                {"abcdefghijklmnopqrstuvwxyz".split("").map(char => (
-                    <span key={char}>{char}</span>
-                ))}
-             </div>
-             <div className={styles.specimenGrid} style={fontStyle}>
-                {"0123456789!@#$%^&*()".split("").map(char => (
-                    <span key={char}>{char}</span>
-                ))}
-             </div>
+          <div className={styles.specimenGrid} style={fontStyle}>
+            {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(char => (
+                <span key={char}>{char}</span>
+            ))}
+          </div>
+          <div className={styles.specimenGrid} style={fontStyle}>
+            {"abcdefghijklmnopqrstuvwxyz".split("").map(char => (
+                <span key={char}>{char}</span>
+            ))}
+          </div>
+          {/* <div className={styles.specimenGrid} style={fontStyle}>
+            {"АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ".split("").map(char => (
+                <span key={char}>{char}</span>
+            ))}
+          </div>
+          <div className={styles.specimenGrid} style={fontStyle}>
+            {"абвгґдеєжзиіїйклмнопрстуфхцчшщьюя".split("").map(char => (
+                <span key={char}>{char}</span>
+            ))}
+          </div> */}
+          <div className={styles.specimenGrid} style={fontStyle}>
+            {"0123456789!@#$%^&*()".split("").map(char => (
+                <span key={char}>{char}</span>
+            ))}
+          </div>
         </section>
 
       </Container>
@@ -148,7 +158,7 @@ const FontTemplate: React.FC<FontTemplateProps> = ({
               return null;
           }
         })}
-    </div>
+    </main>
   );
 };
 

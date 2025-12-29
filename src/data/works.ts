@@ -115,6 +115,18 @@ type CaseStudy = {
   };
   titleColor?: 'primary' | 'contrast';
   blocks?: CaseStudyBlock[];
+  videoFile?: string;
+  posterImage?: string;
+  starring?: string[]; // Array of actor names
+  laurels?: {
+      quote?: string;
+      award?: string;
+      source?: string;
+  }[];
+  credits?: {
+      role: string;
+      name: string;
+  }[];
 };
 
 type WorksType = {
@@ -122,6 +134,7 @@ type WorksType = {
   slug?: string;
   bgColor: string;
   description: string;
+  synopsis?: string;
   categories: string[]; // Array of category tags
   link?: {
     url: string;
@@ -996,37 +1009,48 @@ export const WORKS: WorksType[] = [
     },
   },
   {
-    slug: "example-movie",
+    slug: "whispers-in-the-wind",
     bgColor: "#000000",
-    title: "Cinematic Journey",
-    description: "A short film exploring the depths of urban solitude.",
-    categories: ["photography"], // "video" category doesn't exist yet, using photography or similar
+    description: "",
+    title: "Whispers in the Wind",
+    synopsis: "While a lonely author wrestles with the suffocating grip of so-called writer’s block, desperately searching for inspiration and meaning in her stalled creative process, she is drawn into a series of unexpected events that disrupt her routine and challenge her assumptions about creativity. She begins to see her own experiences as potential narratives and learning to recognize which stories truly deserve to be told and which are better left behind…",
+    categories: ["video"],
     show: true,
-    featured: true,
+    featured: false,
     caseStudy: {
       template: "movie",
-      coverImage: "../../projects/bagel-bro/bagelbro--cover2.webp", // Placeholder
+      coverImage: "../../projects/movies/whispers-in-the-wind/cover.jpg",
+      videoFile: "../../projects/movies/whispers-in-the-wind/whispers-in-the-wind.webm",
+      posterImage: "../../projects/movies/whispers-in-the-wind/poster.jpg",
       client: "Personal Project",
-      releaseDate: "2024",
+      releaseDate: "2023",
       movieData: {
-        duration: "12:34",
+        duration: "2:10",
         director: "Oleg Mokhniuk",
       },
-      link: {
-        url: "https://vimeo.com",
-        label: "Watch on Vimeo"
-      },
-      blocks: [
+      starring: [
+        "Clara Leeder",
+        "Daniel Traub", 
+        "Dominique Wolfram"
+      ],
+      laurels: [
         {
-          type: "section",
-          title: "Synopsis",
-          content: "In the heart of a bustling metropolis, one soul wanders through the neon-lit streets, seeking connection in a world of digital noise. This short film captures the essence of modern isolation and the subtle beauty found in overlooked moments."
+          quote: "Very funny!",
+          source: "Mariia P." 
         },
         {
-           type: "section",
-           title: "Credits",
-           content: "Director of Photography: Oleg Mokhniuk\nSound Design: Oleg Mokhniuk\nEditor: Oleg Mokhniuk"
+          quote: "The only bad thing it was not shot on film.",
+          source: "Anton P."
+        },
+        {
+          quote: "I laughed",
+          source: "Alex DePew"
         }
+      ],
+      credits: [
+        { role: "Director", name: "Oleg Mokhniuk" },
+        { role: "Mentor", name: "Alex DePew" },
+        { role: "Music", name: "Masor by Asi C" }
       ]
     },
   },

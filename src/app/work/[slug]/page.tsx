@@ -30,6 +30,18 @@ interface CaseStudy {
     label: string;
   };
   coverImage?: string;
+  posterImage?: string;
+  videoFile?: string;
+  starring?: string[];
+  laurels?: {
+      quote?: string;
+      award?: string;
+      source?: string;
+  }[];
+  credits?: {
+      role: string;
+      name: string;
+  }[];
   blocks: CaseStudyBlock[];
 }
 
@@ -136,6 +148,12 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                 movieData={work.caseStudy.movieData}
                 link={work.caseStudy.link}
                 coverImage={work.caseStudy.coverImage}
+                videoFile={work.caseStudy.videoFile}
+                posterImage={work.caseStudy.posterImage}
+                starring={work.caseStudy.starring}
+                laurels={work.caseStudy.laurels}
+                credits={work.caseStudy.credits}
+                synopsis={work.synopsis}
              />
           </>
       )

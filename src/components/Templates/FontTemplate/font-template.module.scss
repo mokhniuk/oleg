@@ -1,12 +1,13 @@
 .fontTemplate {
   min-height: 100vh;
-  padding: 120px 0;
+  padding: 120px var(--content-padding);
   color: var(--color-text);
 }
 
 .header {
   text-align: center;
   margin-bottom: 80px;
+  padding-top: calc(var(--content-padding) * 3);
 }
 
 .title {
@@ -93,7 +94,10 @@
 }
 
 .imageSection {
-    margin: 80px 0;
+    // margin: 80px 0;
+  margin-left: calc(var(--content-padding) * -1);
+  margin-right: calc(var(--content-padding) * -1);
+  margin-bottom: 80px;
 }
 
 .blockFigure {

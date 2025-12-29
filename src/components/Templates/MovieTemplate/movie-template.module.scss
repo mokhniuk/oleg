@@ -1,22 +1,34 @@
 .movieTemplate {
-    --color-background: #000;
-    --color-text: #fff;
-    --color-contrast: #fff;
-    --color-primary: #fff;
-    
-    background-color: var(--color-background);
-    color: var(--color-text);
+    background-color: #000;
+    color: #fff;
     min-height: 100vh;
+
+    h2 {
+        width: 100%;
+        margin: 0;
+    }
+
+    * {
+        color: inherit;
+        text-align: center;
+    }
+
+    padding-left: var(--content-padding);
+    padding-right: var(--content-padding);
 }
 
 .heroWrapper {
-    height: 100vh;
+    // min-height: 90vh;    
     position: relative;
-    width: 100%;
+    margin: 0 calc(var(--content-padding) * -1);
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
-    padding-bottom: 120px;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding-top: calc(var(--content-padding) * 7);
+    padding-bottom: var(--content-padding);
     
     &::after {
         content: '';
@@ -25,7 +37,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
+        background: rgba(0,0,0,0.5);
         z-index: 1;
     }
 }
@@ -38,65 +50,183 @@
     position: relative;
     z-index: 2;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    justify-content: center;
+    font-family: "Om Handwriting";
+}
+
+.heroInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding-top: calc(var(--content-padding) * 2);
+}
+
+.laurels {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.laurelItem {
+    position: relative;
+    max-width: 256px;
+    width: 30%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.laurelText {
+    position: relative;
+    line-height: 1.2;
+    padding: 0;
+    font-family: "Om Handwriting";
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.laurelQuote {
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+}
+
+.laurelSource {
+    opacity: 0.8;
+    text-transform: uppercase;
 }
 
 .title {
-    font-size: 6rem;
+    font-size: clamp(2rem, 0.7228rem + 4.7525vw, 5rem);
     line-height: 1;
     margin-bottom: 24px;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.description {
-    font-size: 1.5rem;
-    max-width: 600px;
+.starring {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
     margin-bottom: 32px;
     opacity: 0.9;
 }
 
 .meta {
+    margin-top: auto;
     display: flex;
     gap: 24px;
-    margin-bottom: 40px;
     font-family: monospace;
     opacity: 0.7;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
-.watchButton {
-    display: inline-flex;
-    align-items: center;
+.synopsisSection {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.synopsis {
+    font-size: clamp(1rem, 0.7871rem + 0.7921vw, 1.25rem);
+    line-height: 1.6;
+    max-width: 660px;
+    margin: 0 auto;
+    opacity: 0.9;
+    // font-family: serif;
+    // font-style: italic;
+}
+
+.creditsSection {
+    background: #000;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.creditsTitle {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    opacity: 0.6;
+}
+
+.creditsGrid {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    padding: 20px 40px;
-    background: #fff;
-    color: #000;
-    text-decoration: none;
+    gap: 32px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.creditItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.creditRole {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+.creditName {
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-radius: 50px;
-    transition: transform 0.2s ease;
-    
-    &:hover {
-        transform: scale(1.05);
+}
+
+.videoWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 100px rgba(255,255,255,0.05);
+
+    video {
+        width: 100%;
     }
 }
 
 .content {
     background: #000;
-    padding: 120px 0;
+    padding-bottom: 120px;
 }
 
 .sectionBlock {
     margin-bottom: 80px;
+    text-align: center;
 }
 
 .text {
     font-size: 1.25rem;
     line-height: 1.6;
-    max-width: 800px;
+    max-width: 700px;
+    margin: 0 auto;
     opacity: 0.8;
 }
 
@@ -105,7 +235,14 @@
         font-size: 3rem;
     }
     
-    .heroWrapper {
-        padding-bottom: 60px;
+    .laurels {
+        gap: 20px;
+        transform: scale(0.8);
+    }
+    
+    .starring {
+        flex-direction: column;
+        gap: 12px;
+        font-size: 1rem;
     }
 }

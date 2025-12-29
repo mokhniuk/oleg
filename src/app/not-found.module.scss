@@ -1,11 +1,12 @@
 .main {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 80vh;
     text-align: center;
-    padding: 0 1rem;
+    padding: calc(var(--content-padding) * 2) 0;
 }
 
 .title {
