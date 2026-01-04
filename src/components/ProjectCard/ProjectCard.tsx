@@ -90,6 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
+      prefetch={false}
     >
       {slug && isHovering && (
         <div

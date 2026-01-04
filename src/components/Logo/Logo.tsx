@@ -13,7 +13,7 @@ const Logo: React.FC<LogoProps> = (
   // Add your component logic and JSX here
 
   return (
-    <Link href="/" title="" className={styles["logo-link"]}>
+    <Link href="/" title="" className={styles["logo-link"]} prefetch={false}>
       Oleg Mokhniuk
     </Link>
   );
