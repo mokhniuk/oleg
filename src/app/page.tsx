@@ -62,34 +62,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section hidden >
-        <Container>
-          <SectionHeader
-            title="Pet projects"
-            sectionDescription="Some tools I've created to make my life easier. Or just because I've had an idea."
-          />
-
-          <ul className={styles.petProjects}>
-            {PET_PROJECTS.map((project) => {
-              return (
-                <li key={project.id}>
-                  <a href={project.url} target="_blank" className={styles["pet-project__link"]}>
-                    <figure className={styles.icon}>
-                      <img src={project.icon} alt={project.title} />
-                    </figure>
-                    <p className={styles.title}>{project.title}</p>
-                    <figure className={styles.preview}>
-                      <img src={project.image} alt={project.title} />
-                    </figure>
-                    <p className={styles.description}>{project.description}</p>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </Container>
-      </section>
-
+    
       <section className={styles.contact} id="contact">
         <Container>
           <SectionHeader

@@ -19,7 +19,7 @@ interface ProjectCardProps {
   };
   fonts?: {
     title: string;
-    text: string;
+    text?: string;
     customTitleFont?: boolean;
     customTextFont?: boolean;
   };

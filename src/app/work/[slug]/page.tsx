@@ -94,9 +94,9 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
     if (!work.caseStudy?.fonts) return null;
     const { title, text, customTitleFont, customTextFont } = work.caseStudy.fonts;
 
-    const googleFonts = [];
-    if (!customTitleFont) googleFonts.push(title);
-    if (!customTextFont) googleFonts.push(text);
+    const googleFonts: string[] = [];
+    if (!customTitleFont && title) googleFonts.push(title);
+    if (!customTextFont && text) googleFonts.push(text);
 
     if (googleFonts.length > 0) {
       // De-duplicate

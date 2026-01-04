@@ -1,7 +1,8 @@
 import styles from "@/app/page.module.css";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
-import { CV } from "@/data/cv";
+// import { CV } from "@/data/cv";
+import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -30,7 +31,7 @@ export default function AboutPage() {
             }}
           >
             {/* I was born in 1992 and raised in Kyiv, Ukraine.  */}
-            Since I was a kid, I was interested in computers, loved music and photography. I hold a Bachelor's degree in Applied Physics and a Master of Science in High Technologies (Physics, Chemistry, and Biology) from Taras Shevchenko National University of Kyiv. I have been working as a web developer since 2009, and in 2016 I moved to Germany to continue my career as a frontend engineer in product companies. 
+            Since I was a kid, I was interested in computers, loved music and photography. I hold a Bachelor&apos;s degree in Applied Physics and a Master of Science in High Technologies (Physics, Chemistry, and Biology) from Taras Shevchenko National University of Kyiv. I have been working as a web developer since 2009, and in 2016 I moved to Germany to continue my career as a frontend engineer in product companies. 
           </p>
 
           {/* <div
@@ -73,7 +74,7 @@ export default function AboutPage() {
                 justifyContent: "center",
               }}
             >
-              <img src="./images/dj/1.jpg" alt="DJ" className={styles['about-img']} />
+              <Image src="./images/dj/1.jpg" alt="DJ" className={styles['about-img']} />
             </div>
             <div
               style={{
@@ -84,7 +85,7 @@ export default function AboutPage() {
                 justifyContent: "center",
               }}
             >
-              <img src="./images/about/photo.jpg" alt="Standup Comedy" className={styles['about-img']} />
+              <Image src="./images/about/photo.jpg" alt="Standup Comedy" className={styles['about-img']} />
             </div>
 
             {/* <div
