@@ -58,6 +58,7 @@ const MovieTemplate: React.FC<MovieTemplateProps> = ({
             style={{objectFit: 'cover'}} 
             className={styles.heroImage}
             priority
+            sizes="100vw"
           />
         )}
         <div className={styles.heroContent}>

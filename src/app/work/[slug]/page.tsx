@@ -190,6 +190,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               fill
               style={{ objectFit: "cover", backgroundColor: work.bgColor }}
               priority
+              sizes="100vw"
             />
           </figure>
         )}
@@ -226,6 +227,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                       fill
                       style={{ objectFit: "cover", backgroundColor: work.bgColor }}
                       className={styles.blockImage}
+                      sizes="(max-width: 768px) 100vw, 100vw"
                     />
                   )}
                 </CaseStudySection>
@@ -240,6 +242,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                       fill
                       style={{ objectFit: "cover", backgroundColor: work.bgColor }}
                       className={styles.blockImage}
+                      sizes="(max-width: 768px) 100vw, 100vw"
                     />
                     {block.caption && (
                       <p className={styles.caption}>{block.caption}</p>
@@ -257,6 +260,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                         autoPlay={true}
                         loop={true}
                         muted={true}
+                        playsInline={true}
                         style={{ backgroundColor: work.bgColor }}
                         className={styles.blockVideo}
                       />

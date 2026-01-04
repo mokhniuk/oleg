@@ -133,6 +133,7 @@ const FontTemplate: React.FC<FontTemplateProps> = ({
                       fill
                       style={{ objectFit: "cover" }}
                       className={styles.blockImage}
+                      sizes="(max-width: 768px) 100vw, 100vw"
                     />
                   )}
                 </CaseStudySection>
