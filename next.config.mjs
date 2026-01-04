@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Only use static export for production builds to preserve hot reload in dev
-  ...(!isDev && { output: "export" }),
+  output: !isDev ? "export" : undefined,
   reactStrictMode: true,
   
   // Image optimization for static export
@@ -20,7 +20,7 @@ const nextConfig = {
   },
   
   // Only use assetPrefix in production
-  ...(!isDev && { assetPrefix: "/" }),
+  assetPrefix: !isDev ? "/" : undefined,
   
   // Compression and optimization
   compress: true,
