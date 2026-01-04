@@ -95,7 +95,7 @@ type CaseStudy = {
   // Font pairing for the project
   fonts?: {
     title: string;        // Font for headings/titles
-    text: string;         // Font for body text
+    text?: string;         // Font for body text
     customTitleFont?: boolean;  // If true, load from /fonts/ instead of Google
     customTextFont?: boolean;   // If true, load from /fonts/ instead of Google
   };
@@ -196,7 +196,7 @@ export const WORKS: WorksType[] = [
           title: "Overview",
           bgColor: "#feeadd",
           content:
-            "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their artisanal bagel shop in Berlin. The goal was to create a website that showcases their products beautifully while making it easy for customers to find location information, view the menu, and understand what makes Bagel Bro special in Berlin's competitive food scene.",
+            "Bagel Bro needed a fresh, inviting online presence that would capture the essence of their bagel shop in Berlin, menu, catering and careers information.",
         },
         {
           type: "screens-grid",
@@ -216,14 +216,14 @@ export const WORKS: WorksType[] = [
           content:
             "Figma, Wordpress, HTML, CSS, JS, PHP, MySQL.",
         },
-        {
-          type: "testimonial",
-          quote:
-            "Oleg helped us create this website! We are so grateful for his expertise and support. He was always available to answer our questions and provided us with clear and concise guidance. We highly recommend Oleg for any web development project.",
-          author: "Anastasiia Mizko & Oleksandr Danylin",
-          position:
-            "Founders of Bagel Bro",
-        },
+        // {
+        //   type: "testimonial",
+        //   quote:
+        //     "Oleg helped us create this website! We are so grateful for his expertise and support. He was always available to answer our questions and provided us with clear and concise guidance. We highly recommend Oleg for any web development project.",
+        //   author: "Anastasiia Mizko & Oleksandr Danylin",
+        //   position:
+        //     "Founders of Bagel Bro",
+        // },
 
         {
           type: "image",
@@ -275,7 +275,7 @@ export const WORKS: WorksType[] = [
           title: "Overview",
           bgColor: "#ffffd1",
           content:
-            "U Bar Berlin is a hidden gem speakeasy bar that needed a website reflecting its mysterious, sophisticated atmosphere. The project focused on creating an elegant digital experience that hints at the exclusive nature of the venue while providing essential information for potential guests.",
+            "U Bar is a hidden gem of Berlin. It needed a website reflecting its minimalist, stylish and sophisticated atmosphere. I've designed a modular responsive website that allows to display the bar's schedule, menu, contact information in a clear and easy-to-navigate way. ",
         },
         {
           type: "screens-grid",
@@ -295,7 +295,7 @@ export const WORKS: WorksType[] = [
           title: "My Role",
           // bgColor: "#fafafa",
           content:
-            "Lead designer responsible for visual concept, user interface design, typography selection, color palette development, and design handoff for implementation.",
+            "Design minimalistic and modern website using existing visual language and hand it off for implementation.",
         },
         {
           type: "section",
@@ -355,27 +355,21 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Overview",
           content:
-            "Kashtan is a pop-up space highlighting Ukrainian businesses, handcrafts, and initiatives. We bring the rich culture of Ukrainian food, drinks, and creativity to Berlin.",
+            "Kashtan is a pop-up space in the most famous market in Berlin — Markthalle IX — highlighting Ukrainian businesses, handcrafts, and initiatives. We bring the rich culture of Ukrainian food, drinks, and creativity to Berlin.",
         },
         {
           type: "section",
-          title: "Challenge",
-          bgColor: "#F5FAF4",
+          title: "My Role",
+          // bgColor: "#fafafa",
           content:
-            "Creating a marketplace that feels both professional and personal, serving a community with specific needs. The site needed to handle product listings, orders, and payments while being accessible to users with varying levels of technical comfort.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          content:
-            "Developed an intuitive marketplace with clear navigation, easy product discovery, and straightforward checkout process. Incorporated community feedback throughout development to ensure the platform meets real user needs. Used warm, welcoming design elements that evoke Ukrainian cultural aesthetics.",
+            "Designer, developer, photographer, barista and bartender.",
         },
         {
           type: "section",
           title: "Outcome",
           bgColor: "#F5FAF4",
           content:
-            "Successfully launched a functional marketplace that serves Berlin's Ukrainian community. The platform has facilitated connections between community members and helped people access products that remind them of home, while supporting Ukrainian businesses.",
+            "Successfully launched a minimal website, designeds business cards and flyers for catering.",
         },
         {
           type: "image",
@@ -446,7 +440,7 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Solution",
           content:
-            "Created a flexible, well-structured website with an intuitive content management system. Implemented clear information architecture to organize speakers, sessions, and resources. Provided training and documentation for the team to manage content independently.",
+            "Implemented provided design into a flexible, well-structured website with clear information architecture to organize speakers, sessions, and resources.",
         },
         {
           type: "gallery",
@@ -477,7 +471,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#fffff2",
     title: "The Bus That Never Arrives",
     description:
-      "Designing and implementing website for the soundscape project about Berlin's bus route #100",
+      "Designing and implementing website for the soundscape project about Berlin's bus route №100",
     categories: ["web", "development", "design"],
     link: {
       url: "https://busthatneverarrives.com",
@@ -515,47 +509,28 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Overview",
           content:
-            "The Bus That Never Arrives is an innovative soundscape project exploring Berlin's iconic bus route #100. The project required a website that would serve as both an artistic statement and a functional platform for experiencing the audio work, capturing the essence of urban transit and the stories along the route.",
+            "The Bus That Never Arrives is a soundscape project exploring Berlin's iconic bus route №100. The project required a website that would present the audio work in an engaging and immersive way, while also providing visual context about the project.",
         },
         {
           type: "section",
           title: "My Role",
           // bgColor: "#fafafa",
           content:
-            "Creative director, designer, and developer handling all aspects from concept to launch, including audio integration, interactive elements, and visual storytelling.",
-        },
-        {
-          type: "section",
-          title: "Timeline",
-          content:
-            "Concept development and design: 4 weeks. Development and audio integration: 5 weeks. Testing and refinement: 2 weeks. Total duration: 11 weeks.",
+            "Design and development of the website from concept to launch in close collaboration with the project's team.",
         },
         {
           type: "section",
           title: "Technology Stack",
           // bgColor: "#fafafa",
           content:
-            "React, Next.js, Web Audio API, custom audio player implementation, responsive design, animation libraries for interactive elements.",
-        },
-        {
-          type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "Creating an engaging digital experience that complements rather than overshadows the audio content. The site needed to guide users through the soundscape while providing context about the route and project without overwhelming the primary experience.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          content:
-            "Designed a minimalist, journey-focused interface that allows the audio to take center stage. Implemented an intuitive audio player with visual feedback, created contextual information displays that enhance understanding without distraction, and ensured smooth performance across devices.",
+            "The website was designed as a fully standalone, lightweight, and responsive project. Due to the very short delivery timeframe, it was built using HTML, CSS, and JavaScript.",
         },
         {
           type: "section",
           title: "Outcome",
           // bgColor: "#fafafa",
           content:
-            "Launched an immersive digital experience that successfully presents the soundscape project to online audiences. The website has become an integral part of the artwork itself, allowing people worldwide to experience Berlin's bus route #100 through sound.",
+            "Project was successfully launched and was presented by the whole team at the special event organized by Vitsche.",
         },
         {
           type: "gallery",
@@ -580,7 +555,7 @@ export const WORKS: WorksType[] = [
     bgColor: "#fff3f8",
     title: "Nature on the Edge",
     description:
-      "Implemented responsive layout for the project page and integrated it in existing website.",
+      "Implemented responsive design for the project page and integrated it in existing website.",
     categories: ["web", "development"],
     link: {
       url: "https://vitsche.org/ecology",
@@ -589,7 +564,7 @@ export const WORKS: WorksType[] = [
     show: true,
     featured: true,
     caseStudy: {
-      task: "Integrate new ecology project section into existing website",
+      task: "Integrate new ecology project page into Vitsche.org website",
       releaseDate: "2024",
       role: "Frontend Developer",
       client: "Vitsche",
@@ -618,20 +593,14 @@ export const WORKS: WorksType[] = [
           type: "section",
           title: "Overview",
           content:
-            "Nature on the Edge is an environmental awareness project that needed a dedicated section within the Vitsche.org website. The work involved creating a responsive, visually compelling layout that presents ecological information effectively while seamlessly integrating with the existing site architecture.",
+            "Nature on the Edge is an environmental awareness project that needed a dedicated page within the Vitsche.org website. The work involved implementing design that presents ecological information effectively while seamlessly integrating with the existing site architecture.",
         },
         {
           type: "section",
           title: "My Role",
           // bgColor: "#fafafa",
           content:
-            "Frontend developer responsible for responsive layout implementation, integration with existing codebase, cross-browser testing, and ensuring consistency with the site's design system.",
-        },
-        {
-          type: "section",
-          title: "Timeline",
-          content:
-            "Analysis and planning: 1 week. Layout development: 2 weeks. Integration and testing: 1 week. Total duration: 4 weeks.",
+            "Frontend developer responsible for responsive layout implementation, integration with existing codebase and cross-browser testing.",
         },
         {
           type: "section",
@@ -642,23 +611,10 @@ export const WORKS: WorksType[] = [
         },
         {
           type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "Integrating new content into an established website while maintaining visual consistency and ensuring the new section feels cohesive with the existing design. The layout needed to work flawlessly across all device sizes and present dense ecological information in an accessible way.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          content:
-            "Developed a flexible, responsive layout system that adapts content presentation based on screen size. Carefully matched existing design patterns while introducing new elements needed for the ecology content. Thoroughly tested across devices and browsers to ensure consistent experience.",
-        },
-        {
-          type: "section",
           title: "Outcome",
           // bgColor: "#fafafa",
           content:
-            "Successfully integrated the Nature on the Edge project into the website with a polished, professional presentation. The responsive layout ensures visitors can engage with the ecological content effectively regardless of their device, supporting the project's educational mission.",
+            "After a successful integration, the project page was launched and received positive feedback from users. The project's outdoor campaign also gained strong public recognition.",
         },
         {
           type: "gallery",
@@ -686,7 +642,7 @@ export const WORKS: WorksType[] = [
       label: "u-paper.com",
     },
     show: false,
-    featured: true,
+    featured: false,
     caseStudy: {
       client: "Unlimited Paper",
       coverImage: "./projects/up.jpg",
@@ -842,114 +798,6 @@ export const WORKS: WorksType[] = [
     },
   },
   {
-    slug: "comprehensive-case-study-test",
-    bgColor: "#FF6B6B",
-    title: "Comprehensive Test Case Study",
-    description:
-      "A comprehensive case study designed to test layout behavior with extensive content and complex case study sections.",
-    categories: ["web", "development", "design"],
-    link: {
-      url: "https://very-long-domain-name-for-testing-layout-behavior.com/projects/comprehensive-case-study",
-      label: "very-long-domain-name-for-testing-layout-behavior.com",
-    },
-    link2: {
-      url: "https://secondary-extremely-long-url-for-additional-testing.org/case-studies/detailed-analysis",
-      label: "secondary-extremely-long-url-for-additional-testing.org",
-    },
-    show: false,
-    featured: false,
-    caseStudy: {
-      coverImage: "./projects/test-case-study.jpg",
-      task: "Create revolutionary AI platform",
-      releaseDate: "March 2024",
-      role: "Design Engineer",
-      link: {
-        url: "https://very-long-domain-name-for-testing-layout-behavior.com",
-        label: "view project",
-      },
-      colors: {
-        primary: "#FF6B6B",
-        contrast: "#6BFF6B",
-        faded: "#FFF0F0",
-      },
-      fonts: {
-        title: "DM Serif Display",
-        text: "DM Sans",
-      },
-      blocks: [
-        {
-          type: "section",
-          title: "Overview",
-          content:
-            "This comprehensive test case study represents a complex, multi-faceted project that spans across various industries and technologies. The project aimed to create a revolutionary platform that combines artificial intelligence, machine learning, blockchain technology, and advanced user experience design to solve critical problems in digital transformation. The scope included developing web applications, mobile apps, desktop software, and IoT integrations while maintaining the highest standards of performance, security, and user accessibility. This project challenged conventional approaches and required innovative solutions across multiple domains including frontend development, backend architecture, database design, cloud infrastructure, DevOps practices, and user experience research.",
-        },
-        {
-          type: "section",
-          title: "My Role",
-          // bgColor: "#fafafa",
-          content:
-            "Lead Full-Stack Developer, UI/UX Designer, Product Manager, Technical Architect, DevOps Engineer, Quality Assurance Lead, User Experience Researcher, Data Analyst, Project Coordinator, and Strategic Technology Consultant. Additionally served as the primary liaison between stakeholders, managed cross-functional teams of 15+ developers, designers, and analysts, conducted extensive user research sessions, performed code reviews, established development workflows, implemented CI/CD pipelines, and maintained comprehensive documentation throughout the project lifecycle.",
-        },
-        {
-          type: "section",
-          title: "Timeline",
-          content:
-            "Phase 1: Research and Discovery (3 months) - Conducted extensive market analysis, user interviews, competitive research, and technical feasibility studies. Phase 2: Design and Planning (2 months) - Created comprehensive wireframes, prototypes, design systems, technical specifications, and project roadmaps. Phase 3: Development Sprint 1 (4 months) - Built core platform features, implemented user authentication, developed API endpoints, and established database architecture. Phase 4: Development Sprint 2 (4 months) - Added advanced features, integrated third-party services, implemented real-time functionality, and optimized performance. Phase 5: Testing and Refinement (2 months) - Conducted thorough testing, user acceptance testing, performance optimization, and security audits. Phase 6: Deployment and Launch (1 month) - Deployed to production, monitored performance, gathered user feedback, and implemented immediate improvements. Total project duration: 16 months with ongoing maintenance and feature enhancements.",
-        },
-        {
-          type: "section",
-          title: "Technology Stack",
-          // bgColor: "#fafafa",
-          content:
-            "React.js, Next.js, TypeScript, Node.js, Express, MongoDB, PostgreSQL, Redis, AWS, Docker, Kubernetes, GraphQL, REST APIs, WebSockets, Three.js, WebGL, D3.js, Chart.js, Framer Motion, GSAP, Tailwind CSS, SCSS, Jest, Cypress, Storybook, Figma, Adobe Creative Suite, Sketch, InVision, Principle, After Effects. Built for web, iOS, Android, desktop applications, smart TVs, wearable devices, IoT platforms, and emerging AR/VR technologies with cross-platform compatibility and responsive design patterns.",
-        },
-        {
-          type: "section",
-          title: "Challenge",
-          // bgColor: "#fafafa",
-          content:
-            "The project faced numerous complex challenges that required innovative solutions and strategic thinking. Technical challenges included integrating multiple legacy systems with modern technologies, handling massive data volumes with real-time processing requirements, ensuring cross-platform compatibility across diverse devices and browsers, implementing robust security measures to protect sensitive user data, and maintaining optimal performance under high traffic loads. Business challenges encompassed tight deadlines with changing requirements, limited budget constraints, coordinating remote teams across different time zones, managing stakeholder expectations with conflicting priorities, and adapting to rapidly evolving market conditions. User experience challenges involved designing intuitive interfaces for complex workflows, ensuring accessibility compliance across all platforms, conducting extensive user testing with diverse demographics, and balancing advanced functionality with simplicity and ease of use.",
-        },
-        {
-          type: "section",
-          title: "Solution",
-          content:
-            "Developed a comprehensive solution architecture that leveraged cutting-edge technologies and best practices. Implemented a microservices architecture using Docker containers and Kubernetes orchestration for scalability and maintainability. Created a robust API layer with GraphQL and REST endpoints to handle complex data relationships and real-time updates. Built responsive user interfaces using React.js with TypeScript, ensuring type safety and developer productivity. Implemented advanced state management with Redux Toolkit and Context API for efficient data flow. Integrated machine learning algorithms for predictive analytics and personalized user experiences. Established comprehensive testing strategies including unit tests, integration tests, end-to-end tests, and automated performance testing. Implemented continuous integration and deployment pipelines using GitHub Actions and AWS services. Created detailed documentation, style guides, and component libraries to ensure consistency and maintainability. Conducted extensive user research and usability testing to validate design decisions and improve user satisfaction.",
-        },
-        {
-          type: "gallery",
-          images: [
-            "./projects/test-case-study/wireframes-and-prototypes.jpg",
-            "./projects/test-case-study/user-interface-desktop.jpg",
-            "./projects/test-case-study/mobile-responsive-design.jpg",
-            "./projects/test-case-study/dashboard-analytics.jpg",
-            "./projects/test-case-study/user-journey-mapping.jpg",
-            "./projects/test-case-study/technical-architecture.jpg",
-            "./projects/test-case-study/performance-metrics.jpg",
-            "./projects/test-case-study/user-testing-sessions.jpg",
-            "./projects/test-case-study/design-system-components.jpg",
-            "./projects/test-case-study/final-product-showcase.jpg",
-          ],
-        },
-        {
-          type: "section",
-          title: "Outcome",
-          // bgColor: "#fafafa",
-          content:
-            "The project achieved exceptional results exceeding all initial goals and expectations. Delivered a high-performance platform that serves over 100,000 active users with 99.9% uptime and sub-second response times. Increased user engagement by 350% compared to the previous solution, with user satisfaction scores consistently above 4.8/5. Generated significant revenue growth of 280% within the first year of launch, establishing the platform as a market leader in its category. The solution successfully processed over 10 million transactions monthly while maintaining robust security standards with zero major security incidents. Performance metrics showed 60% faster load times compared to competitors, 85% reduction in user-reported issues, and 95% improvement in conversion rates. The project received industry recognition including multiple design awards, technical innovation awards, and was featured in leading technology publications. The scalable architecture successfully supported a 500% increase in user base without performance degradation, demonstrating the effectiveness of the technical decisions and implementation strategies.",
-        },
-        {
-          type: "testimonial",
-          quote:
-            "This project exceeded every expectation we had. The team delivered an exceptional solution that not only solved our immediate challenges but also positioned us for future growth. The attention to detail, technical excellence, and user-focused approach resulted in a platform that our customers absolutely love. The performance improvements and user experience enhancements have been transformational for our business. We've seen unprecedented engagement levels and our conversion rates have skyrocketed. The collaborative approach and clear communication throughout the project made this one of the most successful partnerships we've ever had. I would highly recommend this team for any complex technical project.",
-          author: "Dr. Alexandra Richardson-Montenegro",
-          position:
-            "Chief Technology Officer and VP of Digital Innovation at Global Technology Solutions Inc.",
-        },
-      ],
-    },
-  },
-  {
     slug: "choice",
     bgColor: "#F6FAFA",
     title: "Choice",
@@ -979,9 +827,9 @@ export const WORKS: WorksType[] = [
   },
   {
     slug: "olegs-handwriting",
-    bgColor: "#ffffff",
+    bgColor: "#eee",
     title: "Oleg's Handwriting",
-    description: "",
+    description: "Handwriting font experiment.",
     categories: ["design", "fonts"],
     show: true,
     featured: false,
@@ -990,8 +838,10 @@ export const WORKS: WorksType[] = [
       client: "Personal",
       releaseDate: "2024 v0.1",
       fonts: {
-        title: "Om Handwriting",
-        text: "Om Handwriting",
+        title: "OmHandwriting",
+        text: "OmHandwriting",
+        customTitleFont: true,
+        customTextFont: true,
       },
       fontFile: "../../projects/fonts/OmHandwriting.woff2",
       downloadLink: "../../projects/fonts/OmHandwriting.woff2", 
@@ -1019,11 +869,15 @@ export const WORKS: WorksType[] = [
     featured: false,
     caseStudy: {
       template: "movie",
-      coverImage: "../../projects/movies/whispers-in-the-wind/cover.jpg",
-      videoFile: "../../projects/movies/whispers-in-the-wind/whispers-in-the-wind.webm",
-      posterImage: "../../projects/movies/whispers-in-the-wind/poster.jpg",
+      coverImage: "../../projects/whispers-in-the-wind/cover.jpg",
+      videoFile: "../../projects/whispers-in-the-wind/whispers-in-the-wind.webm",
+      posterImage: "../../projects/whispers-in-the-wind/poster.jpg",
       client: "Personal Project",
       releaseDate: "2023",
+      // fonts: {
+      //   title: "OmHandwriting",
+      //   customTitleFont: true,
+      // },
       movieData: {
         duration: "2:10",
         director: "Oleg Mokhniuk",

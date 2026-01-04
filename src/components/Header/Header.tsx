@@ -34,7 +34,7 @@ const MENU_ITEMS = [
   {
     url: "/about",
     label: "About",
-    title: "",
+    title: "About",
     visible: true,
   },
   {

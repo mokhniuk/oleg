@@ -84,27 +84,13 @@ export default function CVPage() {
         </ul>
       </CaseStudySection>
 
-      <CaseStudySection title="Skills">
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-          {CV.stack.frameworks.concat(CV.stack.design).map((skill, index) => (
-            <span key={index} style={{
-              padding: "0.5rem 1rem",
-              backgroundColor: "var(--color-bg-secondary)",
-              borderRadius: "20px",
-              fontSize: "0.9rem",
-              color: "var(--color-text-secondary)"
-            }}>
-              {skill}
-            </span>
-          ))}
-        </div>
-      </CaseStudySection>
+          
 
       <CaseStudySection title="Languages">
         <ul style={{ listStyle: "none", padding: 0 }}>
           {CV.languages.map((lang, index) => (
             <li key={index} style={{ marginBottom: "0.5rem", display: "flex", gap: "1rem" }}>
-              <span style={{ fontWeight: 600 }}>{lang.language}</span>
+              <span style={{ fontWeight: 600 }}>{lang.language}</span> —
               <span style={{ color: "var(--color-text-secondary)" }}>{lang.level}</span>
             </li>
           ))}

@@ -15,11 +15,11 @@ export default function AboutPage() {
     <main className={styles.main}>
       <CaseStudyHero
         title="About"
-        description={CV.summary}
+        description=""
         bgColor="#fafafa"
       />
 
-      <CaseStudySection title="Background">
+      <CaseStudySection >
         <div style={{ maxWidth: 800 }}>
           <p
             style={{
@@ -29,30 +29,21 @@ export default function AboutPage() {
               marginBottom: "2rem",
             }}
           >
-            Born and raised in Kyiv, Ukraine, I spent my formative years exploring
-            the intersection of science and art. My academic background is rooted
-            in science—I hold a Master&apos;s degree in Physics, Chemistry, and
-            Biology from the Taras Shevchenko National University of Kyiv. This
-            scientific foundation gave me a rigorous approach to problem-solving,
-            which I now apply to engineering and design.
+            {/* I was born in 1992 and raised in Kyiv, Ukraine.  */}
+            Since I was a kid, I was interested in computers, loved music and photography. I hold a Bachelor's degree in Applied Physics and a Master of Science in High Technologies (Physics, Chemistry, and Biology) from Taras Shevchenko National University of Kyiv. I have been working as a web developer since 2009, and in 2016 I moved to Germany to continue my career as a frontend engineer in product companies. 
           </p>
 
-          <div
-            style={{
-              width: "100%",
-              height: "400px",
-              backgroundColor: "#eee",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: "2rem",
-              borderRadius: "8px",
-            }}
-          >
-            <span style={{ color: "#999" }}>
-              [Placeholder: Childhood photo with camera]
-            </span>
-          </div>
+          {/* <div
+              style={{
+                width: "100%",
+                height: "600px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img src="./images/about/oleg-xs.jpg" alt="kid" className={styles['about-img']} />
+            </div> */}
 
           <p
             style={{
@@ -62,13 +53,7 @@ export default function AboutPage() {
               marginBottom: "2rem",
             }}
           >
-            Beyond the screen, I am passionate about analog mediums. I collect
-            vinyl records and perform as a DJ, finding rhythm and flow that often
-            inspires my digital work. I also practice film photography, capturing
-            moments with a deliberate patience that contrasts with the fast-paced
-            tech world. Occasionally, you might even catch me doing stand-up
-            comedy—because sometimes you just have to laugh at the complexity of
-            it all.
+            Beyond interfaces and development, I’m passionate about an analog lifestyle: I collect vinyl records, perform as a DJ, and practice film photography — mostly street and portrait work. Occasionally, you might also catch me doing stand-up comedy.
           </p>
 
           <div
@@ -82,43 +67,49 @@ export default function AboutPage() {
             <div
               style={{
                 width: "100%",
-                height: "300px",
-                backgroundColor: "#eee",
+                height: "400px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "8px",
               }}
             >
-              <span style={{ color: "#999" }}>
-                [Placeholder: DJing/Vinyl photo]
-              </span>
+              <img src="./images/dj/1.jpg" alt="DJ" className={styles['about-img']} />
             </div>
             <div
               style={{
                 width: "100%",
-                height: "300px",
-                backgroundColor: "#eee",
+                height: "400px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "8px",
               }}
             >
-              <span style={{ color: "#999" }}>[Placeholder: Standup photo]</span>
+              <img src="./images/about/photo.jpg" alt="Standup Comedy" className={styles['about-img']} />
             </div>
+
+            {/* <div
+              style={{
+                width: "100%",
+                height: "400px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img src="./images/about/comedy.jpg" alt="Standup Comedy" className={styles['about-img']} />
+            </div> */}
           </div>
         </div>
       </CaseStudySection>
 
-      <CaseStudySection title="Experience">
+      <CaseStudySection title="CV">
         <p style={{
           fontSize: "1.125rem",
           lineHeight: 1.6,
           color: "var(--color-text-secondary)",
           marginBottom: "2rem",
         }}>
-          I have over 10 years of experience in frontend engineering and UI/UX design, working with various clients and companies to deliver high-quality digital products.
+          I have over 17 years of total experience in web- and frontend development, UI/UX design, working with various clients and companies to deliver high-quality digital products.
         </p>
         <Link href="/cv" className={styles['cv-button']}>
           View full CV

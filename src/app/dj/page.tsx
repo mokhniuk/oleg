@@ -3,7 +3,7 @@ import mainStyles from "@/app/page.module.css";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import ImageGallery from "@/components/ImageGallery/ImageGallery";
-import { DJ_INFO, DJ_EVENTS, DJ_PHOTOS, DJ_PARTNERS, DJ_RECORDS } from "@/data/dj";
+import { DJ_INFO, DJ_EVENTS, DJ_PHOTOS, DJ_PARTNERS } from "@/data/dj";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -133,7 +133,7 @@ export default function DJPage() {
             <CaseStudySection title="Booking Request">
                 <div style={{ maxWidth: 800 }}>
                     <p style={{ color: "#666", marginBottom: "3rem", fontSize: "1.1rem" }}>
-                        Interested in booking me for your event? <br />Feel free to reach me out by email:{" "}
+                        Interested in booking me for your event? <br />Feel free to reach out by email:{" "}
                         <a href={`mailto:${DJ_INFO.bookingEmail}`}>{DJ_INFO.bookingEmail}</a>.
                     </p>
 

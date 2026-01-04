@@ -1,6 +1,6 @@
 type FontConfig = {
     title: string;
-    text: string;
+    text?: string;
     customTitleFont?: boolean;
     customTextFont?: boolean;
 };
@@ -20,7 +20,7 @@ export const preloadFonts = (fonts?: FontConfig, slug?: string, strategy: 'prelo
     const googleFonts = fontList.filter(f => !f.isCustom && f.name);
     
     if (googleFonts.length > 0) {
-        const families = googleFonts.map(f => f.name.replace(/ /g, '+')).join('&family=');
+        const families = googleFonts.map(f => (f.name as string).replace(/ /g, '+')).join('&family=');
         const href = `https://fonts.googleapis.com/css2?family=${families}&display=swap`;
         
         // CSS files are always stylesheets, prefetch helps put them in cache
@@ -41,7 +41,7 @@ export const preloadFonts = (fonts?: FontConfig, slug?: string, strategy: 'prelo
     // Handle Custom Fonts
     const customFonts = fontList.filter(f => f.isCustom && f.name);
     customFonts.forEach(font => {
-        const filename = font.name.replace(/ /g, '-');
+        const filename = (font.name as string).replace(/ /g, '-');
         const href = `/projects/${slug}/fonts/${filename}.woff2`; 
 
         if (!document.querySelector(`link[href="${href}"]`)) {
