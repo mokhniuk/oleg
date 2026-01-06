@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
           Українською
         </Link> */}
 
-        <p className={styles.copyright}>Berlin, 2025</p>
+        <p className={styles.copyright}>Berlin, {new Date().getFullYear()}</p>
       </Container>
     </footer>
   );
