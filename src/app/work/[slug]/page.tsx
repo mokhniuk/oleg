@@ -1,6 +1,7 @@
 import { WORKS, CaseStudyBlock } from "@/data/works";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
@@ -11,8 +12,10 @@ import BrowserFrame from "@/components/BrowserFrame/BrowserFrame";
 import PageTransitionTrigger from "@/components/PageTransitionTrigger/PageTransitionTrigger";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import FontTemplate from "@/components/Templates/FontTemplate/FontTemplate";
-import MovieTemplate from "@/components/Templates/MovieTemplate/MovieTemplate";
+
+// Lazy-load template components — only downloaded when needed
+const FontTemplate = dynamic(() => import("@/components/Templates/FontTemplate/FontTemplate"));
+const MovieTemplate = dynamic(() => import("@/components/Templates/MovieTemplate/MovieTemplate"));
 
 interface CaseStudyPageProps {
   params: {

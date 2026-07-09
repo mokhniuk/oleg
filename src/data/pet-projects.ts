@@ -1,9 +1,6 @@
-import { v4 as uuid } from "uuid";
-
-
 export const PET_PROJECTS = [
     {
-        id: uuid(),
+        id: "vinyl-vault",
         title: "Vinyl vault",
         icon: "",
         image: "",
@@ -11,7 +8,7 @@ export const PET_PROJECTS = [
         description: "Your personal vinyl records collection manager",
     },
     {
-        id: uuid(),
+        id: "knowledge-base",
         title: "Knowledge base",
         icon: "",
         image: "",
@@ -19,7 +16,7 @@ export const PET_PROJECTS = [
         description: "Knowledge base for small business",
     },
     {
-        id: uuid(),
+        id: "freelance-project-manager",
         title: "Freelance Project manager",
         icon: "",
         image: "",
@@ -27,7 +24,7 @@ export const PET_PROJECTS = [
         description: "App that simplifies tracking and managing freelance projects",
     },
     {
-        id: uuid(),
+        id: "travel-planner",
         title: "Travel planner",
         icon: "",
         image: "",
@@ -35,7 +32,7 @@ export const PET_PROJECTS = [
         description: "App that helps you plan your next trip",
     },
     {
-        id: uuid(),
+        id: "budget",
         title: "Budget",
         icon: "",
         image: "",
@@ -43,7 +40,7 @@ export const PET_PROJECTS = [
         description: "Simple personal budgeting app",
     },
     {
-        id: uuid(),
+        id: "yo-page",
         title: "Yo page",
         icon: "",
         image: "",
@@ -51,7 +48,7 @@ export const PET_PROJECTS = [
         description: "Generator of one-screen websites with link collections",
     },
     {
-        id: uuid(),
+        id: "postcard-generator",
         title: "Postcard Generator",
         icon: "",
         image: "",

@@ -74,7 +74,7 @@ export default function AboutPage() {
                 justifyContent: "center",
               }}
             >
-              <Image src="./images/dj/1.jpg" alt="DJ" className={styles['about-img']} />
+              <Image src="./images/dj/1.jpg" alt="DJ" width="384" height="400" className={styles['about-img']} />
             </div>
             <div
               style={{
@@ -85,7 +85,7 @@ export default function AboutPage() {
                 justifyContent: "center",
               }}
             >
-              <Image src="./images/about/photo.jpg" alt="Standup Comedy" className={styles['about-img']} />
+              <Image src="./images/about/photo.jpg" width="384" height="400" alt="Standup Comedy" className={styles['about-img']} />
             </div>
 
             {/* <div

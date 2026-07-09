@@ -4,27 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/convert-images.js && next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "ANALYZE=true next build",
-    "build:optimize": "node scripts/convert-images.js && yarn build"
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
-    "sass": "^1.77.2",
-    "uuid": "^13.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.99.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^16.0.5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@next/bundle-analyzer": "^16.2.4",
+    "@types/node": "^20.19.39",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.3",
     "sharp": "^0.34.5",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

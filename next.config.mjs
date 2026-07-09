@@ -12,11 +12,10 @@ const nextConfig = {
   output: !isDev ? "export" : undefined,
   reactStrictMode: true,
   
-  // Image optimization for static export
+  // Static export requires unoptimized images (no server-side optimizer).
+  // Images are pre-converted to WebP at build time via scripts/convert-images.js.
   images: {
-    loader: "akamai",
-    path: "",
-    unoptimized: true
+    unoptimized: true,
   },
   
   // Only use assetPrefix in production
