@@ -1,10 +1,10 @@
-import { WORKS } from "@/data/works";
+import { getAllWorks } from "@/lib/repositories/works";
 
 /**
  * Get all works that belong to a specific category
  */
 export function getWorksByCategory(category: string) {
-    return WORKS.filter(
+    return getAllWorks().filter(
         (work) => work.show && work.categories.includes(category.toLowerCase())
     );
 }
@@ -14,7 +14,7 @@ export function getWorksByCategory(category: string) {
  */
 export function getAllCategories(): string[] {
     const categoriesSet = new Set<string>();
-    WORKS.forEach((work) => {
+    getAllWorks().forEach((work) => {
         if (work.show) {
             work.categories.forEach((category) => categoriesSet.add(category));
         }
