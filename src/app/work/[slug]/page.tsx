@@ -1,7 +1,8 @@
-import { WORKS, CaseStudyBlock } from "@/data/works";
+import { getAllWorks, getWorkBySlug, getAllWorkSlugs } from "@/lib/repositories/works";
+import { CaseStudyBlock } from "@/lib/types";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
@@ -14,8 +15,10 @@ import styles from "./page.module.scss";
 import Image from "next/image";
 
 // Lazy-load template components — only downloaded when needed
-const FontTemplate = dynamic(() => import("@/components/Templates/FontTemplate/FontTemplate"));
-const MovieTemplate = dynamic(() => import("@/components/Templates/MovieTemplate/MovieTemplate"));
+const FontTemplate = nextDynamic(() => import("@/components/Templates/FontTemplate/FontTemplate"));
+const MovieTemplate = nextDynamic(() => import("@/components/Templates/MovieTemplate/MovieTemplate"));
+
+export const dynamic = "force-dynamic";
 
 interface CaseStudyPageProps {
   params: {
@@ -50,14 +53,12 @@ interface CaseStudy {
 
 // Generate static params for all works
 export async function generateStaticParams() {
-  return WORKS.map((work) => ({
-    slug: work.slug,
-  }));
+  return getAllWorkSlugs().map((slug) => ({ slug }));
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: CaseStudyPageProps) {
-  const work = WORKS.find((w) => w.slug === params.slug);
+  const work = getWorkBySlug(params.slug);
 
   if (!work) {
     return {
@@ -72,7 +73,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps) {
 }
 
 export default function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const work = WORKS.find((w) => w.slug === params.slug);
+  const work = getWorkBySlug(params.slug);
 
   if (!work) {
     notFound();
@@ -81,7 +82,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { caseStudy } = work;
 
   // Find displayed works (only those with show: true)
-  const displayedWorks = WORKS.filter((w) => w.show);
+  const displayedWorks = getAllWorks().filter((w) => w.show);
   const currentIndex = displayedWorks.findIndex((w) => w.slug === params.slug);
   const prevWork = currentIndex > 0 ? displayedWorks[currentIndex - 1] : null;
   const nextWork =
