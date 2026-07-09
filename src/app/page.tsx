@@ -2,11 +2,16 @@ import styles from "@/app/page.module.css";
 import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import { WORKS } from "@/data/works";
-import { PET_PROJECTS } from "@/data/pet-projects";
+import { getFeaturedWorks } from "@/lib/repositories/works";
+import { getAllPetProjects } from "@/lib/repositories/petProjects";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
+  const works = getFeaturedWorks();
+  const petProjects = getAllPetProjects();
+
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
@@ -41,23 +46,17 @@ export default function Home() {
           />
 
           <div className={styles.projects}>
-            {WORKS.map((project) => {
-              return (
-                project.show &&
-                project.featured && (
-                  <ProjectCard
-                    key={project.title}
-                    slug={project.slug}
-                    title={project.title}
-                    bgColor={project.bgColor}
-                    description={project.description}
-                    link={project.link}
-                    fonts={project.caseStudy?.fonts}
-                  // inProgress={project.inProgress}
-                  />
-                )
-              );
-            })}
+            {works.map((project) => (
+              <ProjectCard
+                key={project.title}
+                slug={project.slug}
+                title={project.title}
+                bgColor={project.bgColor}
+                description={project.description}
+                link={project.link}
+                fonts={project.caseStudy?.fonts}
+              />
+            ))}
           </div>
         </Container>
       </section>
