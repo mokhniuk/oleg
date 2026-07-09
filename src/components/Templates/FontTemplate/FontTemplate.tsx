@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./font-template.module.scss";
 import Container from "@/components/Container/Container";
-import { CaseStudyBlock } from "@/data/works";
+import { CaseStudyBlock } from "@/lib/types";
 import Image from "next/image";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 

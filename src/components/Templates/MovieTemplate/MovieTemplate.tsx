@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./movie-template.module.scss";
 import Container from "@/components/Container/Container";
-import { CaseStudyBlock } from "@/data/works";
+import { CaseStudyBlock } from "@/lib/types";
 import Image from "next/image";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 
