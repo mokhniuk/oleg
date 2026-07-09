@@ -7,9 +7,13 @@
     "build": "node scripts/convert-images.js && next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed": "node scripts/seed-db.mjs"
   },
   "dependencies": {
+    "better-sqlite3": "^12.11.1",
     "next": "14.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -17,12 +21,14 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.4",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20.19.39",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.3",
     "sharp": "^0.34.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   }
 }

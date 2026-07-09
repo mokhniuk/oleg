@@ -4,26 +4,22 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const isDev = process.env.NODE_ENV !== 'production';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Only use static export for production builds to preserve hot reload in dev
-  output: !isDev ? "export" : undefined,
+  // Server-rendered app (SQLite-backed). No static export.
   reactStrictMode: true,
-  
-  // Static export requires unoptimized images (no server-side optimizer).
-  // Images are pre-converted to WebP at build time via scripts/convert-images.js.
+
+  experimental: {
+    serverComponentsExternalPackages: ["better-sqlite3"],
+  },
+
+  // Images are pre-converted to WebP; keep the optimizer off (local files only).
   images: {
     unoptimized: true,
   },
-  
-  // Only use assetPrefix in production
-  assetPrefix: !isDev ? "/" : undefined,
-  
-  // Compression and optimization
+
   compress: true,
-  
+
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Only apply optimizations in production
     if (!dev && !isServer) {
