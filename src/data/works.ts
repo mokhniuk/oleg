@@ -152,6 +152,210 @@ type WorksType = {
 
 export const WORKS: WorksType[] = [
   {
+    slug: "new-age-defence",
+    bgColor: "#e6e9ec",
+    title: "New Age Defence",
+    description: "Designed and developed the website for New Age Defence in Berlin.",
+    categories: ["web", "development", "design"],
+    link: {
+      url: "https://new-age-defence.berlin",
+      label: "new-age-defence.berlin",
+    },
+    show: true,
+    featured: true,
+    caseStudy: {
+      coverImage: "../../projects/new-age-defence/new-age-defence--cover.jpg",
+      task: "Design and build a distinctive website for New Age Defence",
+      releaseDate: "2026",
+      role: "Designer & Developer",
+      client: "New Age Defence",
+      link: {
+        url: "https://new-age-defence.berlin",
+        label: "new-age-defence.berlin",
+      },
+      colors: {
+        primary: "#1B2A32",
+        contrast: "#C9A24B",
+        faded: "#F2F4F5",
+      },
+      fonts: {
+        title: "Space Grotesk",
+        text: "Inter",
+      },
+      blocks: [
+        {
+          type: "section",
+          title: "Overview",
+          content:
+            "New Age Defence is a Berlin-based project that needed a bold, modern online presence. I designed and developed a responsive website presenting its offering with a clean, confident visual language.",
+        },
+        {
+          type: "section",
+          title: "My Role",
+          content:
+            "Designer and developer responsible for the visual identity of the site, layout, responsive implementation, and launch.",
+        },
+        {
+          type: "section",
+          title: "Technology Stack",
+          content:
+            "Figma, HTML, CSS, JavaScript.",
+        },
+        {
+          type: "screens-grid",
+          images: [
+            "../../projects/new-age-defence/screens/screen--1.jpg",
+            "../../projects/new-age-defence/screens/screen--2.jpg",
+            "../../projects/new-age-defence/screens/screen--3.jpg",
+          ],
+        },
+        {
+          type: "section",
+          title: "Outcome",
+          content:
+            "Launched a distinctive, responsive website that gives New Age Defence a strong presence in Berlin.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "flicker-club",
+    bgColor: "#f2f2f2",
+    title: "Flicker Club",
+    description:
+      "Designed and developed the website for a Berlin film screening collective.",
+    categories: ["web", "development", "design"],
+    link: {
+      url: "https://flickerclub.com",
+      label: "flickerclub.com",
+    },
+    show: true,
+    featured: true,
+    caseStudy: {
+      coverImage: "../../projects/flicker-club/flicker-club--cover.jpg",
+      task: "Design and build a minimal, editorial website for a film screening collective",
+      releaseDate: "2025",
+      role: "Designer & Developer",
+      client: "Flicker Club",
+      titleColor: "contrast",
+      link: {
+        url: "https://flickerclub.com",
+        label: "flickerclub.com",
+      },
+      colors: {
+        primary: "#141414",
+        contrast: "#8a8a8a",
+        faded: "#f2f2f2",
+      },
+      fonts: {
+        title: "Archivo",
+        text: "Inter",
+      },
+      blocks: [
+        {
+          type: "section",
+          title: "Overview",
+          content:
+            "Flicker Club is a Berlin-based film screening collective curating festival, arthouse, and independent cinema, while giving emerging filmmakers a platform. Run by two people booking films and rooms — no agency, no sponsors — it needed a minimal, editorial website to announce screenings and grow its community.",
+        },
+        {
+          type: "section",
+          title: "My Role",
+          content:
+            "Designed and developed the website end to end, translating the club's stripped-back black-and-white identity into a fast, responsive site.",
+        },
+        {
+          type: "section",
+          title: "Technology Stack",
+          content:
+            "Figma, HTML, CSS, JavaScript.",
+        },
+        {
+          type: "screens-grid",
+          images: [
+            "../../projects/flicker-club/screens/screen--1.jpg",
+            "../../projects/flicker-club/screens/screen--2.jpg",
+            "../../projects/flicker-club/screens/screen--3.jpg",
+          ],
+        },
+        {
+          type: "section",
+          title: "Outcome",
+          content:
+            "Launched a clean, easy-to-update site that gives the collective a home for its screening programme.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "byvtrnk",
+    bgColor: "#e8e4d9",
+    title: "byVTRNK",
+    description:
+      "Built and customised the Shopify store for a Ukrainian veteran-owned workshop.",
+    categories: ["web", "development"],
+    link: {
+      url: "https://byvtrnk.myshopify.com/",
+      label: "byvtrnk.myshopify.com",
+    },
+    show: true,
+    featured: true,
+    caseStudy: {
+      coverImage: "../../projects/byvtrnk/byvtrnk--cover.jpg",
+      task: "Build and customise a Shopify store for a veteran-owned sewing workshop",
+      releaseDate: "2025",
+      role: "Shopify Developer",
+      client: "byVTRNK",
+      link: {
+        url: "https://byvtrnk.myshopify.com/",
+        label: "byvtrnk.myshopify.com",
+      },
+      colors: {
+        primary: "#3D3D2E",
+        contrast: "#8C7A52",
+        faded: "#F2F0E9",
+      },
+      fonts: {
+        title: "Oswald",
+        text: "Inter",
+      },
+      blocks: [
+        {
+          type: "section",
+          title: "Overview",
+          content:
+            "byVTRNK is a veteran-owned sewing workshop producing military uniforms, charitable merchandise, and custom apparel in support of the VETERANKA movement — a community of women with combat experience in Ukraine. As a social enterprise, its proceeds fund programmes supporting women in Ukraine's armed forces and veteran reintegration.",
+        },
+        {
+          type: "section",
+          title: "My Role",
+          content:
+            "Built and customised the Shopify store — theme setup, product catalogue, and checkout — giving the workshop a reliable storefront for its merchandise and fundraising.",
+        },
+        {
+          type: "section",
+          title: "Technology Stack",
+          content:
+            "Shopify, Liquid, custom theme customisation.",
+        },
+        {
+          type: "screens-grid",
+          images: [
+            "../../projects/byvtrnk/screens/screen--1.jpg",
+            "../../projects/byvtrnk/screens/screen--2.jpg",
+            "../../projects/byvtrnk/screens/screen--3.jpg",
+          ],
+        },
+        {
+          type: "section",
+          title: "Outcome",
+          content:
+            "Delivered a functional online shop that lets byVTRNK sell merchandise and channel proceeds to its social mission.",
+        },
+      ],
+    },
+  },
+  {
     slug: "bagel-bro",
     bgColor: "#feeadd",
     title: "Bagel Bro",
