@@ -2,8 +2,10 @@ import styles from "@/app/page.module.css";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import Container from "@/components/Container/Container";
-import { CV } from "@/data/cv";
+import { getCv } from "@/lib/repositories/cv";
 import { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "CV | Oleg Mokhniuk",
@@ -11,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function CVPage() {
+  const CV = getCv();
+  if (!CV) return null;
+
   return (
     <main className={styles.main}>
       <CaseStudyHero
