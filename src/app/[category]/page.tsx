@@ -8,18 +8,13 @@ import {
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import styles from "./category.module.scss";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
     params: Promise<{
         category: string;
     }>;
 };
-
-export async function generateStaticParams() {
-    const categories = getAllCategories();
-    return categories.map((category) => ({
-        category: category,
-    }));
-}
 
 export default async function CategoryPage({ params }: Props) {
     const { category } = await params;
