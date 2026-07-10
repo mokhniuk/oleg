@@ -10,7 +10,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   experimental: {
-    serverComponentsExternalPackages: ["better-sqlite3"],
+    serverComponentsExternalPackages: ["better-sqlite3", "sharp"],
   },
 
   // Images are pre-converted to WebP; keep the optimizer off (local files only).
