@@ -3,7 +3,6 @@ import {
     getWorksByCategory,
     getCategoryMetadata,
     validateCategory,
-    getAllCategories,
 } from "@/utils/categoryUtils";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import styles from "./category.module.scss";
