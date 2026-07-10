@@ -220,15 +220,16 @@
 .uploadzone { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 16px; background: var(--fill); flex-wrap: wrap; }
 .thumb { width: 64px; height: 48px; object-fit: cover; border-radius: 10px; flex: none; }
 
-/* ---- blocks (flat filled) ---- */
-.block { border-radius: 18px; background: var(--fill); margin-bottom: 14px; overflow: hidden; }
-.blockHead { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+/* ---- blocks / manager cards (flat filled) ---- */
+.block { border-radius: 18px; background: var(--fill); margin-bottom: 14px; padding: 20px; }
+.blockHead { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .blockHead strong { font-size: 12px; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
-.block .field { padding: 0 16px; }
-.block .field:last-child { padding-bottom: 16px; }
+.block .field:last-child { margin-bottom: 0; }
 .block .field input:not([type="checkbox"]):not([type="file"]),
 .block .field textarea,
 .block .field select { background: var(--paper); }
+/* nested image-list inside a block sits flush, not as a card-in-a-card */
+.block .block { padding: 0; background: transparent; margin-bottom: 0; }
 .blockBtn {
   width: 34px; height: 34px; border-radius: 10px; border: 0; background: transparent; color: var(--ink-faint);
   cursor: pointer; display: grid; place-items: center; font-size: 15px; font-weight: 700;
