@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/assets/styles/globals.css";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import SiteChrome from "@/components/SiteChrome/SiteChrome";
 import { PageTransitionProvider } from "@/contexts/PageTransitionContext";
 import PageTransitionOverlay from "@/components/PageTransitionOverlay/PageTransitionOverlay";
 
@@ -27,9 +26,7 @@ export default function RootLayout({
       <body className={inter.variable} suppressHydrationWarning>
         <PageTransitionProvider>
           <PageTransitionOverlay />
-          <Header />
-          {children}
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </PageTransitionProvider>
       </body>
     </html>
