@@ -1,19 +1,24 @@
 # Build stage
 FROM node:20-alpine AS builder
 WORKDIR /app
-
-# Copy package files
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=false
-
-# Copy source and build
+RUN apk add --no-cache python3 make g++
+RUN npm install -g bun node-gyp@10
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 COPY . .
-RUN yarn build
+RUN bun run build
 
-# Production stage - ultra-small busybox image
-FROM busybox:1.36-musl AS production
-COPY --from=builder /app/out /var/www/html
-WORKDIR /var/www/html
-
-EXPOSE 8080
-CMD ["busybox", "httpd", "-f", "-p", "8080", "-h", "/var/www/html"]
+# Production stage
+FROM node:20-alpine AS production
+WORKDIR /app
+ENV NODE_ENV=production
+ENV DATABASE_PATH=/app/data/portfolio.db
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/next.config.mjs ./next.config.mjs
+COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /app/src ./src
+EXPOSE 3000
+CMD ["npx", "next", "start", "-p", "3000"]

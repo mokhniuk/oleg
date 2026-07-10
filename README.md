@@ -29,6 +29,19 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Database & deployment
+
+Content lives in SQLite at `DATABASE_PATH` (default `data/portfolio.db`).
+
+First run (once):
+1. `ADMIN_PASSWORD='your-password' bun run seed` — creates and populates the DB.
+
+Persist across redeploys by mounting volumes:
+- `data/` — the SQLite database
+- `public/projects/` — uploaded project images
+
+Run the server: `bun run build && bun run start` (or the Docker image on port 3000).
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
