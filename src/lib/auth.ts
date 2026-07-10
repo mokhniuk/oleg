@@ -1,4 +1,6 @@
 import crypto from "node:crypto";
+import { cookies } from "next/headers";
+import { getSessionSecret } from "@/lib/repositories/settings";
 
 export const SESSION_COOKIE = "admin_session";
 export const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
@@ -39,4 +41,11 @@ export function verifySession(token: string, secret: string, now: number = Date.
   } catch {
     return false;
   }
+}
+
+export function hasValidSession(): boolean {
+  const token = cookies().get(SESSION_COOKIE)?.value;
+  const secret = getSessionSecret();
+  if (!token || !secret) return false;
+  return verifySession(token, secret);
 }
