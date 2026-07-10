@@ -1,0 +1,17 @@
+# Local MySQL for development and tests.
+#   docker compose up -d
+# Then create the test database once:
+#   docker compose exec mysql mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS portfolio_test"
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: portfolio
+    ports:
+      - "3306:3306"
+    volumes:
+      - portfolio-mysql:/var/lib/mysql
+
+volumes:
+  portfolio-mysql:

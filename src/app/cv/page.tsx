@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   description: "Curriculum Vitae of Oleg Mokhniuk - Frontend Engineer and Designer",
 };
 
-export default function CVPage() {
-  const CV = getCv();
+export default async function CVPage() {
+  const CV = await getCv();
   if (!CV) return null;
 
   return (

@@ -5,10 +5,10 @@ import WorkForm from "@/components/admin/WorkForm";
 
 export const dynamic = "force-dynamic";
 
-export default function WorkEditPage({ params }: { params: { id: string } }) {
-  if (!hasValidSession()) redirect("/admin/login");
+export default async function WorkEditPage({ params }: { params: { id: string } }) {
+  if (!(await hasValidSession())) redirect("/admin/login");
   if (params.id === "new") return <WorkForm />;
-  const work = getAllWorks().find((w) => w.id === Number(params.id));
+  const work = (await getAllWorks()).find((w) => w.id === Number(params.id));
   if (!work) notFound();
   return <WorkForm initial={work} />;
 }

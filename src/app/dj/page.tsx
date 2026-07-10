@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     description: "Vinyl-only DJ performances by Oleg Mokhniuk",
 };
 
-export default function DJPage() {
-    const djInfo = getDjInfo();
-    const DJ_EVENTS = getAllDjEvents();
+export default async function DJPage() {
+    const djInfo = await getDjInfo();
+    const DJ_EVENTS = await getAllDjEvents();
     if (!djInfo) return null;
     const DJ_INFO = { summary: djInfo.summary, technicalRider: djInfo.technicalRider, bookingEmail: djInfo.bookingEmail };
     const DJ_PHOTOS = djInfo.photos;

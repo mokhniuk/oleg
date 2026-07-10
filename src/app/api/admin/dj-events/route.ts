@@ -6,7 +6,7 @@ import type { DjEvent } from "@/lib/types";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  if (!hasValidSession()) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const id = createDjEvent((await req.json()) as DjEvent);
+  if (!(await hasValidSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const id = await createDjEvent((await req.json()) as DjEvent);
   return NextResponse.json({ id });
 }

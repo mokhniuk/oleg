@@ -1,5 +1,4 @@
-import type Database from "better-sqlite3";
-import { getDb } from "../db";
+import { rows, run } from "../db";
 import type { PetProject } from "../types";
 
 type Row = {
@@ -24,51 +23,50 @@ const toPet = (r: Row): PetProject => ({
   sortOrder: r.sort_order,
 });
 
-export function getAllPetProjects(db: Database.Database = getDb()): PetProject[] {
-  return (db.prepare("SELECT * FROM pet_projects ORDER BY sort_order, id").all() as Row[]).map(toPet);
+export async function getAllPetProjects(): Promise<PetProject[]> {
+  return (await rows<Row>("SELECT * FROM pet_projects ORDER BY sort_order, id")).map(toPet);
 }
 
-export function createPetProject(input: PetProject, db: Database.Database = getDb()): number {
-  const nextOrder =
-    (db.prepare("SELECT COALESCE(MAX(sort_order), -1) AS m FROM pet_projects").get() as { m: number })
-      .m + 1;
-  const info = db
-    .prepare(
-      `INSERT INTO pet_projects (slug, title, icon, image, url, description, sort_order)
-       VALUES (@slug, @title, @icon, @image, @url, @description, @sort_order)`
-    )
-    .run({
+export async function createPetProject(input: PetProject): Promise<number> {
+  const [{ n }] = await rows<{ n: number }>(
+    "SELECT COALESCE(MAX(sort_order), -1) + 1 AS n FROM pet_projects",
+  );
+  const res = await run(
+    "INSERT INTO pet_projects (slug, title, icon, image, url, description, sort_order) VALUES (:slug, :title, :icon, :image, :url, :description, :sort_order)",
+    {
       slug: input.slug,
       title: input.title,
       icon: input.icon ?? "",
       image: input.image ?? "",
       url: input.url ?? "",
       description: input.description ?? "",
-      sort_order: input.sortOrder ?? nextOrder,
-    });
-  return Number(info.lastInsertRowid);
+      sort_order: input.sortOrder ?? n,
+    },
+  );
+  return res.insertId;
 }
 
-export function updatePetProject(id: number, input: PetProject, db: Database.Database = getDb()): void {
-  db.prepare(
-    `UPDATE pet_projects SET slug=@slug, title=@title, icon=@icon, image=@image, url=@url, description=@description WHERE id=@id`
-  ).run({
-    id,
-    slug: input.slug,
-    title: input.title,
-    icon: input.icon ?? "",
-    image: input.image ?? "",
-    url: input.url ?? "",
-    description: input.description ?? "",
-  });
+export async function updatePetProject(id: number, input: PetProject): Promise<void> {
+  await run(
+    "UPDATE pet_projects SET slug=:slug, title=:title, icon=:icon, image=:image, url=:url, description=:description WHERE id=:id",
+    {
+      id,
+      slug: input.slug,
+      title: input.title,
+      icon: input.icon ?? "",
+      image: input.image ?? "",
+      url: input.url ?? "",
+      description: input.description ?? "",
+    },
+  );
 }
 
-export function deletePetProject(id: number, db: Database.Database = getDb()): void {
-  db.prepare("DELETE FROM pet_projects WHERE id = ?").run(id);
+export async function deletePetProject(id: number): Promise<void> {
+  await run("DELETE FROM pet_projects WHERE id = :id", { id });
 }
 
-export function reorderPetProjects(ids: number[], db: Database.Database = getDb()): void {
-  const stmt = db.prepare("UPDATE pet_projects SET sort_order = ? WHERE id = ?");
-  const tx = db.transaction((list: number[]) => list.forEach((id, i) => stmt.run(i, id)));
-  tx(ids);
+export async function reorderPetProjects(ids: number[]): Promise<void> {
+  for (let i = 0; i < ids.length; i++) {
+    await run("UPDATE pet_projects SET sort_order = :o WHERE id = :id", { o: i, id: ids[i] });
+  }
 }

@@ -11,7 +11,7 @@ function safeSlug(s: string): string {
 }
 
 export async function POST(req: Request) {
-  if (!hasValidSession()) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!(await hasValidSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const form = await req.formData();
   const file = form.get("file");

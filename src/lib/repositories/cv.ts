@@ -1,17 +1,15 @@
-import type Database from "better-sqlite3";
-import { getDb } from "../db";
+import { rows, run } from "../db";
 import type { CvContent } from "../types";
 
-export function getCv(db: Database.Database = getDb()): CvContent | null {
-  const row = db.prepare("SELECT content FROM cv WHERE id = 1").get() as
-    | { content: string }
-    | undefined;
-  return row ? (JSON.parse(row.content) as CvContent) : null;
+export async function getCv(): Promise<CvContent | null> {
+  const r = await rows<{ content: string }>("SELECT content FROM cv WHERE id = 1");
+  return r.length ? (JSON.parse(r[0].content) as CvContent) : null;
 }
 
-export function saveCv(content: CvContent, db: Database.Database = getDb()): void {
-  db.prepare(
-    `INSERT INTO cv (id, content) VALUES (1, @content)
-     ON CONFLICT(id) DO UPDATE SET content=@content`
-  ).run({ content: JSON.stringify(content) });
+export async function saveCv(content: CvContent): Promise<void> {
+  await run(
+    `INSERT INTO cv (id, content) VALUES (1, :content)
+     ON DUPLICATE KEY UPDATE content=:content`,
+    { content: JSON.stringify(content) },
+  );
 }

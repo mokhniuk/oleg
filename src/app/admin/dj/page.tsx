@@ -6,8 +6,8 @@ import DjManager from "@/components/admin/DjManager";
 
 export const dynamic = "force-dynamic";
 
-export default function DjAdminPage() {
-  if (!hasValidSession()) redirect("/admin/login");
-  const info = getDjInfo() ?? { summary: "", technicalRider: [], bookingEmail: "", photos: [], partners: [] };
-  return <DjManager info={info} events={getAllDjEvents()} />;
+export default async function DjAdminPage() {
+  if (!(await hasValidSession())) redirect("/admin/login");
+  const info = (await getDjInfo()) ?? { summary: "", technicalRider: [], bookingEmail: "", photos: [], partners: [] };
+  return <DjManager info={info} events={await getAllDjEvents()} />;
 }

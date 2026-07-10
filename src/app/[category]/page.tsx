@@ -19,11 +19,11 @@ export default async function CategoryPage({ params }: Props) {
     const { category } = await params;
 
     // Validate category exists
-    if (!validateCategory(category)) {
+    if (!(await validateCategory(category))) {
         notFound();
     }
 
-    const works = getWorksByCategory(category);
+    const works = await getWorksByCategory(category);
     const metadata = getCategoryMetadata(category);
 
     return (

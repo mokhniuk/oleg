@@ -1,5 +1,4 @@
-import type Database from "better-sqlite3";
-import { getDb } from "../db";
+import { rows, run } from "../db";
 import type { WorksType, CaseStudy } from "../types";
 
 type Row = {
@@ -55,62 +54,49 @@ function bindParams(input: WorksType) {
   };
 }
 
-export function getAllWorks(db: Database.Database = getDb()): WorksType[] {
-  return (db.prepare("SELECT * FROM works ORDER BY sort_order, id").all() as Row[]).map(toWork);
+export async function getAllWorks(): Promise<WorksType[]> {
+  return (await rows<Row>("SELECT * FROM works ORDER BY sort_order, id")).map(toWork);
 }
 
-export function getFeaturedWorks(db: Database.Database = getDb()): WorksType[] {
+export async function getFeaturedWorks(): Promise<WorksType[]> {
   return (
-    db
-      .prepare("SELECT * FROM works WHERE show = 1 AND featured = 1 ORDER BY sort_order, id")
-      .all() as Row[]
+    await rows<Row>("SELECT * FROM works WHERE `show` = 1 AND featured = 1 ORDER BY sort_order, id")
   ).map(toWork);
 }
 
-export function getWorkBySlug(slug: string, db: Database.Database = getDb()): WorksType | null {
-  const row = db.prepare("SELECT * FROM works WHERE slug = ?").get(slug) as Row | undefined;
-  return row ? toWork(row) : null;
+export async function getWorkBySlug(slug: string): Promise<WorksType | null> {
+  const r = await rows<Row>("SELECT * FROM works WHERE slug = :slug", { slug });
+  return r.length ? toWork(r[0]) : null;
 }
 
-export function getAllWorkSlugs(db: Database.Database = getDb()): string[] {
+export async function getAllWorkSlugs(): Promise<string[]> {
   return (
-    db.prepare("SELECT slug FROM works WHERE show = 1 ORDER BY sort_order, id").all() as {
-      slug: string;
-    }[]
+    await rows<{ slug: string }>("SELECT slug FROM works WHERE `show` = 1 ORDER BY sort_order, id")
   ).map((r) => r.slug);
 }
 
-export function createWork(input: WorksType, db: Database.Database = getDb()): number {
-  const nextOrder =
-    (db.prepare("SELECT COALESCE(MAX(sort_order), -1) AS m FROM works").get() as { m: number }).m + 1;
-  const info = db
-    .prepare(
-      `INSERT INTO works
-       (slug, title, description, synopsis, bg_color, categories, link, link2, show, featured, in_progress, sort_order, case_study)
-       VALUES (@slug, @title, @description, @synopsis, @bg_color, @categories, @link, @link2, @show, @featured, @in_progress, @sort_order, @case_study)`
-    )
-    .run({ ...bindParams(input), sort_order: input.sortOrder ?? nextOrder });
-  return Number(info.lastInsertRowid);
+export async function createWork(input: WorksType): Promise<number> {
+  const [{ n }] = await rows<{ n: number }>("SELECT COALESCE(MAX(sort_order), -1) + 1 AS n FROM works");
+  const res = await run(
+    "INSERT INTO works (slug, title, description, synopsis, bg_color, categories, link, link2, `show`, featured, in_progress, sort_order, case_study) VALUES (:slug, :title, :description, :synopsis, :bg_color, :categories, :link, :link2, :show, :featured, :in_progress, :sort_order, :case_study)",
+    { ...bindParams(input), sort_order: input.sortOrder ?? n },
+  );
+  return res.insertId;
 }
 
-export function updateWork(id: number, input: WorksType, db: Database.Database = getDb()): void {
-  db.prepare(
-    `UPDATE works SET
-       slug=@slug, title=@title, description=@description, synopsis=@synopsis,
-       bg_color=@bg_color, categories=@categories, link=@link, link2=@link2,
-       show=@show, featured=@featured, in_progress=@in_progress, case_study=@case_study
-     WHERE id=@id`
-  ).run({ ...bindParams(input), id });
+export async function updateWork(id: number, input: WorksType): Promise<void> {
+  await run(
+    "UPDATE works SET slug=:slug, title=:title, description=:description, synopsis=:synopsis, bg_color=:bg_color, categories=:categories, link=:link, link2=:link2, `show`=:show, featured=:featured, in_progress=:in_progress, case_study=:case_study WHERE id=:id",
+    { ...bindParams(input), id },
+  );
 }
 
-export function deleteWork(id: number, db: Database.Database = getDb()): void {
-  db.prepare("DELETE FROM works WHERE id = ?").run(id);
+export async function deleteWork(id: number): Promise<void> {
+  await run("DELETE FROM works WHERE id = :id", { id });
 }
 
-export function reorderWorks(ids: number[], db: Database.Database = getDb()): void {
-  const stmt = db.prepare("UPDATE works SET sort_order = ? WHERE id = ?");
-  const tx = db.transaction((list: number[]) => {
-    list.forEach((id, i) => stmt.run(i, id));
-  });
-  tx(ids);
+export async function reorderWorks(ids: number[]): Promise<void> {
+  for (let i = 0; i < ids.length; i++) {
+    await run("UPDATE works SET sort_order = :o WHERE id = :id", { o: i, id: ids[i] });
+  }
 }

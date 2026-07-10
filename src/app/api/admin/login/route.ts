@@ -6,8 +6,8 @@ export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   const { password } = await req.json().catch(() => ({ password: "" }));
-  const stored = getPasswordHash();
-  const secret = getSessionSecret();
+  const stored = await getPasswordHash();
+  const secret = await getSessionSecret();
   if (!stored || !secret || !verifyPassword(password ?? "", stored)) {
     return NextResponse.json({ error: "Invalid password" }, { status: 401 });
   }

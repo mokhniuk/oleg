@@ -43,9 +43,9 @@ export function verifySession(token: string, secret: string, now: number = Date.
   }
 }
 
-export function hasValidSession(): boolean {
+export async function hasValidSession(): Promise<boolean> {
   const token = cookies().get(SESSION_COOKIE)?.value;
-  const secret = getSessionSecret();
+  const secret = await getSessionSecret();
   if (!token || !secret) return false;
   return verifySession(token, secret);
 }

@@ -6,8 +6,8 @@ import type { WorksType } from "@/lib/types";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  if (!hasValidSession()) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!(await hasValidSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = (await req.json()) as WorksType;
-  const id = createWork(body);
+  const id = await createWork(body);
   return NextResponse.json({ id });
 }

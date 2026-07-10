@@ -1,21 +1,20 @@
-import { it, expect, beforeEach } from "vitest";
-import Database from "better-sqlite3";
-import { initSchema } from "../db";
+import { describe, it, expect, beforeEach } from "vitest";
+import { dbAvailable, resetDb } from "./testHelpers";
 import { getPasswordHash, setPasswordHash, getSessionSecret, setSessionSecret } from "./settings";
 
-let db: Database.Database;
-beforeEach(() => {
-  db = new Database(":memory:");
-  initSchema(db);
-});
+const available = await dbAvailable();
 
-it("stores password hash and session secret independently", () => {
-  expect(getPasswordHash(db)).toBeNull();
-  setPasswordHash("hash1", db);
-  expect(getPasswordHash(db)).toBe("hash1");
-  setSessionSecret("secret1", db);
-  expect(getSessionSecret(db)).toBe("secret1");
-  expect(getPasswordHash(db)).toBe("hash1"); // unaffected
-  setPasswordHash("hash2", db);
-  expect(getPasswordHash(db)).toBe("hash2");
+describe.skipIf(!available)("settings repository", () => {
+  beforeEach(resetDb);
+
+  it("stores password hash and session secret independently", async () => {
+    expect(await getPasswordHash()).toBeNull();
+    await setPasswordHash("hash1");
+    expect(await getPasswordHash()).toBe("hash1");
+    await setSessionSecret("secret1");
+    expect(await getSessionSecret()).toBe("secret1");
+    expect(await getPasswordHash()).toBe("hash1"); // unaffected
+    await setPasswordHash("hash2");
+    expect(await getPasswordHash()).toBe("hash2");
+  });
 });

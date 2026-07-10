@@ -1,86 +1,125 @@
-import Database from "better-sqlite3";
-import fs from "node:fs";
-import path from "node:path";
+import mysql from "mysql2/promise";
 
-export function initSchema(db: Database.Database): void {
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS works (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      slug TEXT UNIQUE NOT NULL,
-      title TEXT NOT NULL,
-      description TEXT NOT NULL DEFAULT '',
-      synopsis TEXT,
-      bg_color TEXT NOT NULL DEFAULT '#ffffff',
-      categories TEXT NOT NULL DEFAULT '[]',
-      link TEXT,
-      link2 TEXT,
-      show INTEGER NOT NULL DEFAULT 1,
-      featured INTEGER NOT NULL DEFAULT 0,
-      in_progress INTEGER NOT NULL DEFAULT 0,
-      sort_order INTEGER NOT NULL DEFAULT 0,
-      case_study TEXT
-    );
+export type Pool = mysql.Pool;
 
-    CREATE TABLE IF NOT EXISTS pet_projects (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      slug TEXT UNIQUE NOT NULL,
-      title TEXT NOT NULL,
-      icon TEXT NOT NULL DEFAULT '',
-      image TEXT NOT NULL DEFAULT '',
-      url TEXT NOT NULL DEFAULT '',
-      description TEXT NOT NULL DEFAULT '',
-      sort_order INTEGER NOT NULL DEFAULT 0
-    );
-
-    CREATE TABLE IF NOT EXISTS dj_events (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date TEXT NOT NULL,
-      venue TEXT NOT NULL,
-      city TEXT NOT NULL DEFAULT '',
-      link TEXT,
-      sort_order INTEGER NOT NULL DEFAULT 0
-    );
-
-    CREATE TABLE IF NOT EXISTS dj_info (
-      id INTEGER PRIMARY KEY CHECK (id = 1),
-      summary TEXT NOT NULL DEFAULT '',
-      technical_rider TEXT NOT NULL DEFAULT '[]',
-      booking_email TEXT NOT NULL DEFAULT '',
-      photos TEXT NOT NULL DEFAULT '[]',
-      partners TEXT NOT NULL DEFAULT '[]'
-    );
-
-    CREATE TABLE IF NOT EXISTS cv (
-      id INTEGER PRIMARY KEY CHECK (id = 1),
-      content TEXT NOT NULL DEFAULT '{}'
-    );
-
-    CREATE TABLE IF NOT EXISTS settings (
-      id INTEGER PRIMARY KEY CHECK (id = 1),
-      password_hash TEXT,
-      session_secret TEXT
-    );
-  `);
+/** Build pool options from DATABASE_URL, else individual MYSQL_* env vars. */
+function poolConfig(): mysql.PoolOptions {
+  const url = process.env.DATABASE_URL;
+  if (url) {
+    const u = new URL(url);
+    return {
+      host: u.hostname,
+      port: u.port ? Number(u.port) : 3306,
+      user: decodeURIComponent(u.username),
+      password: decodeURIComponent(u.password),
+      database: u.pathname.replace(/^\//, ""),
+    };
+  }
+  return {
+    host: process.env.MYSQL_HOST || "127.0.0.1",
+    port: process.env.MYSQL_PORT ? Number(process.env.MYSQL_PORT) : 3306,
+    user: process.env.MYSQL_USER || "root",
+    password: process.env.MYSQL_PASSWORD || "",
+    database: process.env.MYSQL_DATABASE || "portfolio",
+  };
 }
 
-export function createDb(dbPath: string): Database.Database {
-  if (dbPath !== ":memory:") {
-    fs.mkdirSync(path.dirname(dbPath), { recursive: true });
-  }
-  const db = new Database(dbPath);
-  db.pragma("journal_mode = WAL");
-  db.pragma("foreign_keys = ON");
-  initSchema(db);
-  return db;
+export function createPool(overrides?: mysql.PoolOptions): Pool {
+  return mysql.createPool({
+    ...poolConfig(),
+    ...overrides,
+    waitForConnections: true,
+    connectionLimit: 10,
+    namedPlaceholders: true,
+    charset: "utf8mb4",
+  });
 }
 
-// Singleton — survives Next.js dev hot-reload via globalThis.
-const globalForDb = globalThis as unknown as { __db?: Database.Database };
+// Process-wide singleton — survives Next.js dev hot-reload via globalThis.
+const globalForDb = globalThis as unknown as { __pool?: Pool };
 
-export function getDb(): Database.Database {
-  if (!globalForDb.__db) {
-    const dbPath = process.env.DATABASE_PATH || "data/portfolio.db";
-    globalForDb.__db = createDb(dbPath);
-  }
-  return globalForDb.__db;
+export function getPool(): Pool {
+  if (!globalForDb.__pool) globalForDb.__pool = createPool();
+  return globalForDb.__pool;
+}
+
+// Named-placeholder params (namedPlaceholders: true) or positional array.
+type Params = Record<string, unknown> | unknown[];
+
+/** Query helper returning typed rows. */
+export async function rows<T>(sql: string, params?: Params, pool: Pool = getPool()): Promise<T[]> {
+  const [result] = await pool.query(sql, params as unknown[]);
+  return result as T[];
+}
+
+/** Mutation helper returning the result header (insertId, affectedRows). */
+export async function run(sql: string, params?: Params, pool: Pool = getPool()): Promise<mysql.ResultSetHeader> {
+  const [result] = await pool.query(sql, params as unknown[]);
+  return result as mysql.ResultSetHeader;
+}
+
+// JSON is stored as LONGTEXT and (de)serialized in the repositories, mirroring
+// the previous SQLite layout. Booleans are TINYINT (0/1). `show` and `date` are
+// reserved words, so they are back-ticked wherever referenced.
+const SCHEMA: string[] = [
+  `CREATE TABLE IF NOT EXISTS works (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     slug VARCHAR(191) NOT NULL UNIQUE,
+     title TEXT NOT NULL,
+     description TEXT NOT NULL,
+     synopsis TEXT NULL,
+     bg_color VARCHAR(32) NOT NULL DEFAULT '#ffffff',
+     categories LONGTEXT NOT NULL,
+     link LONGTEXT NULL,
+     link2 LONGTEXT NULL,
+     \`show\` TINYINT NOT NULL DEFAULT 1,
+     featured TINYINT NOT NULL DEFAULT 0,
+     in_progress TINYINT NOT NULL DEFAULT 0,
+     sort_order INT NOT NULL DEFAULT 0,
+     case_study LONGTEXT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS pet_projects (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     slug VARCHAR(191) NOT NULL UNIQUE,
+     title TEXT NOT NULL,
+     icon TEXT NOT NULL,
+     image TEXT NOT NULL,
+     url TEXT NOT NULL,
+     description TEXT NOT NULL,
+     sort_order INT NOT NULL DEFAULT 0
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS dj_events (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     \`date\` VARCHAR(32) NOT NULL,
+     venue TEXT NOT NULL,
+     city TEXT NOT NULL,
+     link TEXT NULL,
+     sort_order INT NOT NULL DEFAULT 0
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS dj_info (
+     id INT PRIMARY KEY,
+     summary LONGTEXT NOT NULL,
+     technical_rider LONGTEXT NOT NULL,
+     booking_email VARCHAR(255) NOT NULL,
+     photos LONGTEXT NOT NULL,
+     partners LONGTEXT NOT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS cv (
+     id INT PRIMARY KEY,
+     content LONGTEXT NOT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS settings (
+     id INT PRIMARY KEY,
+     password_hash VARCHAR(255) NULL,
+     session_secret VARCHAR(255) NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+];
+
+export async function initSchema(pool: Pool = getPool()): Promise<void> {
+  for (const stmt of SCHEMA) await pool.query(stmt);
 }

@@ -8,9 +8,9 @@ import WorksListActions from "@/components/admin/WorksListActions";
 
 export const dynamic = "force-dynamic";
 
-export default function WorksListPage() {
-  if (!hasValidSession()) redirect("/admin/login");
-  const works = getAllWorks();
+export default async function WorksListPage() {
+  if (!(await hasValidSession())) redirect("/admin/login");
+  const works = await getAllWorks();
 
   return (
     <div className={styles.wrap}>

@@ -1,30 +1,25 @@
-import type Database from "better-sqlite3";
-import { getDb } from "../db";
+import { rows, run } from "../db";
 
-function ensureRow(db: Database.Database) {
-  db.prepare("INSERT OR IGNORE INTO settings (id) VALUES (1)").run();
+async function ensureRow(): Promise<void> {
+  await run("INSERT IGNORE INTO settings (id) VALUES (1)");
 }
 
-export function getPasswordHash(db: Database.Database = getDb()): string | null {
-  const row = db.prepare("SELECT password_hash FROM settings WHERE id = 1").get() as
-    | { password_hash: string | null }
-    | undefined;
-  return row?.password_hash ?? null;
+export async function getPasswordHash(): Promise<string | null> {
+  const r = await rows<{ password_hash: string | null }>("SELECT password_hash FROM settings WHERE id = 1");
+  return r[0]?.password_hash ?? null;
 }
 
-export function setPasswordHash(hash: string, db: Database.Database = getDb()): void {
-  ensureRow(db);
-  db.prepare("UPDATE settings SET password_hash = ? WHERE id = 1").run(hash);
+export async function setPasswordHash(hash: string): Promise<void> {
+  await ensureRow();
+  await run("UPDATE settings SET password_hash = :hash WHERE id = 1", { hash });
 }
 
-export function getSessionSecret(db: Database.Database = getDb()): string | null {
-  const row = db.prepare("SELECT session_secret FROM settings WHERE id = 1").get() as
-    | { session_secret: string | null }
-    | undefined;
-  return row?.session_secret ?? null;
+export async function getSessionSecret(): Promise<string | null> {
+  const r = await rows<{ session_secret: string | null }>("SELECT session_secret FROM settings WHERE id = 1");
+  return r[0]?.session_secret ?? null;
 }
 
-export function setSessionSecret(secret: string, db: Database.Database = getDb()): void {
-  ensureRow(db);
-  db.prepare("UPDATE settings SET session_secret = ? WHERE id = 1").run(secret);
+export async function setSessionSecret(secret: string): Promise<void> {
+  await ensureRow();
+  await run("UPDATE settings SET session_secret = :secret WHERE id = 1", { secret });
 }

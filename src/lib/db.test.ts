@@ -1,30 +1,21 @@
 import { describe, it, expect } from "vitest";
-import Database from "better-sqlite3";
-import { initSchema } from "./db";
+import { getPool, initSchema } from "./db";
+import { dbAvailable } from "./repositories/testHelpers";
 
-describe("initSchema", () => {
-  it("creates all content tables", () => {
-    const db = new Database(":memory:");
-    initSchema(db);
-    const tables = db
-      .prepare("SELECT name FROM sqlite_master WHERE type='table'")
-      .all()
-      .map((r: any) => r.name);
-    for (const t of [
-      "works",
-      "pet_projects",
-      "dj_events",
-      "dj_info",
-      "cv",
-      "settings",
-    ]) {
-      expect(tables).toContain(t);
+const available = await dbAvailable();
+
+describe.skipIf(!available)("initSchema", () => {
+  it("creates all content tables", async () => {
+    await initSchema();
+    const [rows] = await getPool().query("SHOW TABLES");
+    const names = (rows as Record<string, string>[]).map((r) => Object.values(r)[0]);
+    for (const t of ["works", "pet_projects", "dj_events", "dj_info", "cv", "settings"]) {
+      expect(names).toContain(t);
     }
   });
 
-  it("is idempotent", () => {
-    const db = new Database(":memory:");
-    initSchema(db);
-    expect(() => initSchema(db)).not.toThrow();
+  it("is idempotent", async () => {
+    await initSchema();
+    await expect(initSchema()).resolves.not.toThrow();
   });
 });

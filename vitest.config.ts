@@ -6,6 +6,10 @@ export default defineConfig({
     environment: "node",
     include: ["src/**/*.test.ts"],
     passWithNoTests: true,
+    setupFiles: ["./vitest.setup.ts"],
+    // Test files share one MySQL test database; run them serially so one
+    // file's TRUNCATE can't wipe another's rows mid-test.
+    fileParallelism: false,
   },
   resolve: {
     alias: { "@": path.resolve(__dirname, "src") },

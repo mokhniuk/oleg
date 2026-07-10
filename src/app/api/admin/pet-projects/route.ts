@@ -6,7 +6,7 @@ import type { PetProject } from "@/lib/types";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  if (!hasValidSession()) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const id = createPetProject((await req.json()) as PetProject);
+  if (!(await hasValidSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const id = await createPetProject((await req.json()) as PetProject);
   return NextResponse.json({ id });
 }

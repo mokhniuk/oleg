@@ -1,4 +1,4 @@
-import { getAllWorks, getWorkBySlug, getAllWorkSlugs } from "@/lib/repositories/works";
+import { getAllWorks, getWorkBySlug } from "@/lib/repositories/works";
 import { CaseStudyBlock } from "@/lib/types";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -51,14 +51,9 @@ interface CaseStudy {
   blocks: CaseStudyBlock[];
 }
 
-// Generate static params for all works
-export async function generateStaticParams() {
-  return getAllWorkSlugs().map((slug) => ({ slug }));
-}
-
 // Generate metadata for SEO
 export async function generateMetadata({ params }: CaseStudyPageProps) {
-  const work = getWorkBySlug(params.slug);
+  const work = await getWorkBySlug(params.slug);
 
   if (!work) {
     return {
@@ -72,8 +67,8 @@ export async function generateMetadata({ params }: CaseStudyPageProps) {
   };
 }
 
-export default function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const work = getWorkBySlug(params.slug);
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+  const work = await getWorkBySlug(params.slug);
 
   if (!work) {
     notFound();
@@ -82,7 +77,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { caseStudy } = work;
 
   // Find displayed works (only those with show: true)
-  const displayedWorks = getAllWorks().filter((w) => w.show);
+  const displayedWorks = (await getAllWorks()).filter((w) => w.show);
   const currentIndex = displayedWorks.findIndex((w) => w.slug === params.slug);
   const prevWork = currentIndex > 0 ? displayedWorks[currentIndex - 1] : null;
   const nextWork =

@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import Database from "better-sqlite3";
-import { initSchema } from "../db";
+import { dbAvailable, resetDb } from "./testHelpers";
 import {
   createWork,
   getAllWorks,
@@ -13,11 +12,7 @@ import {
 } from "./works";
 import type { WorksType } from "../types";
 
-let db: Database.Database;
-beforeEach(() => {
-  db = new Database(":memory:");
-  initSchema(db);
-});
+const available = await dbAvailable();
 
 const sample: WorksType = {
   slug: "bagel-bro",
@@ -36,10 +31,12 @@ const sample: WorksType = {
   },
 };
 
-describe("works repository", () => {
-  it("round-trips a work with nested case study", () => {
-    const id = createWork(sample, db);
-    const got = getWorkBySlug("bagel-bro", db)!;
+describe.skipIf(!available)("works repository", () => {
+  beforeEach(resetDb);
+
+  it("round-trips a work with nested case study", async () => {
+    const id = await createWork(sample);
+    const got = (await getWorkBySlug("bagel-bro"))!;
     expect(got.id).toBe(id);
     expect(got.title).toBe("Bagel Bro");
     expect(got.show).toBe(true);
@@ -50,26 +47,26 @@ describe("works repository", () => {
     expect(got.caseStudy?.blocks?.[0]).toMatchObject({ type: "section", content: "Hello" });
   });
 
-  it("filters featured and lists slugs", () => {
-    createWork(sample, db);
-    createWork({ ...sample, slug: "hidden", featured: false, show: false }, db);
-    expect(getFeaturedWorks(db).map((w) => w.slug)).toEqual(["bagel-bro"]);
-    expect(getAllWorkSlugs(db)).toEqual(["bagel-bro"]);
-    expect(getAllWorks(db)).toHaveLength(2);
+  it("filters featured and lists slugs", async () => {
+    await createWork(sample);
+    await createWork({ ...sample, slug: "hidden", featured: false, show: false });
+    expect((await getFeaturedWorks()).map((w) => w.slug)).toEqual(["bagel-bro"]);
+    expect(await getAllWorkSlugs()).toEqual(["bagel-bro"]);
+    expect(await getAllWorks()).toHaveLength(2);
   });
 
-  it("updates and deletes", () => {
-    const id = createWork(sample, db);
-    updateWork(id, { ...sample, title: "Renamed" }, db);
-    expect(getWorkBySlug("bagel-bro", db)!.title).toBe("Renamed");
-    deleteWork(id, db);
-    expect(getWorkBySlug("bagel-bro", db)).toBeNull();
+  it("updates and deletes", async () => {
+    const id = await createWork(sample);
+    await updateWork(id, { ...sample, title: "Renamed" });
+    expect((await getWorkBySlug("bagel-bro"))!.title).toBe("Renamed");
+    await deleteWork(id);
+    expect(await getWorkBySlug("bagel-bro")).toBeNull();
   });
 
-  it("reorders by index", () => {
-    const a = createWork({ ...sample, slug: "a" }, db);
-    const b = createWork({ ...sample, slug: "b" }, db);
-    reorderWorks([b, a], db);
-    expect(getAllWorks(db).map((w) => w.slug)).toEqual(["b", "a"]);
+  it("reorders by index", async () => {
+    const a = await createWork({ ...sample, slug: "a" });
+    const b = await createWork({ ...sample, slug: "b" });
+    await reorderWorks([b, a]);
+    expect((await getAllWorks()).map((w) => w.slug)).toEqual(["b", "a"]);
   });
 });

@@ -9,11 +9,11 @@ import styles from "@/components/admin/admin.module.scss";
 
 export const dynamic = "force-dynamic";
 
-export default function AdminDashboard() {
-  if (!hasValidSession()) redirect("/admin/login");
-  const works = getAllWorks();
-  const pets = getAllPetProjects();
-  const events = getAllDjEvents();
+export default async function AdminDashboard() {
+  if (!(await hasValidSession())) redirect("/admin/login");
+  const works = await getAllWorks();
+  const pets = await getAllPetProjects();
+  const events = await getAllDjEvents();
   const shown = works.filter((w) => w.show).length;
   const recent = works.slice(0, 4);
 

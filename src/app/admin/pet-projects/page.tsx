@@ -5,7 +5,7 @@ import PetProjectsManager from "@/components/admin/PetProjectsManager";
 
 export const dynamic = "force-dynamic";
 
-export default function PetProjectsAdminPage() {
-  if (!hasValidSession()) redirect("/admin/login");
-  return <PetProjectsManager initial={getAllPetProjects()} />;
+export default async function PetProjectsAdminPage() {
+  if (!(await hasValidSession())) redirect("/admin/login");
+  return <PetProjectsManager initial={await getAllPetProjects()} />;
 }

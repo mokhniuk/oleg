@@ -31,16 +31,35 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Database & deployment
 
-Content lives in SQLite at `DATABASE_PATH` (default `data/portfolio.db`).
+Content lives in **MySQL**. Configure the connection with either a single
+`DATABASE_URL` (`mysql://user:pass@host:3306/dbname`) or the individual
+`MYSQL_HOST` / `MYSQL_PORT` / `MYSQL_USER` / `MYSQL_PASSWORD` / `MYSQL_DATABASE`
+env vars. See `.env.example`.
 
-First run (once):
-1. `ADMIN_PASSWORD='your-password' bun run seed` — creates and populates the DB.
+### Local development
 
-Persist across redeploys by mounting volumes:
-- `data/` — the SQLite database
-- `public/projects/` — uploaded project images
+```bash
+docker compose up -d          # start a local MySQL
+cp .env.example .env          # DATABASE_URL points at it by default
+docker compose exec mysql mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS portfolio_test"  # for tests
+ADMIN_PASSWORD='dev-password' bun run seed   # create schema + import content + admin login
+bun run dev
+```
 
-Run the server: `bun run build && bun run start` (or the Docker image on port 3000).
+`bun run test` runs the repository suite against `portfolio_test` (it skips if
+no MySQL is reachable).
+
+### Production (Hostinger / any Node host)
+
+1. Create a MySQL database in the host panel and set the connection env vars
+   (`DATABASE_URL` or the `MYSQL_*` set) plus `ADMIN_PASSWORD`.
+2. Run the one-time seed: `ADMIN_PASSWORD='your-password' bun run seed`
+   (`ADMIN_PASSWORD` is only needed for this step — the app doesn't read it at
+   runtime). After that you can unset it.
+3. `bun run build && bun run start` (or the Docker image on port 3000).
+
+Uploaded project images are written to `public/projects/` — persist that
+directory across redeploys (e.g. a mounted volume) so uploads survive.
 
 ## Deploy on Vercel
 

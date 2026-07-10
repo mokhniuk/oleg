@@ -3,8 +3,8 @@ import { getAllWorks } from "@/lib/repositories/works";
 /**
  * Get all works that belong to a specific category
  */
-export function getWorksByCategory(category: string) {
-    return getAllWorks().filter(
+export async function getWorksByCategory(category: string) {
+    return (await getAllWorks()).filter(
         (work) => work.show && work.categories.includes(category.toLowerCase())
     );
 }
@@ -12,9 +12,9 @@ export function getWorksByCategory(category: string) {
 /**
  * Get all unique categories from all works
  */
-export function getAllCategories(): string[] {
+export async function getAllCategories(): Promise<string[]> {
     const categoriesSet = new Set<string>();
-    getAllWorks().forEach((work) => {
+    (await getAllWorks()).forEach((work) => {
         if (work.show) {
             work.categories.forEach((category) => categoriesSet.add(category));
         }
@@ -69,14 +69,14 @@ export function getCategoryMetadata(category: string): {
 /**
  * Check if a category exists in the works data
  */
-export function validateCategory(category: string): boolean {
-    const allCategories = getAllCategories();
+export async function validateCategory(category: string): Promise<boolean> {
+    const allCategories = await getAllCategories();
     return allCategories.includes(category.toLowerCase());
 }
 
 /**
  * Get count of works in a category
  */
-export function getCategoryCount(category: string): number {
-    return getWorksByCategory(category).length;
+export async function getCategoryCount(category: string): Promise<number> {
+    return (await getWorksByCategory(category)).length;
 }
