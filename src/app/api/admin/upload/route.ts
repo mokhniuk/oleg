@@ -20,13 +20,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "No file" }, { status: 400 });
   }
 
+  const MAX_BYTES = 15 * 1024 * 1024;
+  if (file.size > MAX_BYTES) {
+    return NextResponse.json({ error: "File too large (max 15MB)" }, { status: 413 });
+  }
+
   const buf = Buffer.from(await file.arrayBuffer());
   const base = path.parse(file.name).name.toLowerCase().replace(/[^a-z0-9-_]/g, "-");
   const dir = path.join(process.cwd(), "public", "projects", slug);
   await fs.mkdir(dir, { recursive: true });
 
   const webpName = `${base}.webp`;
-  await sharp(buf).webp({ quality: 82 }).toFile(path.join(dir, webpName));
+  try {
+    await sharp(buf).webp({ quality: 82 }).toFile(path.join(dir, webpName));
+  } catch {
+    return NextResponse.json({ error: "Invalid image file" }, { status: 400 });
+  }
 
   return NextResponse.json({ path: `/projects/${slug}/${webpName}` });
 }
