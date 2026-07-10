@@ -32,8 +32,15 @@ export default function PetProjectsManager({ initial }: { initial: PetProject[] 
   }
 
   return (
-    <div>
-      <h1>Pet projects</h1>
+    <div className={styles.wrap}>
+      <div className={styles.pagehead}>
+        <div className={styles.pageheadInner}>
+          <div>
+            <h1>Pet projects</h1>
+            <p className={styles.sub}>Managed here, hidden on the site for now</p>
+          </div>
+        </div>
+      </div>
       {items.map((p, i) => (
         <div key={p.id ?? `new-${i}`} className={styles.block}>
           <div className={styles.field}><label>Slug</label>

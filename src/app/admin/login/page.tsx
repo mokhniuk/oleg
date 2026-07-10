@@ -21,14 +21,23 @@ export default function LoginPage() {
   }
 
   return (
-    <form className={styles.login} onSubmit={submit}>
-      <h1>Admin</h1>
-      <div className={styles.field}>
-        <label htmlFor="pw">Password</label>
-        <input id="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus />
-      </div>
-      {error && <p className={styles.error}>{error}</p>}
-      <button className={styles.button} type="submit">Log in</button>
-    </form>
+    <div className={styles.auth}>
+      <form className={styles.authbox} onSubmit={submit}>
+        <h1>Sign in.</h1>
+        <p className={styles.authSub}>Manage works, projects, events and your CV.</p>
+        <div className={styles.field}>
+          <label htmlFor="pw">Password</label>
+          <input id="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus />
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
+        <button
+          className={styles.button}
+          type="submit"
+          style={{ width: "100%", justifyContent: "center", marginTop: 8, padding: 14 }}
+        >
+          Log in
+        </button>
+      </form>
+    </div>
   );
 }

@@ -47,15 +47,14 @@ export default function BlocksEditor({
 
   return (
     <div>
-      <h3>Case study blocks</h3>
       {blocks.map((b, i) => (
         <div key={i} className={styles.block}>
           <div className={styles.blockHead}>
             <strong>{b.type}</strong>
-            <span className={styles.row}>
-              <button type="button" className={styles.button} onClick={() => move(i, -1)}>↑</button>
-              <button type="button" className={styles.button} onClick={() => move(i, 1)}>↓</button>
-              <button type="button" className={`${styles.button} ${styles.danger}`} onClick={() => remove(i)}>Delete</button>
+            <span className={styles.row} style={{ marginLeft: "auto", gap: 2 }}>
+              <button type="button" className={styles.blockBtn} onClick={() => move(i, -1)} aria-label="Move up">↑</button>
+              <button type="button" className={styles.blockBtn} onClick={() => move(i, 1)} aria-label="Move down">↓</button>
+              <button type="button" className={`${styles.blockBtn} ${styles.del}`} onClick={() => remove(i)} aria-label="Delete block">✕</button>
             </span>
           </div>
 
@@ -117,10 +116,11 @@ export default function BlocksEditor({
         </div>
       ))}
 
-      <div className={styles.row}>
+      <div className={styles.addrow}>
+        <span className={styles.addLbl}>Add block</span>
         {BLOCK_TYPES.map((t) => (
-          <button type="button" key={t} className={`${styles.button} ${styles.secondary}`} onClick={() => add(t)}>
-            + {t}
+          <button type="button" key={t} className={styles.chip} onClick={() => add(t)}>
+            {t}
           </button>
         ))}
       </div>

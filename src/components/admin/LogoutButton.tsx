@@ -9,7 +9,7 @@ export default function LogoutButton() {
     router.push("/admin/login");
   }
   return (
-    <button className={`${styles.button} ${styles.secondary}`} onClick={logout}>
+    <button className={styles.logout} onClick={logout}>
       Log out
     </button>
   );

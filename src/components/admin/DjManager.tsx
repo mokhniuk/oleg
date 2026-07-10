@@ -37,8 +37,18 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
   }
 
   return (
-    <div>
-      <h1>DJ</h1>
+    <div className={styles.wrap}>
+      <div className={styles.pagehead}>
+        <div className={styles.pageheadInner}>
+          <div>
+            <h1>DJ</h1>
+            <p className={styles.sub}>Summary, technical rider, photos and events</p>
+          </div>
+          <div className={styles.actions}>
+            <button className={styles.button} onClick={saveInfo}>Save DJ info</button>
+          </div>
+        </div>
+      </div>
       <div className={styles.field}><label>Summary</label>
         <textarea rows={4} value={dj.summary} onChange={(e) => setDj({ ...dj, summary: e.target.value })} /></div>
       <div className={styles.field}><label>Booking email</label>
