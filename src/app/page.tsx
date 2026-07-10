@@ -3,14 +3,12 @@ import Container from "@/components/Container/Container";
 import SectionHeader from "@/components/SectionHeader/SectionHeader";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { getFeaturedWorks } from "@/lib/repositories/works";
-import { getAllPetProjects } from "@/lib/repositories/petProjects";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
   const works = getFeaturedWorks();
-  const petProjects = getAllPetProjects();
 
   return (
     <main className={styles.main}>
