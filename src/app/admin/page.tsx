@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getAllWorks } from "@/lib/repositories/works";
 import { getAllPetProjects } from "@/lib/repositories/petProjects";
 import { getAllDjEvents } from "@/lib/repositories/djEvents";
+import { hasValidSession } from "@/lib/auth";
 import styles from "@/components/admin/admin.module.scss";
 
 export const dynamic = "force-dynamic";
 
 export default function AdminDashboard() {
+  if (!hasValidSession()) redirect("/admin/login");
   const works = getAllWorks();
   const pets = getAllPetProjects();
   const events = getAllDjEvents();

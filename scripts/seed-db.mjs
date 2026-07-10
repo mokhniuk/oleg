@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import fs from "node:fs";
 import { createDb } from "../src/lib/db.ts";
 import { getAllWorks, createWork } from "../src/lib/repositories/works.ts";
 import { getAllPetProjects, createPetProject } from "../src/lib/repositories/petProjects.ts";
@@ -7,10 +8,7 @@ import { getDjInfo, saveDjInfo } from "../src/lib/repositories/djInfo.ts";
 import { getCv, saveCv } from "../src/lib/repositories/cv.ts";
 import { getPasswordHash, setPasswordHash, getSessionSecret, setSessionSecret } from "../src/lib/repositories/settings.ts";
 
-import { WORKS } from "../src/data/works.ts";
-import { PET_PROJECTS } from "../src/data/pet-projects.ts";
-import { DJ_INFO, DJ_EVENTS, DJ_PHOTOS, DJ_PARTNERS } from "../src/data/dj.ts";
-import { CV, TOP_SKILLS } from "../src/data/cv.ts";
+const data = JSON.parse(fs.readFileSync(new URL("./seed-data.json", import.meta.url), "utf8"));
 
 const dbPath = process.env.DATABASE_PATH || "data/portfolio.db";
 const db = createDb(dbPath);
@@ -23,65 +21,37 @@ function scryptHash(password) {
 
 // Works
 if (getAllWorks(db).length === 0) {
-  for (const w of WORKS) {
-    createWork(
-      {
-        slug: w.slug ?? w.title.toLowerCase().replace(/\s+/g, "-"),
-        title: w.title,
-        description: w.description,
-        synopsis: w.synopsis,
-        bgColor: w.bgColor,
-        categories: w.categories,
-        link: w.link,
-        link2: w.link2,
-        show: w.show,
-        featured: w.featured,
-        inProgress: w.inProgress,
-        caseStudy: w.caseStudy,
-      },
-      db
-    );
+  for (const w of data.works) {
+    createWork(w, db);
   }
-  console.log(`Seeded ${WORKS.length} works`);
+  console.log(`Seeded ${data.works.length} works`);
 } else {
   console.log("Works already present — skipping");
 }
 
 // Pet projects
 if (getAllPetProjects(db).length === 0) {
-  for (const p of PET_PROJECTS) {
-    createPetProject(
-      { slug: p.id, title: p.title, icon: p.icon, image: p.image, url: p.url, description: p.description },
-      db
-    );
+  for (const p of data.petProjects) {
+    createPetProject(p, db);
   }
-  console.log(`Seeded ${PET_PROJECTS.length} pet projects`);
+  console.log(`Seeded ${data.petProjects.length} pet projects`);
 } else {
   console.log("Pet projects already present — skipping");
 }
 
 // DJ events
 if (getAllDjEvents(db).length === 0) {
-  for (const e of DJ_EVENTS) {
-    createDjEvent({ date: e.date, venue: e.venue, city: e.city, link: e.link }, db);
+  for (const e of data.djEvents) {
+    createDjEvent(e, db);
   }
-  console.log(`Seeded ${DJ_EVENTS.length} DJ events`);
+  console.log(`Seeded ${data.djEvents.length} DJ events`);
 } else {
   console.log("DJ events already present — skipping");
 }
 
 // DJ info
 if (!getDjInfo(db)) {
-  saveDjInfo(
-    {
-      summary: DJ_INFO.summary,
-      technicalRider: DJ_INFO.technicalRider,
-      bookingEmail: DJ_INFO.bookingEmail,
-      photos: DJ_PHOTOS,
-      partners: DJ_PARTNERS,
-    },
-    db
-  );
+  saveDjInfo(data.djInfo, db);
   console.log("Seeded DJ info");
 } else {
   console.log("DJ info already present — skipping");
@@ -89,7 +59,7 @@ if (!getDjInfo(db)) {
 
 // CV
 if (!getCv(db)) {
-  saveCv({ topSkills: TOP_SKILLS, ...CV }, db);
+  saveCv(data.cv, db);
   console.log("Seeded CV");
 } else {
   console.log("CV already present — skipping");

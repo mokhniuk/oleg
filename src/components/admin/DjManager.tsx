@@ -14,22 +14,25 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
     setEvs((xs) => xs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
 
   async function saveInfo() {
-    await fetch("/api/admin/dj-info", {
+    const res = await fetch("/api/admin/dj-info", {
       method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(dj),
     });
-    alert("DJ info saved");
+    if (res.ok) alert("DJ info saved");
+    else alert("Save failed");
   }
   async function saveEvent(e: DjEvent) {
     const isEdit = typeof e.id === "number";
-    await fetch(isEdit ? `/api/admin/dj-events/${e.id}` : "/api/admin/dj-events", {
+    const res = await fetch(isEdit ? `/api/admin/dj-events/${e.id}` : "/api/admin/dj-events", {
       method: isEdit ? "PUT" : "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(e),
     });
-    router.refresh();
+    if (res.ok) router.refresh();
+    else alert("Save failed");
   }
   async function delEvent(e: DjEvent) {
     if (e.id && confirm("Delete event?")) {
-      await fetch(`/api/admin/dj-events/${e.id}`, { method: "DELETE" });
-      router.refresh();
+      const res = await fetch(`/api/admin/dj-events/${e.id}`, { method: "DELETE" });
+      if (res.ok) router.refresh();
+      else alert("Delete failed");
     } else setEvs((xs) => xs.filter((x) => x !== e));
   }
 

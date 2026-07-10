@@ -13,17 +13,19 @@ export default function PetProjectsManager({ initial }: { initial: PetProject[] 
 
   async function save(p: PetProject) {
     const isEdit = typeof p.id === "number";
-    await fetch(isEdit ? `/api/admin/pet-projects/${p.id}` : "/api/admin/pet-projects", {
+    const res = await fetch(isEdit ? `/api/admin/pet-projects/${p.id}` : "/api/admin/pet-projects", {
       method: isEdit ? "PUT" : "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(p),
     });
-    router.refresh();
+    if (res.ok) router.refresh();
+    else alert("Save failed");
   }
   async function del(p: PetProject) {
     if (p.id && confirm("Delete?")) {
-      await fetch(`/api/admin/pet-projects/${p.id}`, { method: "DELETE" });
-      router.refresh();
+      const res = await fetch(`/api/admin/pet-projects/${p.id}`, { method: "DELETE" });
+      if (res.ok) router.refresh();
+      else alert("Delete failed");
     } else {
       setItems((xs) => xs.filter((x) => x !== p));
     }

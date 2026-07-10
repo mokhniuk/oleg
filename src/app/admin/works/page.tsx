@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getAllWorks } from "@/lib/repositories/works";
+import { hasValidSession } from "@/lib/auth";
 import styles from "@/components/admin/admin.module.scss";
 import WorksListActions from "@/components/admin/WorksListActions";
 
 export const dynamic = "force-dynamic";
 
 export default function WorksListPage() {
+  if (!hasValidSession()) redirect("/admin/login");
   const works = getAllWorks();
   return (
     <div>
