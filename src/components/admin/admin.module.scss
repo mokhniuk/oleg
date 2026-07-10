@@ -1,0 +1,22 @@
+.wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+.login { max-width: 360px; margin: 15vh auto; display: flex; flex-direction: column; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.field label { font-size: 0.85rem; font-weight: 600; }
+.field input, .field textarea, .field select {
+  padding: 0.55rem 0.7rem; border: 1px solid #ccc; border-radius: 6px; font: inherit;
+}
+.button {
+  padding: 0.55rem 1rem; border: 0; border-radius: 6px; background: #111; color: #fff;
+  font-weight: 600; cursor: pointer;
+}
+.button.secondary { background: #eee; color: #111; }
+.button.danger { background: #b00020; color: #fff; }
+.row { display: flex; gap: 0.5rem; align-items: center; }
+.nav { display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.nav a { text-decoration: none; font-weight: 600; }
+.list { display: flex; flex-direction: column; gap: 0.5rem; }
+.item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; border: 1px solid #eee; border-radius: 6px; }
+.block { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+.blockHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.error { color: #b00020; font-size: 0.9rem; }
+.thumb { width: 64px; height: 48px; object-fit: cover; border-radius: 4px; }
