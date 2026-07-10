@@ -3,9 +3,12 @@ import mainStyles from "@/app/page.module.css";
 import CaseStudyHero from "@/components/CaseStudyHero/CaseStudyHero";
 import CaseStudySection from "@/components/CaseStudySection/CaseStudySection";
 import ImageGallery from "@/components/ImageGallery/ImageGallery";
-import { DJ_INFO, DJ_EVENTS, DJ_PHOTOS, DJ_PARTNERS } from "@/data/dj";
+import { getDjInfo } from "@/lib/repositories/djInfo";
+import { getAllDjEvents } from "@/lib/repositories/djEvents";
 import { Metadata } from "next";
 import Image from "next/image";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     title: "DJing | Oleg Mokhniuk",
@@ -13,6 +16,13 @@ export const metadata: Metadata = {
 };
 
 export default function DJPage() {
+    const djInfo = getDjInfo();
+    const DJ_EVENTS = getAllDjEvents();
+    if (!djInfo) return null;
+    const DJ_INFO = { summary: djInfo.summary, technicalRider: djInfo.technicalRider, bookingEmail: djInfo.bookingEmail };
+    const DJ_PHOTOS = djInfo.photos;
+    const DJ_PARTNERS = djInfo.partners;
+
     return (
         <div className={styles.main}>
             <header className={styles.hero}>
