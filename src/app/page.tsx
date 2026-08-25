@@ -62,7 +62,7 @@ export default function Home() {
         </Container>
       </section>
 
-    
+
       <section className={styles.contact} id="contact">
         <Container>
           <SectionHeader
@@ -88,7 +88,7 @@ export default function Home() {
             hidden
           > */}
           <Image
-            src="/images/berlin.jpg"
+            src="/images/berlin.webp"
             alt=""
             width={1280}
             height={600}

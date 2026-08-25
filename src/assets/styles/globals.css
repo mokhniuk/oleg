@@ -68,7 +68,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  cursor: url('/images/cursors/arrow-2.svg') 8 8, auto;
 }
 
 html,
@@ -80,23 +79,29 @@ body {
   scrollbar-color: #000000 #ffffff;
 }
 
-/* Custom cursor for links, buttons, and interactive elements */
-a,
-button,
-[role="button"],
-input[type="submit"],
-input[type="button"] {
-  cursor: url('/images/cursors/hand-2.svg') 8 0, pointer;
-}
+@media (hover: hover) {
+  * {
+    cursor: url('/images/cursors/arrow-2.svg') 8 8, auto;
+  }
 
-/* Custom cursor for text input areas */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
-textarea,
-[contenteditable="true"] {
-  cursor: url('/images/cursors/text.svg') 12 12, text;
+  /* Custom cursor for links, buttons, and interactive elements */
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    cursor: url('/images/cursors/hand-2.svg') 8 0, pointer;
+  }
+
+  /* Custom cursor for text input areas */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  [contenteditable="true"] {
+    cursor: url('/images/cursors/text.svg') 12 12, text;
+  }
 }
 
 @keyframes fadeInUp {
