@@ -29,6 +29,11 @@ yarn-error.log*
 .env
 .env*.local
 
+# stray sqlite files (data layer is MySQL)
+*.db
+*.db-shm
+*.db-wal
+
 # vercel
 .vercel
 

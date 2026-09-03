@@ -58,9 +58,9 @@ export async function run(sql: string, params?: Params, pool: Pool = getPool()):
   return result as mysql.ResultSetHeader;
 }
 
-// JSON is stored as LONGTEXT and (de)serialized in the repositories, mirroring
-// the previous SQLite layout. Booleans are TINYINT (0/1). `show` and `date` are
-// reserved words, so they are back-ticked wherever referenced.
+// JSON is stored as LONGTEXT and (de)serialized in the repositories. Booleans
+// are TINYINT (0/1). `show` and `date` are reserved words, so they are
+// back-ticked wherever referenced.
 const SCHEMA: string[] = [
   `CREATE TABLE IF NOT EXISTS works (
      id INT AUTO_INCREMENT PRIMARY KEY,

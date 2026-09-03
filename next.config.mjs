@@ -6,7 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Server-rendered app (SQLite-backed). No static export.
+  // Server-rendered app (MySQL-backed). No static export.
   reactStrictMode: true,
 
   experimental: {

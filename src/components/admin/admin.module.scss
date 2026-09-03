@@ -64,7 +64,7 @@
 .logout:hover { color: var(--ink); }
 
 /* ---- page container + head ---- */
-.wrap { padding: 0 48px 80px; max-width: 1160px; }
+.wrap { padding: 0 48px 80px; max-width: 1600px; }
 .pagehead { position: relative; padding: 30px 0 34px; }
 .pagehead::before {
   content: ""; position: absolute; z-index: 0; width: 360px; height: 240px; border-radius: 50%;
