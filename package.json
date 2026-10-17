@@ -13,22 +13,22 @@
     "seed": "tsx scripts/seed-db.mjs"
   },
   "dependencies": {
-    "mysql2": "^3.22.6",
+    "mysql2": "^3.24.4",
     "next": "14.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.101.0"
+    "sass": "^1.105.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^16.2.10",
+    "@next/bundle-analyzer": "^16.3.6",
     "@types/node": "^20.19.43",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.3",
     "sharp": "^0.34.5",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   }
 }
