@@ -9,6 +9,7 @@ import TagsInput from "./TagsInput";
 import SaveBar from "./SaveBar";
 import { apiError, useFeedback } from "./Feedback";
 import { useDirtyForm } from "./useDirtyForm";
+import { fieldError, slugify } from "./slugify";
 import styles from "@/components/admin/admin.module.scss";
 import { ArrowLeftIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
@@ -23,17 +24,6 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "content", label: "Content" },
 ];
 type Errors = Partial<Record<"title" | "slug", string>>;
-
-const slugify = (s: string) =>
-  s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-
-/** Splits `{error: "title is required"}`-style API messages onto the field they belong to. */
-function fieldError(message: string): Errors {
-  const m = /^(title|slug) is required/.exec(message);
-  if (m) return { [m[1]]: "Required" };
-  if (/slug/i.test(message)) return { slug: message };
-  return {};
-}
 
 // the parts of a work each tab edits, for the "unsaved" dot on a tab
 const part = (w: WorksType, tab: Tab) => {

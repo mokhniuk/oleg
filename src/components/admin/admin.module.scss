@@ -467,3 +467,9 @@
 .grpHead .blockBtn svg { width: 16px; height: 16px; }
 .more { display: inline-flex; align-items: center; gap: 6px; }
 .more svg { width: 16px; height: 16px; stroke-width: 2; }
+
+/* ---- pet project cards ---- */
+.petTitle { display: flex; align-items: center; gap: 10px; }
+.petIcon { width: 28px; height: 28px; object-fit: contain; border-radius: 8px; background: rgba(255, 255, 255, 0.6); flex: none; }
+.wacts .del { color: #181818; }
+.wcard.wrow .wacts { margin-left: auto; }
