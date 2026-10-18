@@ -2,62 +2,57 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-// Recursively collect all jpg/png files under a directory
-function collectImages(dir, results = []) {
-  if (!fs.existsSync(dir)) return results;
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      collectImages(fullPath, results);
-    } else if (entry.name.match(/\.(jpg|jpeg|png)$/i)) {
-      results.push(fullPath);
-    }
-  }
-  return results;
-}
+// Convert all JPG and PNG images to WebP recursively
+const convertImages = async (dir) => {
+  if (!fs.existsSync(dir)) return;
 
-// Convert all JPG and PNG images to WebP (skips already-converted files)
-const convertImages = async () => {
-  const inputDirs = ['public/images', 'public/projects'];
-  let converted = 0;
-  let skipped = 0;
+  const files = fs.readdirSync(dir);
 
-  for (const dir of inputDirs) {
-    const images = collectImages(dir);
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
 
-    for (const inputPath of images) {
-      const outputPath = inputPath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+    if (stat.isDirectory()) {
+      await convertImages(fullPath);
+    } else if (file.match(/\.(jpg|jpeg|png)$/i)) {
+      const outputPath = fullPath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
-      // Skip if WebP already exists and is newer than the source
+      // Skip if WebP already exists and is newer than source
       if (fs.existsSync(outputPath)) {
-        const srcMtime = fs.statSync(inputPath).mtimeMs;
-        const outMtime = fs.statSync(outputPath).mtimeMs;
-        if (outMtime >= srcMtime) {
-          skipped++;
+        const outStat = fs.statSync(outputPath);
+        if (outStat.mtime > stat.mtime) {
           continue;
         }
       }
 
-      console.log(`Converting ${inputPath} → ${outputPath}`);
+      console.log(`Converting ${fullPath} to ${outputPath}`);
 
       try {
-        await sharp(inputPath)
+        await sharp(fullPath)
           .webp({ quality: 80 })
           .toFile(outputPath);
 
-        const originalSize = fs.statSync(inputPath).size;
+        const originalSize = stat.size;
         const webpSize = fs.statSync(outputPath).size;
         const savings = ((originalSize - webpSize) / originalSize * 100).toFixed(1);
 
-        console.log(`  Original: ${(originalSize / 1024).toFixed(1)}KB  WebP: ${(webpSize / 1024).toFixed(1)}KB  Savings: ${savings}%`);
-        converted++;
+        console.log(`  Original: ${(originalSize / 1024).toFixed(1)}KB`);
+        console.log(`  WebP: ${(webpSize / 1024).toFixed(1)}KB`);
+        console.log(`  Savings: ${savings}%`);
       } catch (error) {
-        console.error(`  Error converting ${inputPath}:`, error.message);
+        console.error(`Error converting ${fullPath}:`, error);
       }
     }
   }
-
-  console.log(`\nDone. Converted: ${converted}, Skipped (up-to-date): ${skipped}`);
 };
 
-convertImages().catch(console.error);
+const run = async () => {
+  const inputDirs = ['public/images', 'public/projects'];
+  for (const dir of inputDirs) {
+    await convertImages(dir);
+  }
+};
+
+run().then(() => {
+  console.log('Image conversion completed!');
+}).catch(console.error);

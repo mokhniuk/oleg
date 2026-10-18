@@ -29,7 +29,8 @@
   &:before {
     content: "";
     width: 100%;
-    filter: blur(172px);
+    filter: blur(80px);
+    /* Reduced from 172px for performance */
     position: absolute;
     z-index: 0;
     transform: translate3d(0, 0, 0);
@@ -39,7 +40,8 @@
   &:before {
     width: 557px;
     height: 378px;
-    background-color: rgba(240, 242, 150, 0.6);
+    background-color: rgba(240, 242, 150, 0.4);
+    /* Lowered opacity */
     left: 45%;
     top: 35%;
   }
@@ -47,9 +49,35 @@
   &:after {
     width: 343px;
     height: 333px;
-    background-color: rgba(79, 140, 212, 0.75);
+    background-color: rgba(79, 140, 212, 0.45);
+    /* Lowered opacity */
     right: 55%;
     top: 25%;
+  }
+
+  /* Optimized for mobile performance */
+  @media screen and (max-width: 768px) {
+
+    &:after,
+    &:before {
+      filter: blur(40px);
+      /* Drastically reduced blur on mobile */
+      opacity: 0.6;
+    }
+
+    &:before {
+      width: 300px;
+      height: 200px;
+      left: 20%;
+      top: 20%;
+    }
+
+    &:after {
+      width: 250px;
+      height: 250px;
+      right: 20%;
+      top: 15%;
+    }
   }
 }
 
