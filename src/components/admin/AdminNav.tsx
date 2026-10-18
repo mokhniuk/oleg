@@ -35,6 +35,7 @@ export default function AdminNav() {
         ))}
       </nav>
       <span className={styles.headRight}>
+        <a href="/" target="_blank" rel="noreferrer" className={styles.viewSite}>View site <span aria-hidden>↗</span></a>
         <LogoutButton />
       </span>
     </header>

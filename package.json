@@ -14,6 +14,9 @@
     "reset-password": "tsx --env-file=.env scripts/reset-admin-password.mjs"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "mysql2": "^3.24.4",
     "next": "14.2.3",
     "react": "^18.3.1",

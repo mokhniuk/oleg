@@ -3,6 +3,9 @@ import { useState } from "react";
 import type { CvContent } from "@/lib/types";
 import styles from "@/components/admin/admin.module.scss";
 import { apiError, useFeedback } from "./Feedback";
+import TagsInput from "./TagsInput";
+import SaveBar from "./SaveBar";
+import { useDirtyForm } from "./useDirtyForm";
 
 type Experience = CvContent["experience"][number];
 type Education = CvContent["education"][number];
@@ -16,6 +19,7 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
   const [cv, setCv] = useState<CvContent>(initial);
   const [saving, setSaving] = useState(false);
   const { toast } = useFeedback();
+  const { dirty, markSaved, revert, runSave } = useDirtyForm(cv, save);
 
   const set = (patch: Partial<CvContent>) => setCv((c) => ({ ...c, ...patch }));
   const setInfo = (patch: Partial<CvContent["personalInfo"]>) =>
@@ -37,6 +41,7 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
         body: JSON.stringify(cv),
       });
       if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      markSaved(cv);
       toast("CV saved");
     } catch {
       toast("Network error, CV not saved", "error");
@@ -81,19 +86,8 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
         {/* Top skills */}
         <section className={styles.fsec}>
           <h2>Top skills</h2>
-          <p className={styles.fsp}>The headline skills shown at the top of the CV.</p>
-          <div className={styles.list}>
-            {cv.topSkills.map((s, i) => (
-              <div key={i} className={styles.row}>
-                <input style={{ flex: 1 }} value={s}
-                  onChange={(e) => set({ topSkills: cv.topSkills.map((x, j) => (j === i ? e.target.value : x)) })} />
-                <button className={`${styles.button} ${styles.danger} ${styles.sm}`} onClick={() => set({ topSkills: removeAt(cv.topSkills, i) })}>Remove</button>
-              </div>
-            ))}
-          </div>
-          <div className={styles.addrow}>
-            <button className={styles.chip} onClick={() => set({ topSkills: [...cv.topSkills, ""] })}>+ Add skill</button>
-          </div>
+          <p className={styles.fsp}>The headline skills shown at the top of the CV. Drag to reorder.</p>
+          <TagsInput value={cv.topSkills} label="Top skills" placeholder="Add a skill and press Enter" onChange={(topSkills) => set({ topSkills })} />
         </section>
 
         {/* Experience */}
@@ -131,24 +125,22 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
         {/* Stack */}
         <section className={styles.fsec}>
           <h2>Stack</h2>
-          <p className={styles.fsp}>Tools grouped by category. Tags are comma-separated.</p>
-          {stackEntries.map(([key, values], i) => (
-            <div key={i} className={styles.block}>
-              <div className={styles.grid2}>
-                <div className={styles.field}><label>Category</label>
-                  <input value={key} onChange={(e) => setStack(stackEntries.map((en, j) => (j === i ? [e.target.value, en[1]] : en)))} /></div>
-                <div className={styles.field} style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-                  <button className={`${styles.button} ${styles.danger} ${styles.sm}`}
-                    onClick={() => setStack(stackEntries.filter((_, j) => j !== i))}>Remove category</button>
+          <p className={styles.fsp}>Tools grouped by category.</p>
+          <div className={styles.cvgrid}>
+            {stackEntries.map(([key, values], i) => (
+              <div key={i} className={styles.grp}>
+                <div className={styles.grpHead}>
+                  <input aria-label="Category name" value={key}
+                    onChange={(e) => setStack(stackEntries.map((en, j) => (j === i ? [e.target.value, en[1]] : en)))} />
+                  <button type="button" className={styles.blockBtn} aria-label={`Remove ${key || "category"}`} title="Remove category"
+                    onClick={() => setStack(stackEntries.filter((_, j) => j !== i))}>✕</button>
                 </div>
+                <TagsInput value={values} label={`${key} items`} placeholder="Add a tool"
+                  onChange={(tags) => setStack(stackEntries.map((en, j) => (j === i ? [en[0], tags] : en)))} />
               </div>
-              <div className={styles.field}><label>Items</label>
-                <input value={values.join(", ")}
-                  onChange={(e) => setStack(stackEntries.map((en, j) => (j === i ? [en[0], e.target.value.split(",").map((s) => s.trim()).filter(Boolean)] : en)))} /></div>
-            </div>
-          ))}
-          <div className={styles.addrow}>
-            <button className={styles.chip} onClick={() => setStack([...stackEntries, ["new category", []]])}>+ Add category</button>
+            ))}
+            <button type="button" className={styles.grpAdd}
+              onClick={() => setStack([...stackEntries, [`category ${stackEntries.length + 1}`, []]])}>+ Add category</button>
           </div>
         </section>
 
@@ -202,6 +194,7 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
           </div>
         </section>
       </div>
+      <SaveBar dirty={dirty} saving={saving} onSave={runSave} label="Save CV" onDiscard={() => setCv(revert())} />
     </div>
   );
 }

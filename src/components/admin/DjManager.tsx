@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import type { DjInfo, DjEvent } from "@/lib/types";
 import ImageListEditor from "./ImageListEditor";
 import TagsInput from "./TagsInput";
+import SaveBar from "./SaveBar";
+import { useDirtyForm } from "./useDirtyForm";
 import styles from "@/components/admin/admin.module.scss";
 import { apiError, useFeedback } from "./Feedback";
 import { useExclusive } from "./useExclusive";
@@ -14,6 +16,8 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
   const router = useRouter();
   const { toast, confirm } = useFeedback();
   const { busy, exclusive } = useExclusive();
+  const [savingInfo, setSavingInfo] = useState(false);
+  const { dirty, markSaved, revert, runSave } = useDirtyForm(dj, saveInfo);
   const resync = useRef(false); // adopt the server list on the next refresh (after a failed reorder)
   useEffect(() => {
     if (resync.current) {
@@ -26,15 +30,20 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
     setEvs((xs) => xs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
 
   async function saveInfo() {
+    if (savingInfo) return;
+    setSavingInfo(true);
     try {
       const res = await fetch("/api/admin/dj-info", {
         method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(dj),
       });
       if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      markSaved(dj);
       toast("DJ info saved");
       router.refresh();
     } catch {
       toast("Network error, not saved", "error");
+    } finally {
+      setSavingInfo(false);
     }
   }
   async function saveEvent(i: number) {
@@ -97,7 +106,7 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
             <p className={styles.sub}>Summary, technical rider, photos and events</p>
           </div>
           <div className={styles.actions}>
-            <button className={styles.button} onClick={saveInfo}>Save DJ info</button>
+            <button className={styles.button} disabled={savingInfo} onClick={saveInfo}>Save DJ info</button>
           </div>
         </div>
       </div>
@@ -124,8 +133,6 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
       <div className={styles.field}><label>Partners (comma-separated)</label>
         <TagsInput value={dj.partners} onChange={(partners) => setDj({ ...dj, partners })} /></div>
 
-      <button className={styles.button} onClick={saveInfo}>Save DJ info</button>
-
       <h2 style={{ marginTop: "2rem" }}>Events</h2>
       {evs.map((e, i) => (
         <div key={e.id ?? `new-${i}`} className={styles.block}>
@@ -148,6 +155,7 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
         </div>
       ))}
       <button className={`${styles.button} ${styles.secondary}`} onClick={() => setEvs((xs) => [...xs, { date: "", venue: "", city: "Berlin" }])}>+ Add event</button>
+      <SaveBar dirty={dirty} saving={savingInfo} onSave={runSave} label="Save DJ info" onDiscard={() => setDj(revert())} />
     </div>
   );
 }
