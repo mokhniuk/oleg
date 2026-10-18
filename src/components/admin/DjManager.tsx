@@ -1,38 +1,37 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import type { DjInfo, DjEvent } from "@/lib/types";
 import ImageListEditor from "./ImageListEditor";
+import ImageUploader from "./ImageUploader";
 import TagsInput from "./TagsInput";
 import SaveBar from "./SaveBar";
+import RowList from "./RowList";
+import Tabs from "./Tabs";
+import DjEvents from "./DjEvents";
+import { apiError, useFeedback } from "./Feedback";
 import { useDirtyForm } from "./useDirtyForm";
 import styles from "@/components/admin/admin.module.scss";
-import { apiError, useFeedback } from "./Feedback";
-import { useExclusive } from "./useExclusive";
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
+
+type Rider = DjInfo["technicalRider"][number];
+type Tab = "profile" | "events" | "rider" | "photos";
+
+const part = (dj: DjInfo, tab: Tab) =>
+  JSON.stringify(tab === "profile" ? [dj.summary, dj.bookingEmail, dj.partners] : tab === "rider" ? dj.technicalRider : tab === "photos" ? dj.photos : null);
 
 export default function DjManager({ info, events }: { info: DjInfo; events: DjEvent[] }) {
   const [dj, setDj] = useState<DjInfo>(info);
-  const [evs, setEvs] = useState<DjEvent[]>(events);
+  const [tab, setTab] = useState<Tab>("profile");
+  const [saving, setSaving] = useState(false);
+  const [rev, setRev] = useState(0); // remounts the rider list after Discard
   const router = useRouter();
-  const { toast, confirm } = useFeedback();
-  const { busy, exclusive } = useExclusive();
-  const [savingInfo, setSavingInfo] = useState(false);
-  const { dirty, markSaved, revert, runSave } = useDirtyForm(dj, saveInfo);
-  const resync = useRef(false); // adopt the server list on the next refresh (after a failed reorder)
-  useEffect(() => {
-    if (resync.current) {
-      resync.current = false;
-      setEvs(events);
-    }
-  }, [events]);
-
-  const setEv = (i: number, patch: Partial<DjEvent>) =>
-    setEvs((xs) => xs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
+  const { toast } = useFeedback();
+  const { dirty, baseline, markSaved, revert, runSave } = useDirtyForm(dj, saveInfo);
 
   async function saveInfo() {
-    if (savingInfo) return;
-    setSavingInfo(true);
+    if (saving) return;
+    setSaving(true);
     try {
       const res = await fetch("/api/admin/dj-info", {
         method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(dj),
@@ -44,59 +43,13 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
     } catch {
       toast("Network error, not saved", "error");
     } finally {
-      setSavingInfo(false);
+      setSaving(false);
     }
   }
-  async function saveEvent(i: number) {
-    const e = evs[i];
-    const isEdit = typeof e.id === "number";
-    try {
-      const res = await fetch(isEdit ? `/api/admin/dj-events/${e.id}` : "/api/admin/dj-events", {
-        method: isEdit ? "PUT" : "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(e),
-      });
-      if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
-      // a created row needs its new id, otherwise the next Save would POST a duplicate
-      if (!isEdit) setEv(i, { id: (await res.json()).id });
-      toast(isEdit ? "Event saved" : "Event created");
-      router.refresh();
-    } catch {
-      toast("Network error, not saved", "error");
-    }
-  }
-  async function moveEvent(i: number, delta: -1 | 1) {
-    if (evs.some((x) => typeof x.id !== "number")) return toast("Save new rows before reordering", "error");
-    const next = [...evs];
-    const [moved] = next.splice(i, 1);
-    next.splice(i + delta, 0, moved);
-    setEvs(next);
-    try {
-      const res = await fetch("/api/admin/dj-events/reorder", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ids: next.map((x) => x.id).filter((id) => typeof id === "number") }),
-      });
-      if (!res.ok) throw new Error(await apiError(res, "Reorder failed"));
-      router.refresh();
-    } catch (e) {
-      resync.current = true;
-      router.refresh();
-      toast(e instanceof Error ? e.message : "Reorder failed", "error");
-    }
-  }
-  async function delEvent(i: number) {
-    const e = evs[i];
-    if (typeof e.id !== "number") return setEvs((xs) => xs.filter((_, j) => j !== i));
-    if (!(await confirm({ title: "Delete this event?", message: "This cannot be undone.", confirmLabel: "Delete", danger: true }))) return;
-    try {
-      const res = await fetch(`/api/admin/dj-events/${e.id}`, { method: "DELETE" });
-      if (!res.ok) return toast(await apiError(res, "Delete failed"), "error");
-      setEvs((xs) => xs.filter((x) => x.id !== e.id));
-      toast("Event deleted");
-      router.refresh();
-    } catch {
-      toast("Network error, not deleted", "error");
-    }
-  }
+
+  const dirtyTab = (t: Tab) => t !== "events" && part(dj, t) !== part(baseline, t);
+  const today = new Date().toISOString().slice(0, 10);
+  const upcoming = events.filter((e) => e.date >= today).length;
 
   return (
     <div className={styles.wrap}>
@@ -104,59 +57,93 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
         <div className={styles.pageheadInner}>
           <div>
             <h1>DJ</h1>
-            <p className={styles.sub}>Summary, technical rider, photos and events</p>
+            <p className={styles.sub}>Profile, events, technical rider and photos</p>
           </div>
           <div className={styles.actions}>
-            <button className={styles.button} disabled={savingInfo} onClick={saveInfo}>Save DJ info</button>
+            <a className={`${styles.button} ${styles.secondary}`} href="/dj" target="_blank" rel="noreferrer">
+              View on site <ArrowTopRightOnSquareIcon aria-hidden />
+            </a>
           </div>
         </div>
       </div>
-      <div className={styles.field}><label>Summary</label>
-        <textarea rows={4} value={dj.summary} onChange={(e) => setDj({ ...dj, summary: e.target.value })} /></div>
-      <div className={styles.field}><label>Booking email</label>
-        <input value={dj.bookingEmail} onChange={(e) => setDj({ ...dj, bookingEmail: e.target.value })} /></div>
 
-      <h3>Technical rider</h3>
-      {dj.technicalRider.map((r, i) => (
-        <div key={i} className={styles.block}>
-          <div className={styles.field}><label>Name</label>
-            <input value={r.name} onChange={(e) => setDj({ ...dj, technicalRider: dj.technicalRider.map((x, j) => j === i ? { ...x, name: e.target.value } : x) })} /></div>
-          <div className={styles.field}><label>Description</label>
-            <input value={r.description} onChange={(e) => setDj({ ...dj, technicalRider: dj.technicalRider.map((x, j) => j === i ? { ...x, description: e.target.value } : x) })} /></div>
-          <div className={styles.field}><label>Image path</label>
-            <input value={r.image} onChange={(e) => setDj({ ...dj, technicalRider: dj.technicalRider.map((x, j) => j === i ? { ...x, image: e.target.value } : x) })} /></div>
-          <button className={`${styles.button} ${styles.danger}`} onClick={() => setDj({ ...dj, technicalRider: dj.technicalRider.filter((_, j) => j !== i) })}>Remove</button>
+      <div className={styles.editor}>
+        <div className={styles.editorMain}>
+          <Tabs<Tab>
+            active={tab} onChange={setTab}
+            tabs={[
+              { id: "profile", label: "Profile", dirty: dirtyTab("profile") },
+              { id: "events", label: "Events", count: events.length },
+              { id: "rider", label: "Technical rider", count: dj.technicalRider.length, dirty: dirtyTab("rider") },
+              { id: "photos", label: "Photos", count: dj.photos.length, dirty: dirtyTab("photos") },
+            ]}
+          />
+
+          {tab === "profile" && (
+            <div role="tabpanel" id="panel-profile" aria-labelledby="tab-profile">
+              <div className={styles.field}><label htmlFor="dj-sum">Summary</label>
+                <textarea id="dj-sum" rows={6} value={dj.summary} onChange={(e) => setDj({ ...dj, summary: e.target.value })} /></div>
+              <div className={styles.field}><label htmlFor="dj-mail">Booking email</label>
+                <input id="dj-mail" type="email" value={dj.bookingEmail} onChange={(e) => setDj({ ...dj, bookingEmail: e.target.value })} /></div>
+              <div className={styles.field}><label>Partners</label>
+                <TagsInput value={dj.partners} label="Partners" placeholder="Add a partner and press Enter" onChange={(partners) => setDj({ ...dj, partners })} />
+                <span className={styles.help}>Labels, clubs and collectives. Drag to reorder.</span></div>
+            </div>
+          )}
+
+          {tab === "events" && (
+            <div role="tabpanel" id="panel-events" aria-labelledby="tab-events">
+              <DjEvents events={events} />
+            </div>
+          )}
+
+          {tab === "rider" && (
+            <div role="tabpanel" id="panel-rider" aria-labelledby="tab-rider">
+              <p className={styles.fsp}>Equipment you need on stage. Drag to reorder.</p>
+              <RowList<Rider>
+                key={rev}
+                items={dj.technicalRider} onChange={(technicalRider) => setDj({ ...dj, technicalRider })}
+                create={() => ({ name: "", description: "", image: "" })}
+                title={(r) => r.name} meta={(r) => (r.image ? "Has image" : "")}
+                addLabel="Add rider item" emptyText="No rider items yet."
+                render={(r, up) => (
+                  <>
+                    <div className={styles.field}><label>Name</label><input value={r.name} onChange={(e) => up({ name: e.target.value })} /></div>
+                    <div className={styles.field}><label>Description</label><input value={r.description} onChange={(e) => up({ description: e.target.value })} /></div>
+                    <ImageUploader value={r.image} slug="dj" label="Image" onChange={(image) => up({ image })} />
+                  </>
+                )}
+              />
+            </div>
+          )}
+
+          {tab === "photos" && (
+            <div role="tabpanel" id="panel-photos" aria-labelledby="tab-photos">
+              <ImageListEditor label="Photos" values={dj.photos} slug="dj" onChange={(photos) => setDj({ ...dj, photos })} />
+            </div>
+          )}
         </div>
-      ))}
-      <button className={`${styles.button} ${styles.secondary}`} onClick={() => setDj({ ...dj, technicalRider: [...dj.technicalRider, { name: "", description: "", image: "" }] })}>+ Rider item</button>
 
-      <ImageListEditor label="Photos" values={dj.photos} slug="dj" onChange={(photos) => setDj({ ...dj, photos })} />
-      <div className={styles.field}><label>Partners (comma-separated)</label>
-        <TagsInput value={dj.partners} onChange={(partners) => setDj({ ...dj, partners })} /></div>
+        <aside className={styles.sidebar} aria-label="DJ overview">
+          <div className={styles.scard}>
+            <h3>Profile</h3>
+            <p className={styles.state} data-dirty={dirty}>{dirty ? "Unsaved changes" : "All changes saved"}</p>
+            <p className={styles.help}>Events save on their own. Profile, rider and photos save together.</p>
+          </div>
+          <div className={styles.scard}>
+            <h3>Overview</h3>
+            <dl className={styles.stats}>
+              <div><dt>Events</dt><dd>{events.length}</dd></div>
+              <div><dt>Upcoming</dt><dd>{upcoming}</dd></div>
+              <div><dt>Rider items</dt><dd>{dj.technicalRider.length}</dd></div>
+              <div><dt>Photos</dt><dd>{dj.photos.length}</dd></div>
+              <div><dt>Partners</dt><dd>{dj.partners.length}</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
 
-      <h2 style={{ marginTop: "2rem" }}>Events</h2>
-      {evs.map((e, i) => (
-        <div key={e.id ?? `new-${i}`} className={styles.block}>
-          <div className={styles.row}>
-            <div className={styles.field}><label>Date</label>
-              <input type="date" value={e.date} onChange={(ev) => setEv(i, { date: ev.target.value })} /></div>
-            <div className={styles.field}><label>Venue</label>
-              <input value={e.venue} onChange={(ev) => setEv(i, { venue: ev.target.value })} /></div>
-            <div className={styles.field}><label>City</label>
-              <input value={e.city} onChange={(ev) => setEv(i, { city: ev.target.value })} /></div>
-          </div>
-          <div className={styles.field}><label>Link (optional)</label>
-            <input value={e.link ?? ""} onChange={(ev) => setEv(i, { link: ev.target.value })} /></div>
-          <div className={styles.row}>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => moveEvent(i, -1))} aria-label="Move up" title="Move up"><ArrowUpIcon /></button>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === evs.length - 1} onClick={() => exclusive(() => moveEvent(i, 1))} aria-label="Move down" title="Move down"><ArrowDownIcon /></button>
-            <button className={styles.button} disabled={busy} onClick={() => exclusive(() => saveEvent(i))}>Save</button>
-            <button className={`${styles.button} ${styles.danger}`} disabled={busy} onClick={() => exclusive(() => delEvent(i))}>Delete</button>
-          </div>
-        </div>
-      ))}
-      <button className={`${styles.button} ${styles.secondary}`} onClick={() => setEvs((xs) => [...xs, { date: "", venue: "", city: "Berlin" }])}>+ Add event</button>
-      <SaveBar dirty={dirty} saving={savingInfo} onSave={runSave} label="Save DJ info" onDiscard={() => setDj(revert())} />
+      <SaveBar dirty={dirty} saving={saving} onSave={runSave} label="Save" onDiscard={() => { setDj(revert()); setRev((r) => r + 1); }} />
     </div>
   );
 }
