@@ -1,12 +1,17 @@
+// Best-effort .env load for local runs (Node 20.12+). Harmless if .env or the API is missing.
+try { process.loadEnvFile(); } catch {}
+
 import crypto from "node:crypto";
 import fs from "node:fs";
-import { getPool, initSchema } from "../src/lib/db.ts";
-import { getAllWorks, createWork } from "../src/lib/repositories/works.ts";
-import { getAllPetProjects, createPetProject } from "../src/lib/repositories/petProjects.ts";
-import { getAllDjEvents, createDjEvent } from "../src/lib/repositories/djEvents.ts";
-import { getDjInfo, saveDjInfo } from "../src/lib/repositories/djInfo.ts";
-import { getCv, saveCv } from "../src/lib/repositories/cv.ts";
-import { getPasswordHash, setPasswordHash, getSessionSecret, setSessionSecret } from "../src/lib/repositories/settings.ts";
+
+// Imports are dynamic so they run after the env is loaded (static imports are hoisted).
+const { getPool, initSchema } = await import("../src/lib/db.ts");
+const { getAllWorks, createWork } = await import("../src/lib/repositories/works.ts");
+const { getAllPetProjects, createPetProject } = await import("../src/lib/repositories/petProjects.ts");
+const { getAllDjEvents, createDjEvent } = await import("../src/lib/repositories/djEvents.ts");
+const { getDjInfo, saveDjInfo } = await import("../src/lib/repositories/djInfo.ts");
+const { getCv, saveCv } = await import("../src/lib/repositories/cv.ts");
+const { getPasswordHash, setPasswordHash, getSessionSecret, setSessionSecret } = await import("../src/lib/repositories/settings.ts");
 
 const data = JSON.parse(fs.readFileSync(new URL("./seed-data.json", import.meta.url), "utf8"));
 

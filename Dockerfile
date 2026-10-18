@@ -1,27 +1,40 @@
-# Build stage
+# Production image for the portfolio (Next.js `next start`, MySQL-backed).
+# Not `output: standalone`: the seed/reset scripts run TypeScript from src/ via tsx.
+
+# --- production-only node_modules ---
+FROM node:20-alpine AS deps
+WORKDIR /app
+RUN npm install -g bun
+COPY package.json bun.lock ./
+RUN bun install --production --frozen-lockfile
+
+# --- build ---
 FROM node:20-alpine AS builder
 WORKDIR /app
 RUN npm install -g bun
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 COPY . .
-# mysql2 is pure JS — no native build needed, and the build no longer touches
-# the database (all routes render on demand).
+# The build does not need a database.
 RUN bun run build
 
-# Production stage
+# --- runtime ---
 FROM node:20-alpine AS production
 WORKDIR /app
-ENV NODE_ENV=production
-# DB connection comes from the environment at runtime:
-#   DATABASE_URL=mysql://user:pass@host:3306/dbname
-# or the individual MYSQL_HOST / MYSQL_PORT / MYSQL_USER / MYSQL_PASSWORD / MYSQL_DATABASE vars.
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/next.config.mjs ./next.config.mjs
-COPY --from=builder /app/scripts ./scripts
-COPY --from=builder /app/src ./src
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    UPLOAD_DIR=/data/projects
+# Runtime env (not baked in): DATABASE_URL=mysql://user:pass@host:3306/db
+# Uploads live on a volume at UPLOAD_DIR; named volumes inherit this ownership.
+RUN mkdir -p /data/projects && chown node:node /data/projects
+COPY --from=deps --chown=node:node /app/node_modules ./node_modules
+COPY --from=builder --chown=node:node /app/.next ./.next
+COPY --from=builder --chown=node:node /app/public ./public
+COPY --from=builder --chown=node:node /app/scripts ./scripts
+COPY --from=builder --chown=node:node /app/src ./src
+COPY --from=builder --chown=node:node /app/package.json /app/next.config.mjs /app/tsconfig.json ./
+USER node
 EXPOSE 3000
-CMD ["npx", "next", "start", "-p", "3000"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3000/api/health || exit 1
+CMD ["node_modules/.bin/next", "start", "-p", "3000"]

@@ -35,8 +35,6 @@ Thumbs.db
 
 # Development files
 README.md
-Dockerfile*
-.dockerignore
 jest.config.js
 cypress.config.js
 

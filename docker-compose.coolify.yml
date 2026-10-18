@@ -1,0 +1,57 @@
+# Production stack: Next.js app + MySQL. Built for Coolify ("Docker Compose" build pack,
+# Gitea repo), but also runs with plain Docker Compose.
+#
+# Local run (env values are required, there is no .env in the image):
+#   SERVICE_PASSWORD_DB=changeme SERVICE_PASSWORD_ROOT=changeme-root \
+#     docker compose -f docker-compose.coolify.yml up --build
+# The app listens on container port 3000; no host port is published (Coolify's proxy
+# routes to it). To reach it locally add a `ports: ["3100:3000"]` override file.
+#
+# Coolify-specific bits (marked "COOLIFY"):
+#  - SERVICE_PASSWORD_<ID> / SERVICE_FQDN_<ID>_<PORT> are "magic" variables: Coolify
+#    generates the passwords once (persisted across deploys, editable in the UI) and
+#    assigns the domain you set under Domains for service `app` -> container port 3000.
+#  - No `ports:` and no Traefik labels: Coolify's proxy adds them from the Domains setting.
+#  - Healthchecks are taken from this file (git-based compose apps have no Healthcheck page).
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      # COOLIFY: declares the domain slot for this service (set the real domain in the UI).
+      SERVICE_FQDN_APP_3000: ${SERVICE_FQDN_APP_3000:-}
+      DATABASE_URL: mysql://portfolio:${SERVICE_PASSWORD_DB}@mysql:3306/portfolio
+      UPLOAD_DIR: /data/projects
+    volumes:
+      - uploads:/data/projects
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: portfolio
+      MYSQL_USER: portfolio
+      MYSQL_PASSWORD: ${SERVICE_PASSWORD_DB}
+      MYSQL_ROOT_PASSWORD: ${SERVICE_PASSWORD_ROOT}
+    volumes:
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  uploads:
+  mysql:

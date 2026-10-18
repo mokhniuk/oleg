@@ -1,6 +1,7 @@
-import { describe, it, expect, afterAll, vi } from "vitest";
+import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import sharp from "sharp";
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 
 const session = vi.hoisted(() => ({ valid: true }));
@@ -9,7 +10,8 @@ vi.mock("@/lib/auth", () => ({ hasValidSession: async () => session.valid }));
 import { POST } from "./route";
 
 const SLUG = "vitest-upload";
-const dir = path.join(process.cwd(), "public", "projects", SLUG);
+const root = path.join(os.tmpdir(), `vitest-uploads-${process.pid}`);
+const dir = path.join(root, SLUG);
 
 async function png() {
   return sharp({ create: { width: 4, height: 4, channels: 3, background: "#f00" } }).png().toBuffer();
@@ -28,7 +30,11 @@ async function upload(name: string, data: Buffer | string, type = "image/png", s
   }));
 }
 
-afterAll(() => fs.rm(dir, { recursive: true, force: true }));
+beforeAll(() => { process.env.UPLOAD_DIR = root; });
+afterAll(async () => {
+  delete process.env.UPLOAD_DIR;
+  await fs.rm(root, { recursive: true, force: true });
+});
 
 describe("upload route", () => {
   it("401 without a session", async () => {

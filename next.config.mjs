@@ -1,16 +1,20 @@
-import bundleAnalyzer from '@next/bundle-analyzer';
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
   // Server-rendered app (MySQL-backed). No static export.
   reactStrictMode: true,
 
   experimental: {
     serverComponentsExternalPackages: ["mysql2", "sharp"],
+    // Runs src/instrumentation.ts on server start (creates the DB schema).
+    instrumentationHook: true,
+  },
+
+  // Serve /projects/* through a route handler so files uploaded after startup
+  // are visible (next start snapshots public/ at boot) and so uploads can live on a volume.
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: "/projects/:path*", destination: "/api/media/:path*" }],
+    };
   },
 
   // Images are pre-converted to WebP; keep the optimizer off (local files only).
@@ -59,7 +63,11 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 };
 
-// Only wrap with bundle analyzer when explicitly enabled
-export default process.env.ANALYZE === 'true' 
-  ? withBundleAnalyzer(nextConfig) 
-  : nextConfig;
+// The analyzer is a devDependency: load it only when asked, so `next start`
+// in a production-only install never needs it.
+if (process.env.ANALYZE === 'true') {
+  const { default: bundleAnalyzer } = await import('@next/bundle-analyzer');
+  nextConfig = bundleAnalyzer({ enabled: true })(nextConfig);
+}
+
+export default nextConfig;

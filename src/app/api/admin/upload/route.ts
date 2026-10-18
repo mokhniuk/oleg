@@ -3,6 +3,7 @@ import { hasValidSession } from "@/lib/auth";
 import sharp from "sharp";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { uploadDir } from "@/lib/uploadDir";
 
 export const runtime = "nodejs";
 
@@ -43,7 +44,7 @@ export async function POST(req: Request) {
 
   const buf = Buffer.from(await file.arrayBuffer());
   const base = path.parse(file.name).name.toLowerCase().replace(/[^a-z0-9-_]/g, "-").replace(/^-+|-+$/g, "") || "image";
-  const dir = path.join(process.cwd(), "public", "projects", slug);
+  const dir = path.join(uploadDir(), slug);
   let webp: Buffer;
   try {
     webp = await sharp(buf).rotate().webp({ quality: 82 }).toBuffer();

@@ -18,8 +18,15 @@ bun run lint           # next lint
 bun run test           # vitest run (see DB note below)
 bun run test:watch     # vitest watch
 bun run analyze        # ANALYZE=true next build (bundle analyzer)
-ADMIN_PASSWORD='...' bun run seed   # create schema + import seed-data.json + admin login
+ADMIN_PASSWORD='...' bun run seed   # import seed-data.json + admin login (schema is also created on boot)
+ADMIN_PASSWORD='...' bun run reset-password   # reset admin password, invalidates sessions
 ```
+
+`seed` / `reset-password` run via `tsx` (a production dependency, so they also work inside the
+Docker image: `docker compose exec app npm run reset-password`). They no longer use
+`--env-file`; each script does a best-effort `process.loadEnvFile()` for a local `.env`, so in
+containers just pass env vars. Deployment: see `docs/deploy-coolify.md` (`Dockerfile` +
+`docker-compose.coolify.yml`).
 
 Run a single test file: `bunx vitest run src/lib/repositories/works.test.ts`
 
@@ -30,6 +37,10 @@ The app needs a reachable MySQL. Locally: `docker compose up -d` starts one, and
 either a single `DATABASE_URL` (`mysql://user:pass@host:3306/db`) or the individual
 `MYSQL_HOST/PORT/USER/PASSWORD/DATABASE` vars (URL wins).
 
+- **Schema on boot:** `src/instrumentation.ts` (enabled by `experimental.instrumentationHook`)
+  calls `initSchema()` when the Node server starts, retrying 15x/2s while MySQL comes up; it never
+  crashes the server. `GET /api/health` (no auth) runs `SELECT 1`: 200 `{ok:true}` / 503 `{ok:false}`
+  — used by the Docker/Coolify healthchecks.
 - **Seeding** is a one-time step: `initSchema()` creates tables, `seed-data.json` fills
   content, and `ADMIN_PASSWORD` is hashed into the DB. `ADMIN_PASSWORD` is *only* read by
   the seed script — the running app never reads it.
@@ -74,8 +85,13 @@ signature, it only checks the cookie exists.
   `SiteChrome.tsx` renders the public Header/Footer for everything **except** `/admin/*`,
   which has its own layout/nav.
 
-**Images:** uploads go to `public/projects/<slug>/` as WebP (converted server-side with
-`sharp` in `api/admin/upload/route.ts`). This directory must persist across redeploys. The
+**Images:** uploads go to `<UPLOAD_DIR>/<slug>/` as WebP (converted server-side with
+`sharp` in `api/admin/upload/route.ts`); `UPLOAD_DIR` defaults to `public/projects` (dev) and is a
+volume (`/data/projects`) in Docker, and must persist across redeploys. The stored public path is
+always `/projects/<slug>/<name>.webp`. `next start` snapshots `public/` at boot, so `/projects/*` is
+rewritten (`next.config.mjs` `beforeFiles`) to `src/app/api/media/[...path]/route.ts`, which serves
+from `UPLOAD_DIR` first and falls back to the baked-in `public/projects` (traversal-safe, Range/ETag/304
+support). Don't link to `/projects` files via anything that bypasses this route. The
 `build` script also runs `convert-images.js` over `public/images` and `public/projects`. The
 Next image optimizer is disabled (`images.unoptimized`); `mysql2` and `sharp` are externalized
 in `next.config.mjs`.
