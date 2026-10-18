@@ -9,6 +9,8 @@ import {
   updateWork,
   deleteWork,
   reorderWorks,
+  setWorkFlags,
+  getPublicWorkBySlug,
 } from "./works";
 import type { WorksType } from "../types";
 
@@ -68,5 +70,36 @@ describe.skipIf(!available)("works repository", () => {
     const b = await createWork({ ...sample, slug: "b" });
     await reorderWorks([b, a]);
     expect((await getAllWorks()).map((w) => w.slug)).toEqual(["b", "a"]);
+  });
+
+  it("patches only the given flags", async () => {
+    const id = await createWork(sample);
+    await setWorkFlags(id, { show: false });
+    let got = (await getWorkBySlug("bagel-bro"))!;
+    expect(got.show).toBe(false);
+    expect(got.featured).toBe(true);
+    await setWorkFlags(id, { featured: false, inProgress: false });
+    got = (await getWorkBySlug("bagel-bro"))!;
+    expect(got.featured).toBe(false);
+    expect(got.inProgress).toBe(false);
+    expect(got.show).toBe(false);
+  });
+
+  it("refuses a reorder list that is stale, partial or has duplicates", async () => {
+    const a = await createWork({ ...sample, slug: "a" });
+    const b = await createWork({ ...sample, slug: "b" });
+    expect(await reorderWorks([b])).toBe(false);
+    expect(await reorderWorks([b, b])).toBe(false);
+    expect(await reorderWorks([b, a, 9999])).toBe(false);
+    expect((await getAllWorks()).map((w) => w.slug)).toEqual(["a", "b"]);
+    expect(await reorderWorks([b, a])).toBe(true);
+  });
+
+  it("public lookup hides works with show = false", async () => {
+    const id = await createWork(sample);
+    expect((await getPublicWorkBySlug("bagel-bro"))?.id).toBe(id);
+    await setWorkFlags(id, { show: false });
+    expect(await getPublicWorkBySlug("bagel-bro")).toBeNull();
+    expect(await getWorkBySlug("bagel-bro")).not.toBeNull();
   });
 });

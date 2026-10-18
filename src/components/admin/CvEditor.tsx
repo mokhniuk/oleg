@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { CvContent } from "@/lib/types";
 import styles from "@/components/admin/admin.module.scss";
+import { apiError, useFeedback } from "./Feedback";
 
 type Experience = CvContent["experience"][number];
 type Education = CvContent["education"][number];
@@ -14,7 +15,7 @@ const emptyLanguage: Language = { language: "", level: "" };
 export default function CvEditor({ initial }: { initial: CvContent }) {
   const [cv, setCv] = useState<CvContent>(initial);
   const [saving, setSaving] = useState(false);
-  const [note, setNote] = useState("");
+  const { toast } = useFeedback();
 
   const set = (patch: Partial<CvContent>) => setCv((c) => ({ ...c, ...patch }));
   const setInfo = (patch: Partial<CvContent["personalInfo"]>) =>
@@ -29,14 +30,19 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
 
   async function save() {
     setSaving(true);
-    setNote("");
-    const res = await fetch("/api/admin/cv", {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(cv),
-    });
-    setSaving(false);
-    setNote(res.ok ? "Saved" : "Save failed");
+    try {
+      const res = await fetch("/api/admin/cv", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(cv),
+      });
+      if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      toast("CV saved");
+    } catch {
+      toast("Network error, CV not saved", "error");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -45,7 +51,7 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
         <div className={styles.pageheadInner}>
           <div>
             <h1>CV</h1>
-            <p className={styles.sub}>{note || "Experience, skills, languages and education"}</p>
+            <p className={styles.sub}>Experience, skills, languages and education</p>
           </div>
           <div className={styles.actions}>
             <button className={styles.button} disabled={saving} onClick={save}>{saving ? "Saving…" : "Save CV"}</button>

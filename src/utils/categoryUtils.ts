@@ -5,7 +5,7 @@ import { getAllWorks } from "@/lib/repositories/works";
  */
 export async function getWorksByCategory(category: string) {
     return (await getAllWorks()).filter(
-        (work) => work.show && work.categories.includes(category.toLowerCase())
+        (work) => work.show && work.categories.some((c) => c.toLowerCase() === category.toLowerCase())
     );
 }
 
@@ -16,7 +16,7 @@ export async function getAllCategories(): Promise<string[]> {
     const categoriesSet = new Set<string>();
     (await getAllWorks()).forEach((work) => {
         if (work.show) {
-            work.categories.forEach((category) => categoriesSet.add(category));
+            work.categories.forEach((category) => categoriesSet.add(category.toLowerCase()));
         }
     });
     return Array.from(categoriesSet).sort();

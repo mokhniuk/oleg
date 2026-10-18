@@ -183,7 +183,8 @@
   width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(4px); color: #181818; display: grid; place-items: center; cursor: pointer; text-decoration: none;
 }
-.wacts a:hover, .wacts button:hover { background: #fff; }
+.wacts a:hover, .wacts button:hover:not(:disabled) { background: #fff; }
+.wacts button:disabled { opacity: 0.35; cursor: default; }
 .wacts .del:hover { color: #c8483d; }
 .wacts svg { width: 15px; height: 15px; }
 
@@ -265,4 +266,35 @@
   .works { grid-template-columns: 1fr; }
   .grid2, .grid3 { grid-template-columns: 1fr; }
   .actions { margin-left: 0; }
+}
+
+/* ---- feedback: toasts + confirm dialog ---- */
+.toasts {
+  position: fixed; right: 24px; bottom: 24px; z-index: 100; display: flex; flex-direction: column;
+  gap: 10px; align-items: flex-end; pointer-events: none;
+}
+.toast {
+  pointer-events: auto; cursor: pointer; max-width: 360px; padding: 13px 20px; border-radius: 100px;
+  background: var(--ink); color: var(--paper); font-size: 14.5px; font-weight: 650;
+  animation: toastIn 0.18s ease;
+}
+.toastError { background: #c8483d; color: #fff; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.dialog {
+  width: 100%; max-width: 400px; padding: 28px; border-radius: 22px; background: var(--paper); color: var(--ink);
+  animation: toastIn 0.18s ease;
+}
+.dialog h3 { font-size: 20px; line-height: 1.2; }
+.dialog p { color: var(--ink-soft); font-size: 15px; margin-top: 10px; }
+.dialogActions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.button.dangerSolid { background: #c8483d; color: #fff; }
+
+@media (max-width: 820px) {
+  .toasts { left: 16px; right: 16px; align-items: stretch; }
+  .toast { max-width: none; border-radius: 16px; }
 }

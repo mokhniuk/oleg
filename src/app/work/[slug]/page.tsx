@@ -1,4 +1,4 @@
-import { getAllWorks, getWorkBySlug } from "@/lib/repositories/works";
+import { getAllWorks, getPublicWorkBySlug } from "@/lib/repositories/works";
 import { CaseStudyBlock } from "@/lib/types";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -53,7 +53,7 @@ interface CaseStudy {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: CaseStudyPageProps) {
-  const work = await getWorkBySlug(params.slug);
+  const work = await getPublicWorkBySlug(params.slug);
 
   if (!work) {
     return {
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps) {
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const work = await getWorkBySlug(params.slug);
+  const work = await getPublicWorkBySlug(params.slug);
 
   if (!work) {
     notFound();

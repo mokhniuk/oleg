@@ -1,39 +1,91 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { DjInfo, DjEvent } from "@/lib/types";
 import ImageListEditor from "./ImageListEditor";
+import TagsInput from "./TagsInput";
 import styles from "@/components/admin/admin.module.scss";
+import { apiError, useFeedback } from "./Feedback";
+import { useExclusive } from "./useExclusive";
 
 export default function DjManager({ info, events }: { info: DjInfo; events: DjEvent[] }) {
   const [dj, setDj] = useState<DjInfo>(info);
   const [evs, setEvs] = useState<DjEvent[]>(events);
   const router = useRouter();
+  const { toast, confirm } = useFeedback();
+  const { busy, exclusive } = useExclusive();
+  const resync = useRef(false); // adopt the server list on the next refresh (after a failed reorder)
+  useEffect(() => {
+    if (resync.current) {
+      resync.current = false;
+      setEvs(events);
+    }
+  }, [events]);
 
   const setEv = (i: number, patch: Partial<DjEvent>) =>
     setEvs((xs) => xs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
 
   async function saveInfo() {
-    const res = await fetch("/api/admin/dj-info", {
-      method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(dj),
-    });
-    if (res.ok) alert("DJ info saved");
-    else alert("Save failed");
+    try {
+      const res = await fetch("/api/admin/dj-info", {
+        method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(dj),
+      });
+      if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      toast("DJ info saved");
+      router.refresh();
+    } catch {
+      toast("Network error, not saved", "error");
+    }
   }
-  async function saveEvent(e: DjEvent) {
+  async function saveEvent(i: number) {
+    const e = evs[i];
     const isEdit = typeof e.id === "number";
-    const res = await fetch(isEdit ? `/api/admin/dj-events/${e.id}` : "/api/admin/dj-events", {
-      method: isEdit ? "PUT" : "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(e),
-    });
-    if (res.ok) router.refresh();
-    else alert("Save failed");
+    try {
+      const res = await fetch(isEdit ? `/api/admin/dj-events/${e.id}` : "/api/admin/dj-events", {
+        method: isEdit ? "PUT" : "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(e),
+      });
+      if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      // a created row needs its new id, otherwise the next Save would POST a duplicate
+      if (!isEdit) setEv(i, { id: (await res.json()).id });
+      toast(isEdit ? "Event saved" : "Event created");
+      router.refresh();
+    } catch {
+      toast("Network error, not saved", "error");
+    }
   }
-  async function delEvent(e: DjEvent) {
-    if (e.id && confirm("Delete event?")) {
+  async function moveEvent(i: number, delta: -1 | 1) {
+    if (evs.some((x) => typeof x.id !== "number")) return toast("Save new rows before reordering", "error");
+    const next = [...evs];
+    const [moved] = next.splice(i, 1);
+    next.splice(i + delta, 0, moved);
+    setEvs(next);
+    try {
+      const res = await fetch("/api/admin/dj-events/reorder", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ids: next.map((x) => x.id).filter((id) => typeof id === "number") }),
+      });
+      if (!res.ok) throw new Error(await apiError(res, "Reorder failed"));
+      router.refresh();
+    } catch (e) {
+      resync.current = true;
+      router.refresh();
+      toast(e instanceof Error ? e.message : "Reorder failed", "error");
+    }
+  }
+  async function delEvent(i: number) {
+    const e = evs[i];
+    if (typeof e.id !== "number") return setEvs((xs) => xs.filter((_, j) => j !== i));
+    if (!(await confirm({ title: "Delete this event?", message: "This cannot be undone.", confirmLabel: "Delete", danger: true }))) return;
+    try {
       const res = await fetch(`/api/admin/dj-events/${e.id}`, { method: "DELETE" });
-      if (res.ok) router.refresh();
-      else alert("Delete failed");
-    } else setEvs((xs) => xs.filter((x) => x !== e));
+      if (!res.ok) return toast(await apiError(res, "Delete failed"), "error");
+      setEvs((xs) => xs.filter((x) => x.id !== e.id));
+      toast("Event deleted");
+      router.refresh();
+    } catch {
+      toast("Network error, not deleted", "error");
+    }
   }
 
   return (
@@ -70,7 +122,7 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
 
       <ImageListEditor label="Photos" values={dj.photos} slug="dj" onChange={(photos) => setDj({ ...dj, photos })} />
       <div className={styles.field}><label>Partners (comma-separated)</label>
-        <input value={dj.partners.join(", ")} onChange={(e) => setDj({ ...dj, partners: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })} /></div>
+        <TagsInput value={dj.partners} onChange={(partners) => setDj({ ...dj, partners })} /></div>
 
       <button className={styles.button} onClick={saveInfo}>Save DJ info</button>
 
@@ -88,8 +140,10 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
           <div className={styles.field}><label>Link (optional)</label>
             <input value={e.link ?? ""} onChange={(ev) => setEv(i, { link: ev.target.value })} /></div>
           <div className={styles.row}>
-            <button className={styles.button} onClick={() => saveEvent(evs[i])}>Save</button>
-            <button className={`${styles.button} ${styles.danger}`} onClick={() => delEvent(evs[i])}>Delete</button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => moveEvent(i, -1))} aria-label="Move up">↑</button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === evs.length - 1} onClick={() => exclusive(() => moveEvent(i, 1))} aria-label="Move down">↓</button>
+            <button className={styles.button} disabled={busy} onClick={() => exclusive(() => saveEvent(i))}>Save</button>
+            <button className={`${styles.button} ${styles.danger}`} disabled={busy} onClick={() => exclusive(() => delEvent(i))}>Delete</button>
           </div>
         </div>
       ))}

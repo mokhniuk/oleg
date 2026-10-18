@@ -1,4 +1,4 @@
-import { rows, run } from "../db";
+import { rows, run, reorderRows } from "../db";
 import type { DjEvent } from "../types";
 
 type Row = {
@@ -40,8 +40,8 @@ export async function createDjEvent(input: DjEvent): Promise<number> {
   return res.insertId;
 }
 
-export async function updateDjEvent(id: number, input: DjEvent): Promise<void> {
-  await run(
+export async function updateDjEvent(id: number, input: DjEvent): Promise<boolean> {
+  const res = await run(
     "UPDATE dj_events SET `date`=:date, venue=:venue, city=:city, link=:link WHERE id=:id",
     {
       id,
@@ -51,14 +51,13 @@ export async function updateDjEvent(id: number, input: DjEvent): Promise<void> {
       link: input.link ?? null,
     },
   );
+  return res.affectedRows > 0;
 }
 
-export async function deleteDjEvent(id: number): Promise<void> {
-  await run("DELETE FROM dj_events WHERE id = :id", { id });
+export async function deleteDjEvent(id: number): Promise<boolean> {
+  return (await run("DELETE FROM dj_events WHERE id = :id", { id })).affectedRows > 0;
 }
 
-export async function reorderDjEvents(ids: number[]): Promise<void> {
-  for (let i = 0; i < ids.length; i++) {
-    await run("UPDATE dj_events SET sort_order = :o WHERE id = :id", { o: i, id: ids[i] });
-  }
+export async function reorderDjEvents(ids: number[]): Promise<boolean> {
+  return reorderRows("dj_events", ids);
 }

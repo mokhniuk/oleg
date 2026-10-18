@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import type { WorksType, CaseStudyBlock } from "@/lib/types";
 import BlocksEditor from "./BlocksEditor";
 import ImageUploader from "./ImageUploader";
+import TagsInput from "./TagsInput";
+import { apiError, useFeedback } from "./Feedback";
 import styles from "@/components/admin/admin.module.scss";
 
 const emptyWork: WorksType = {
@@ -14,6 +16,7 @@ export default function WorkForm({ initial }: { initial?: WorksType }) {
   const [work, setWork] = useState<WorksType>(initial ?? emptyWork);
   const [saving, setSaving] = useState(false);
   const router = useRouter();
+  const { toast } = useFeedback();
   const slug = work.slug ?? "";
 
   const set = (patch: Partial<WorksType>) => setWork((w) => ({ ...w, ...patch }));
@@ -23,15 +26,22 @@ export default function WorkForm({ initial }: { initial?: WorksType }) {
 
   async function save() {
     setSaving(true);
-    const isEdit = typeof work.id === "number";
-    const res = await fetch(isEdit ? `/api/admin/works/${work.id}` : "/api/admin/works", {
-      method: isEdit ? "PUT" : "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(work),
-    });
-    setSaving(false);
-    if (res.ok) router.push("/admin/works");
-    else alert("Save failed");
+    try {
+      const isEdit = typeof work.id === "number";
+      const res = await fetch(isEdit ? `/api/admin/works/${work.id}` : "/api/admin/works", {
+        method: isEdit ? "PUT" : "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(work),
+      });
+      if (!res.ok) return toast(await apiError(res, "Save failed"), "error");
+      toast(isEdit ? "Work saved" : "Work created");
+      router.push("/admin/works");
+      router.refresh();
+    } catch {
+      toast("Network error, work not saved", "error");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -72,9 +82,8 @@ export default function WorkForm({ initial }: { initial?: WorksType }) {
               </div>
             </div>
             <div className={styles.field}><label>Categories</label>
-              <input value={work.categories.join(", ")}
-                onChange={(e) => set({ categories: e.target.value.split(",").map((c) => c.trim()).filter(Boolean) })} />
-              <span className={styles.help}>Comma-separated tags.</span>
+              <TagsInput value={work.categories} onChange={(categories) => set({ categories })} />
+              <span className={styles.help}>Comma-separated tags, saved in lowercase.</span>
             </div>
           </div>
 

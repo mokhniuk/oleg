@@ -36,7 +36,7 @@ export default async function WorksListPage() {
                   <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
                 </svg>
               </Link>
-              <WorksListActions id={w.id!} />
+              <WorksListActions id={w.id!} ids={works.map((x) => x.id!)} show={w.show} featured={!!w.featured} />
             </span>
             <Link href={`/admin/works/${w.id}`} className={styles.wtitle} style={{ textDecoration: "none" }}>
               {w.title}

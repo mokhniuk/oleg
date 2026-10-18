@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "@/components/admin/admin.module.scss";
+import { apiError, useFeedback } from "./Feedback";
 
 export default function ImageUploader({
   value,
@@ -14,15 +15,22 @@ export default function ImageUploader({
   label?: string;
 }) {
   const [busy, setBusy] = useState(false);
+  const { toast } = useFeedback();
   async function upload(file: File) {
     setBusy(true);
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("slug", slug || "misc");
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    setBusy(false);
-    if (res.ok) onChange((await res.json()).path);
-    else alert("Upload failed");
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("slug", slug);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+      if (!res.ok) return toast(await apiError(res, "Upload failed"), "error");
+      onChange((await res.json()).path);
+      toast("Image uploaded");
+    } catch {
+      toast("Network error, upload failed", "error");
+    } finally {
+      setBusy(false);
+    }
   }
   return (
     <div className={styles.field}>
@@ -32,10 +40,11 @@ export default function ImageUploader({
         <input
           type="file"
           accept="image/*"
-          disabled={busy}
+          disabled={busy || !slug}
           onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])}
         />
       </div>
+      {!slug && <span className={styles.help}>Set a slug first to enable uploads.</span>}
       <input value={value ?? ""} onChange={(e) => onChange(e.target.value)} placeholder="/projects/slug/image.webp" />
     </div>
   );

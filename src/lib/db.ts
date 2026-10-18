@@ -58,6 +58,43 @@ export async function run(sql: string, params?: Params, pool: Pool = getPool()):
   return result as mysql.ResultSetHeader;
 }
 
+/** Run `fn` on one connection inside a transaction; rolls back if it throws. */
+export async function inTransaction<T>(fn: (conn: mysql.PoolConnection) => Promise<T>, pool: Pool = getPool()): Promise<T> {
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    const out = await fn(conn);
+    await conn.commit();
+    return out;
+  } catch (e) {
+    try {
+      await conn.rollback();
+    } catch {
+      conn.destroy(); // connection is broken; don't hand it back to the pool
+    }
+    throw e;
+  } finally {
+    conn.release();
+  }
+}
+
+/**
+ * Set sort_order = position for every row of `table`. `ids` must be exactly the
+ * current set of row ids (no duplicates, nothing missing or unknown); otherwise
+ * nothing changes and false is returned, so a stale client list can't scramble the order.
+ */
+export async function reorderRows(table: "works" | "pet_projects" | "dj_events", ids: number[]): Promise<boolean> {
+  return inTransaction(async (conn) => {
+    const [existing] = await conn.query<mysql.RowDataPacket[]>(`SELECT id FROM \`${table}\` FOR UPDATE`);
+    const have = new Set(existing.map((r) => r.id as number));
+    if (new Set(ids).size !== ids.length || ids.length !== have.size || !ids.every((id) => have.has(id))) return false;
+    for (let i = 0; i < ids.length; i++) {
+      await conn.query(`UPDATE \`${table}\` SET sort_order = ? WHERE id = ?`, [i, ids[i]]);
+    }
+    return true;
+  });
+}
+
 // JSON is stored as LONGTEXT and (de)serialized in the repositories. Booleans
 // are TINYINT (0/1). `show` and `date` are reserved words, so they are
 // back-ticked wherever referenced.
