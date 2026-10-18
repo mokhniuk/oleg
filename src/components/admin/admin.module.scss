@@ -449,3 +449,21 @@
   font: inherit; font-weight: 650; cursor: pointer;
 }
 .grpAdd:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+/* ---- icons (Heroicons) ---- */
+.shell svg[aria-hidden], .button svg, .blockBtn svg, .bgrip svg, .wgrip svg, .tagChip button svg, .viewSite svg, .back svg { flex: none; }
+.button svg, .viewSite svg { width: 16px; height: 16px; stroke-width: 2; }
+.button:has(> svg:only-child) { padding: 11px; }
+.button.sm:has(> svg:only-child) { padding: 8px; }
+.blockBtn svg { width: 17px; height: 17px; }
+.bgrip svg { width: 18px; height: 18px; }
+.wgrip svg { width: 18px; height: 18px; }
+.tagChip button { display: grid; place-items: center; }
+.tagChip button svg { width: 12px; height: 12px; stroke-width: 2.5; }
+.wacts svg { width: 17px; height: 17px; }
+.viewSite { display: inline-flex; align-items: center; gap: 6px; }
+.back { display: inline-flex; align-items: center; gap: 6px; }
+.back svg { width: 16px; height: 16px; stroke-width: 2; }
+.grpHead .blockBtn svg { width: 16px; height: 16px; }
+.more { display: inline-flex; align-items: center; gap: 6px; }
+.more svg { width: 16px; height: 16px; stroke-width: 2; }

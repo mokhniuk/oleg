@@ -9,6 +9,7 @@ import { useDirtyForm } from "./useDirtyForm";
 import styles from "@/components/admin/admin.module.scss";
 import { apiError, useFeedback } from "./Feedback";
 import { useExclusive } from "./useExclusive";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
 
 export default function DjManager({ info, events }: { info: DjInfo; events: DjEvent[] }) {
   const [dj, setDj] = useState<DjInfo>(info);
@@ -147,8 +148,8 @@ export default function DjManager({ info, events }: { info: DjInfo; events: DjEv
           <div className={styles.field}><label>Link (optional)</label>
             <input value={e.link ?? ""} onChange={(ev) => setEv(i, { link: ev.target.value })} /></div>
           <div className={styles.row}>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => moveEvent(i, -1))} aria-label="Move up">↑</button>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === evs.length - 1} onClick={() => exclusive(() => moveEvent(i, 1))} aria-label="Move down">↓</button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => moveEvent(i, -1))} aria-label="Move up" title="Move up"><ArrowUpIcon /></button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === evs.length - 1} onClick={() => exclusive(() => moveEvent(i, 1))} aria-label="Move down" title="Move down"><ArrowDownIcon /></button>
             <button className={styles.button} disabled={busy} onClick={() => exclusive(() => saveEvent(i))}>Save</button>
             <button className={`${styles.button} ${styles.danger}`} disabled={busy} onClick={() => exclusive(() => delEvent(i))}>Delete</button>
           </div>

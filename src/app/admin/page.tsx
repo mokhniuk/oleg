@@ -6,6 +6,7 @@ import { getAllDjEvents } from "@/lib/repositories/djEvents";
 import { hasValidSession } from "@/lib/auth";
 import { isDarkColor } from "@/lib/color";
 import styles from "@/components/admin/admin.module.scss";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +57,7 @@ export default async function AdminDashboard() {
 
       <div className={styles.seclbl}>
         <h2>Recent works</h2>
-        <Link href="/admin/works" className={styles.more}>All works →</Link>
+        <Link href="/admin/works" className={styles.more}>All works <ArrowRightIcon aria-hidden /></Link>
       </div>
       <div className={styles.works}>
         {recent.map((w) => (

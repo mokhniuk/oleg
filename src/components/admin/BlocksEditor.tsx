@@ -5,6 +5,7 @@ import ImageUploader from "./ImageUploader";
 import ImageListEditor from "./ImageListEditor";
 import { SortableItem, SortableList } from "./Sortable";
 import styles from "@/components/admin/admin.module.scss";
+import { Bars2Icon, ChevronDownIcon, ChevronUpIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 const BLOCK_TYPES: CaseStudyBlock["type"][] = [
   "section",
@@ -174,14 +175,14 @@ export default function BlocksEditor({
               {(handle) => (
                 <div className={`${styles.brow} ${isOpen ? styles.browOpen : ""}`}>
                   <div className={styles.browHead}>
-                    <button type="button" className={styles.bgrip} aria-label="Drag block" {...handle}>⋮⋮</button>
+                    <button type="button" className={styles.bgrip} aria-label="Drag block" {...handle}><Bars2Icon /></button>
                     <button type="button" className={styles.browMain} aria-expanded={isOpen} onClick={() => toggle(k)}>
                       <span className={styles.kind}>{b.type}</span>
                       <span className={styles.browText}>{summary(b)}</span>
                     </button>
-                    <button type="button" className={styles.blockBtn} onClick={() => duplicate(i)} aria-label="Duplicate block" title="Duplicate">⧉</button>
-                    <button type="button" className={`${styles.blockBtn} ${styles.del}`} onClick={() => remove(i)} aria-label="Delete block" title="Delete">✕</button>
-                    <button type="button" className={styles.blockBtn} onClick={() => toggle(k)} aria-label={isOpen ? "Collapse" : "Expand"}>{isOpen ? "▴" : "▾"}</button>
+                    <button type="button" className={styles.blockBtn} onClick={() => duplicate(i)} aria-label="Duplicate block" title="Duplicate"><DocumentDuplicateIcon /></button>
+                    <button type="button" className={`${styles.blockBtn} ${styles.del}`} onClick={() => remove(i)} aria-label="Delete block" title="Delete"><TrashIcon /></button>
+                    <button type="button" className={styles.blockBtn} onClick={() => toggle(k)} aria-label={isOpen ? "Collapse" : "Expand"}>{isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}</button>
                   </div>
                   {isOpen && <div className={styles.browBody}>{fields(b, i)}</div>}
                 </div>

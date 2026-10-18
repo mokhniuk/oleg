@@ -2,6 +2,7 @@
 import { useId, useState } from "react";
 import styles from "@/components/admin/admin.module.scss";
 import { SortableItem, SortableList } from "./Sortable";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 /**
  * Chip input: type and press Enter or comma to add, Backspace on an empty field removes the
@@ -52,7 +53,7 @@ export default function TagsInput({
                   type="button"
                   aria-label={`Remove ${tag}`}
                   onClick={(e) => { e.stopPropagation(); onChange(value.filter((_, j) => j !== i)); }}
-                >×</button>
+                ><XMarkIcon /></button>
               </span>
             )}
           </SortableItem>

@@ -5,6 +5,7 @@ import type { PetProject } from "@/lib/types";
 import styles from "@/components/admin/admin.module.scss";
 import { apiError, useFeedback } from "./Feedback";
 import { useExclusive } from "./useExclusive";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
 
 export default function PetProjectsManager({ initial }: { initial: PetProject[] }) {
   const [items, setItems] = useState<PetProject[]>(initial);
@@ -96,8 +97,8 @@ export default function PetProjectsManager({ initial }: { initial: PetProject[] 
           <div className={styles.field}><label>Description</label>
             <input value={p.description} onChange={(e) => set(i, { description: e.target.value })} /></div>
           <div className={styles.row}>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => move(i, -1))} aria-label="Move up">↑</button>
-            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === items.length - 1} onClick={() => exclusive(() => move(i, 1))} aria-label="Move down">↓</button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === 0} onClick={() => exclusive(() => move(i, -1))} aria-label="Move up" title="Move up"><ArrowUpIcon /></button>
+            <button className={`${styles.button} ${styles.secondary}`} disabled={busy || i === items.length - 1} onClick={() => exclusive(() => move(i, 1))} aria-label="Move down" title="Move down"><ArrowDownIcon /></button>
             <button className={styles.button} disabled={busy} onClick={() => exclusive(() => save(i))}>Save</button>
             <button className={`${styles.button} ${styles.danger}`} disabled={busy} onClick={() => exclusive(() => del(i))}>Delete</button>
           </div>

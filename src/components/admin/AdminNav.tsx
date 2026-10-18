@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "@/components/admin/admin.module.scss";
 import LogoutButton from "@/components/admin/LogoutButton";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 /**
  * Admin navigation bar. Hidden on the login page, where there is no
@@ -35,7 +36,7 @@ export default function AdminNav() {
         ))}
       </nav>
       <span className={styles.headRight}>
-        <a href="/" target="_blank" rel="noreferrer" className={styles.viewSite}>View site <span aria-hidden>↗</span></a>
+        <a href="/" target="_blank" rel="noreferrer" className={styles.viewSite}>View site <ArrowTopRightOnSquareIcon aria-hidden /></a>
         <LogoutButton />
       </span>
     </header>

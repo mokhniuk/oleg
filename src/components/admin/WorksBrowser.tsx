@@ -8,6 +8,7 @@ import styles from "@/components/admin/admin.module.scss";
 import WorksListActions from "./WorksListActions";
 import { SortableItem, SortableList } from "./Sortable";
 import { apiError, useFeedback } from "./Feedback";
+import { ArrowTopRightOnSquareIcon, Bars2Icon, PencilIcon } from "@heroicons/react/24/outline";
 
 type View = "grid" | "list";
 type Filter = "all" | "featured" | "hidden";
@@ -123,18 +124,16 @@ export default function WorksBrowser({ works }: { works: WorksType[] }) {
                 {(handle) => (
                   <div className={`${styles.wcard} ${view === "list" ? styles.wrow : ""} ${isDarkColor(w.bgColor) ? styles.onDark : ""}`} style={{ background: w.bgColor }}>
                     {!filtering && (
-                      <button type="button" className={styles.wgrip} aria-label={`Drag ${w.title}`} {...handle}>⋮⋮</button>
+                      <button type="button" className={styles.wgrip} aria-label={`Drag ${w.title}`} {...handle}><Bars2Icon /></button>
                     )}
                     <span className={styles.wacts}>
                       {w.show && (
                         <a href={`/work/${w.slug}`} target="_blank" rel="noreferrer" aria-label="View on site" title="View on site">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg>
+                          <ArrowTopRightOnSquareIcon />
                         </a>
                       )}
                       <Link href={`/admin/works/${w.id}`} aria-label="Edit work" title="Edit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
-                        </svg>
+                        <PencilIcon />
                       </Link>
                       <WorksListActions id={w.id!} ids={order} show={w.show} featured={!!w.featured} />
                     </span>

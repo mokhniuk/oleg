@@ -10,6 +10,7 @@ import SaveBar from "./SaveBar";
 import { apiError, useFeedback } from "./Feedback";
 import { useDirtyForm } from "./useDirtyForm";
 import styles from "@/components/admin/admin.module.scss";
+import { ArrowLeftIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 const emptyWork: WorksType = {
   slug: "", title: "", description: "", bgColor: "#ffffff", categories: [], show: true, featured: false, inProgress: false, caseStudy: { blocks: [] },
@@ -140,14 +141,14 @@ export default function WorkForm({ initial, categorySuggestions = [] }: { initia
       <div className={styles.pagehead}>
         <div className={styles.pageheadInner}>
           <div>
-            <Link href="/admin/works" className={styles.back}>← Works</Link>
+            <Link href="/admin/works" className={styles.back}><ArrowLeftIcon aria-hidden /> Works</Link>
             <h1>{work.id ? work.title || "Edit work" : "New work"}</h1>
             <p className={styles.sub}>{slug ? `/work/${slug}` : "A new project"}</p>
           </div>
           <div className={styles.actions}>
             {isEdit && work.show && (
               <a className={`${styles.button} ${styles.secondary}`} href={`/work/${work.slug}`} target="_blank" rel="noreferrer">
-                View on site ↗
+                View on site <ArrowTopRightOnSquareIcon aria-hidden />
               </a>
             )}
           </div>

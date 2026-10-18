@@ -6,6 +6,7 @@ import { apiError, useFeedback } from "./Feedback";
 import TagsInput from "./TagsInput";
 import SaveBar from "./SaveBar";
 import { useDirtyForm } from "./useDirtyForm";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 type Experience = CvContent["experience"][number];
 type Education = CvContent["education"][number];
@@ -133,7 +134,7 @@ export default function CvEditor({ initial }: { initial: CvContent }) {
                   <input aria-label="Category name" value={key}
                     onChange={(e) => setStack(stackEntries.map((en, j) => (j === i ? [e.target.value, en[1]] : en)))} />
                   <button type="button" className={styles.blockBtn} aria-label={`Remove ${key || "category"}`} title="Remove category"
-                    onClick={() => setStack(stackEntries.filter((_, j) => j !== i))}>✕</button>
+                    onClick={() => setStack(stackEntries.filter((_, j) => j !== i))}><TrashIcon /></button>
                 </div>
                 <TagsInput value={values} label={`${key} items`} placeholder="Add a tool"
                   onChange={(tags) => setStack(stackEntries.map((en, j) => (j === i ? [en[0], tags] : en)))} />
