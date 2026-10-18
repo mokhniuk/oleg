@@ -60,7 +60,11 @@ if (!(await getCv())) {
 
 // Auth settings
 if (!(await getPasswordHash())) {
-  await setPasswordHash(scryptHash(process.env.ADMIN_PASSWORD || "changeme"));
+  if (!process.env.ADMIN_PASSWORD) {
+    console.error("ADMIN_PASSWORD is required to set the initial admin password");
+    process.exit(1);
+  }
+  await setPasswordHash(scryptHash(process.env.ADMIN_PASSWORD));
   console.log("Set initial admin password");
 }
 if (!(await getSessionSecret())) {

@@ -10,7 +10,7 @@
     "analyze": "ANALYZE=true next build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "seed": "tsx scripts/seed-db.mjs",
+    "seed": "tsx --env-file=.env scripts/seed-db.mjs",
     "reset-password": "tsx --env-file=.env scripts/reset-admin-password.mjs"
   },
   "dependencies": {
@@ -18,7 +18,8 @@
     "next": "14.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.105.0"
+    "sass": "^1.105.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.3.6",
@@ -27,7 +28,6 @@
     "@types/react-dom": "^18.3.7",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.3",
-    "sharp": "^0.34.5",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
