@@ -10,7 +10,8 @@
     "analyze": "ANALYZE=true next build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "seed": "tsx scripts/seed-db.mjs"
+    "seed": "tsx scripts/seed-db.mjs",
+    "reset-password": "tsx --env-file=.env scripts/reset-admin-password.mjs"
   },
   "dependencies": {
     "mysql2": "^3.24.4",
