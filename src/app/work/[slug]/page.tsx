@@ -109,11 +109,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const mainStyles = {
     "--font-title": work.caseStudy?.fonts?.title ? `${work.caseStudy.fonts.title}, serif` : "inherit",
-    "--font-text": work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, sans-serif` : "inherit",
+    "--font-text": work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, system-ui, sans-serif` : "inherit",
     "--color-primary": work.caseStudy?.colors?.primary || "#000",
     "--color-contrast": work.caseStudy?.colors?.contrast || "#666",
     "--color-faded": work.caseStudy?.colors?.faded || work.bgColor,
-    fontFamily: work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, sans-serif` : undefined,
+    fontFamily: work.caseStudy?.fonts?.text ? `${work.caseStudy.fonts.text}, system-ui, sans-serif` : undefined,
   } as React.CSSProperties;
 
   // ... 

@@ -5,8 +5,8 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 
 // Imports are dynamic so they run after the env is loaded (static imports are hoisted).
-const { getPool, initSchema } = await import("../src/lib/db.ts");
-const { getAllWorks, createWork } = await import("../src/lib/repositories/works.ts");
+const { getPool, initSchema, rows } = await import("../src/lib/db.ts");
+const { getAllWorks, createWork, updateWork } = await import("../src/lib/repositories/works.ts");
 const { getAllPetProjects, createPetProject } = await import("../src/lib/repositories/petProjects.ts");
 const { getAllDjEvents, createDjEvent } = await import("../src/lib/repositories/djEvents.ts");
 const { getDjInfo, saveDjInfo } = await import("../src/lib/repositories/djInfo.ts");
@@ -23,12 +23,21 @@ function scryptHash(password) {
 
 await initSchema();
 
-// Works
+// Works. SEED_UPDATE=1 also upserts by slug: overwrites matching works with seed-data.json
+// (admin edits to those works are lost) and adds missing ones. Without it, an existing DB is untouched.
 if ((await getAllWorks()).length === 0) {
   for (const w of data.works) await createWork(w);
   console.log(`Seeded ${data.works.length} works`);
+} else if (process.env.SEED_UPDATE === "1") {
+  const ids = new Map((await rows("SELECT id, slug FROM works")).map((r) => [r.slug, r.id]));
+  for (const w of data.works) {
+    const id = ids.get(w.slug);
+    if (id) await updateWork(id, w);
+    else await createWork(w);
+  }
+  console.log(`Upserted ${data.works.length} works (SEED_UPDATE=1)`);
 } else {
-  console.log("Works already present — skipping");
+  console.log("Works already present — skipping (set SEED_UPDATE=1 to overwrite by slug)");
 }
 
 // Pet projects

@@ -35,6 +35,5 @@ COPY --from=builder --chown=node:node /app/src ./src
 COPY --from=builder --chown=node:node /app/package.json /app/next.config.mjs /app/tsconfig.json ./
 USER node
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:3000/api/health || exit 1
+# Healthcheck lives in docker-compose.coolify.yml (single source of truth).
 CMD ["node_modules/.bin/next", "start", "-p", "3000"]

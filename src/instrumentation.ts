@@ -3,7 +3,7 @@
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     const { ensureSchema } = await import("./instrumentation.node");
-    // Not awaited: the server starts accepting requests while we wait for the DB.
-    void ensureSchema().catch((err) => console.error("[init] unexpected error", err));
+    // Awaited so requests are not served against a missing schema. ensureSchema never throws.
+    await ensureSchema().catch((err) => console.error("[init] unexpected error", err));
   }
 }

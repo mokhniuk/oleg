@@ -22,6 +22,7 @@ beforeAll(async () => {
   await fs.writeFile(path.join(uploads, "p", "clip.mp4"), "0123456789");
   await fs.writeFile(path.join(tmp, "secret.txt"), "secret");
   await fs.writeFile(path.join(uploads, "p", "weird.xyz"), "x");
+  await fs.symlink(path.join(tmp, "secret.txt"), path.join(uploads, "p", "link.txt"));
   process.env.UPLOAD_DIR = uploads;
   process.chdir(cwd);
 });
@@ -32,13 +33,17 @@ afterAll(async () => {
 });
 
 describe("media route", () => {
+  it("does not follow symlinks that leave the base dir", async () => {
+    expect((await get(["p", "link.txt"])).status).toBe(404);
+  });
+
   it("upload dir takes precedence over the baked dir", async () => {
     const res = await get(["p", "both.webp"]);
     expect(res.status).toBe(200);
     expect(await text(res)).toBe("from-uploads");
     expect(res.headers.get("content-type")).toBe("image/webp");
     expect(res.headers.get("content-length")).toBe("12");
-    expect(res.headers.get("cache-control")).toBe("public, max-age=3600");
+    expect(res.headers.get("cache-control")).toBe("public, max-age=0, must-revalidate");
   });
 
   it("falls back to the baked dir", async () => {

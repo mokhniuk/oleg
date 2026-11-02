@@ -33,7 +33,9 @@
         },
         "fonts": {
           "title": "Signifier",
-          "text": "PP Neue Montreal"
+          "text": "PP Neue Montreal",
+          "customTitleFont": true,
+          "customTextFont": true
         },
         "blocks": [
           {
@@ -110,7 +112,8 @@
         },
         "fonts": {
           "title": "Barriecito",
-          "text": "SF Pro Text"
+          "text": "SF Pro Text",
+          "customTextFont": true
         },
         "blocks": [
           {

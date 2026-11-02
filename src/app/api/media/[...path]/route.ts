@@ -41,11 +41,23 @@ function resolveInside(base: string, segments: string[]): string | null {
   return full.startsWith(root + path.sep) ? full : null;
 }
 
+/** Same as resolveInside but follows symlinks and re-checks containment. */
+async function resolveReal(base: string, segments: string[]): Promise<string | null> {
+  const full = resolveInside(base, segments);
+  if (!full) return null;
+  try {
+    const [realRoot, realFull] = await Promise.all([fsp.realpath(base), fsp.realpath(full)]);
+    return realFull.startsWith(realRoot + path.sep) ? realFull : null;
+  } catch {
+    return null;
+  }
+}
+
 async function findFile(segments: string[]) {
   // Upload dir first so uploads win over baked-in files of the same name.
   for (const base of [uploadDir(), bakedProjectsDir()]) {
-    const full = resolveInside(base, segments);
-    if (!full) return null;
+    const full = await resolveReal(base, segments);
+    if (!full) continue;
     try {
       const st = await fsp.stat(full);
       if (st.isFile()) return { full, st };
@@ -84,7 +96,8 @@ async function serve(req: Request, { params }: Ctx, head: boolean) {
   const etag = `W/"${st.size.toString(16)}-${Math.floor(st.mtimeMs).toString(16)}"`;
   const headers: Record<string, string> = {
     "Content-Type": TYPES[path.extname(full).toLowerCase()] ?? "application/octet-stream",
-    "Cache-Control": "public, max-age=3600",
+    // Files can be replaced in place under the same name: always revalidate (ETag/304 below).
+    "Cache-Control": "public, max-age=0, must-revalidate",
     "Accept-Ranges": "bytes",
     ETag: etag,
     "Last-Modified": st.mtime.toUTCString(),

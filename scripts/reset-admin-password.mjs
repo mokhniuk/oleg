@@ -11,7 +11,7 @@ const { setPasswordHash, setSessionSecret } = await import("../src/lib/repositor
 // Prefer ADMIN_PASSWORD: a command-line argument shows up in shell history and `ps`.
 const password = process.env.ADMIN_PASSWORD ?? process.argv[2];
 if (!password) {
-  console.error("Usage: ADMIN_PASSWORD='<new-password>' npm run reset-password");
+  console.error("Usage: ADMIN_PASSWORD='<new-password>' bun run reset-password   (or npm run in the container)");
   process.exit(1);
 }
 

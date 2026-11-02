@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { hasValidSession } from "@/lib/auth";
 import sharp from "sharp";
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
-import { uploadDir } from "@/lib/uploadDir";
+import { bakedProjectsDir, uploadDir } from "@/lib/uploadDir";
 
 export const runtime = "nodejs";
 
@@ -55,8 +56,14 @@ export async function POST(req: Request) {
   await fs.mkdir(dir, { recursive: true });
 
   // never overwrite: "wx" fails atomically if the name is taken, so retry as name-2, name-3, ...
+  // Also avoid names that exist in the baked-in public/projects, which uploads would shadow.
+  const bakedTaken = (name: string) => existsSync(path.join(bakedProjectsDir(), slug, name));
   let webpName = `${base}.webp`;
   for (let n = 2; ; n++) {
+    if (bakedTaken(webpName)) {
+      webpName = `${base}-${n}.webp`;
+      continue;
+    }
     try {
       await fs.writeFile(path.join(dir, webpName), webp, { flag: "wx" });
       break;

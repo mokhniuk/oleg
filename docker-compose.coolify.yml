@@ -21,7 +21,11 @@ services:
     environment:
       # COOLIFY: declares the domain slot for this service (set the real domain in the UI).
       SERVICE_FQDN_APP_3000: ${SERVICE_FQDN_APP_3000:-}
-      DATABASE_URL: mysql://portfolio:${SERVICE_PASSWORD_DB}@mysql:3306/portfolio
+      # Discrete vars (not DATABASE_URL) so passwords with @ / : # need no URL-encoding.
+      MYSQL_HOST: mysql
+      MYSQL_USER: portfolio
+      MYSQL_PASSWORD: ${SERVICE_PASSWORD_DB}
+      MYSQL_DATABASE: portfolio
       UPLOAD_DIR: /data/projects
     volumes:
       - uploads:/data/projects

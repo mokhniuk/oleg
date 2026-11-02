@@ -66,3 +66,16 @@ Back up both volumes. For the database a periodic dump is simplest (Coolify sche
     docker exec <mysql-container> sh -c 'mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" --no-tablespaces portfolio' | gzip > portfolio-$(date +%F).sql.gz
 
 For uploads, archive the `uploads` volume (for example `docker run --rm -v <project>_uploads:/d -v $PWD:/b alpine tar czf /b/uploads.tgz -C /d .`).
+
+## Updating seeded works on an existing database
+
+`seed` skips content that already exists. To push changed works from `scripts/seed-data.json` into a live DB
+(overwrites works with the same slug, so admin edits to those works are lost):
+
+    SEED_UPDATE=1 ADMIN_PASSWORD=x npx tsx scripts/seed-db.mjs
+
+## Fonts
+
+Fonts marked `customTitleFont`/`customTextFont` are not requested from Google. Commercial fonts
+(Signifier, PP Neue Montreal, SF Pro Text) are not bundled, so those pages use the serif/sans fallback until
+you add licensed files under `public/projects/<slug>/fonts/` and an `@font-face` in `src/assets/styles/project-fonts.css`.
