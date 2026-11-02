@@ -19,7 +19,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@heroicons/react": "^2.2.0",
     "mysql2": "^3.24.4",
-    "next": "14.2.3",
+    "next": "14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.105.0",
@@ -32,7 +32,7 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "14.2.35",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
   }
